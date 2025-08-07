@@ -1,0 +1,136 @@
+/* Main Logo Styling */
+.header-main-logo {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  z-index: 1000;
+  background: white;
+  margin-bottom: 30px;
+}
+.header-logo-image {
+  height: auto;
+  max-height: 120px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+/* Header container adjustments */
+.c-header {
+  position: relative;
+  padding-top: 20px;
+}
+.c-header__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+/* Navigation bar styling */
+.main-nav {
+  width: 100%;
+  position: relative;
+  z-index: 900;
+  background: transparent !important;;
+  border-top: 2px solid #eee;
+  padding: 20px 0;
+  margin-top: 0;
+}
+.main-nav__box {
+  width: 100%;
+  text-align: center;
+}
+/* Navigation menu container */
+.nav__list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* Navigation items */
+.nav__item {
+  margin: 0 15px;
+}
+/* Navigation links */
+.nav__link {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 5px 0;
+  position: relative;
+}
+/* Active link state */
+.nav__link.active-link {
+  color: #0066cc;
+}
+/* Hover effect */
+.nav__link:hover {
+  color: #0066cc;
+}
+/* Ensure original logo stays hidden */
+.logo {
+  display: none !important;
+}
+/* Mobile Optimization */
+@media (max-width: 767px) {
+  .header-main-logo {
+    padding: 15px 0;
+    margin-bottom: 20px;
+  }
+  
+  .header-logo-image {
+    max-height: 80px;
+    max-width: 80%;
+  }
+  
+  .main-nav {
+    padding: 15px 0;
+    border-top-width: 1px;
+  }
+  
+  .nav__list {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav__item {
+    margin: 10px 0;
+  }
+}
+/* Social Links Styling */
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+.social__link {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 18px;
+  color: #0066cc; /* Using your existing blue color from nav links */
+  transition: all 0.2s;
+}
+.social__link:hover {
+  color: #004999; /* Slightly darker blue for hover */
+  transform: translateY(-2px);
+}
+/* Font Awesome icon fix */
+.fas {
+  display: inline-block;
+  font: normal normal normal 14px/1 "Font Awesome 6 Free";
+  font-weight: 900;
+}
+/* Footer email link styling to match social links */
+.footer-email {
+  display: inline-block;
+  margin: 10px;
+  color: #0066cc;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.footer-email:hover {
+  color: #004999;
+  transform: translateY(-2px);
+}

@@ -1,0 +1,15 @@
+logo_image: '/uploads/Logo_ismrm.png' #/images/logo.svg' # You can add own logo. For example '/images/logo.png'.
+
+menu__settings:
+  menu__items:
+    - title: 'Home'
+      url: '/'
+    - title: 'Miembros'
+      url: '/members/'
+    - title: 'Eventos'
+      url: '/eventos/'
+    - title: 'Oportunidades Profesionales'
+      url: '/oportunidades-profesionales/'
+    - title: 'Publicaciones'
+      url: '/publicaciones/'
+      

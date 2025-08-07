@@ -1,0 +1,16 @@
+footer_menu__settings:
+  menu__items:
+    - title: 'Home'
+      url: '/'
+    - title: 'Miembros'
+      url: '/members/'
+    - title: 'Eventos'
+      url: '/projects/'
+    - title: 'Oportunidades Profesionales'
+      url: '/oportunidades-profesionales/'
+    - title: 'Publicaciones'
+      url: '/publicaciones/'
+
+
+copyright_text_html: >-
+  <p><img src="/uploads/Logo_ismrm.png" alt="ISMRM LAC" style="height: 50px; margin-bottom: 10px;"><br>© 2024 <a href="/">ISMRM - Latin American Chapter</a></p>

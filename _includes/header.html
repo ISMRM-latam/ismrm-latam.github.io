@@ -1,0 +1,47 @@
+<!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+        <!-- Replace just this logo div -->
+        <div class="header-main-logo">
+          <a href="{{ site.baseurl }}/">
+            <img src="/uploads/Logo_ismrm.png" alt="Logo" class="header-logo-image">
+          </a>
+        </div>
+        <!-- Keep the rest of the original header.html content -->
+        <nav class="main-nav">
+          <div class="main-nav__box">
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+            <div class="nav__title">Menu</div>
+              <ul class="nav__list list-reset">
+              {% for item in site.data.navigation.menu__settings.menu__items %}
+                {% if item.submenu %}
+                <li class="nav__item dropdown">
+                  <span class="nav__link dropdown-toggle">{{ item.title }} <i class="ion ion-ios-arrow-down arrow-down"></i></span>
+                  <div class="dropdown-menu">
+                    {% for submenu-item in item.submenu %}
+                      <a href="{{ submenu-item.url }}" class="nav__link{% if page.url == submenu-item.url %} active-link{% endif %}">{{submenu-item.title}}</a>
+                    {% endfor %}
+                  </div>
+                </li>
+                {% else %}
+                <li class="nav__item">
+                  <a href="{{ item.url | relative_url }}" class="nav__link{% if page.url == item.url %} active-link{% endif %}">{{ item.title }}</a>
+                </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+          {% bookshop_include social-link %}
+        </nav>
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->

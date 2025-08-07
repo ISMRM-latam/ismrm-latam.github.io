@@ -1,13 +1,10 @@
 title: ISMRM - Latin American Chapter
 
 plugins:
-  - jekyll-bookshop
   - jekyll-sitemap
   - jekyll/tagging
 
-# Multiple bookshops can be used on one website,
 # or different production / staging locations.
-bookshop_locations:
   - ../component-library
 
 exclude:

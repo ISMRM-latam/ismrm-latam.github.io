@@ -1,0 +1,49 @@
+name: Update Framavox feed
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/120 * * * *'  # every 2 hours; adjust as you like
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # needed to commit changes
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch Framavox feed and convert to JSON
+        run: |
+          python - << 'PY'
+          import json, xml.etree.ElementTree as ET, urllib.request, os, pathlib
+          url = "https://framavox.org/g/98304.xml"
+          with urllib.request.urlopen(url, timeout=20) as r:
+              xml = r.read()
+          ns = {"a": "http://www.w3.org/2005/Atom"}
+          root = ET.fromstring(xml)
+          feed = {
+              "title": root.findtext("a:title", default="", namespaces=ns),
+              "updated": root.findtext("a:updated", default="", namespaces=ns),
+              "link": (root.find("a:link", ns).attrib.get("href","") if root.find("a:link", ns) is not None else ""),
+              "entries": []
+          }
+          for e in root.findall("a:entry", ns):
+              feed["entries"].append({
+                  "id": e.findtext("a:id", default="", namespaces=ns),
+                  "title": e.findtext("a:title", default="", namespaces=ns),
+                  "link": (e.find("a:link", ns).attrib.get("href","") if e.find("a:link", ns) is not None else ""),
+                  "updated": e.findtext("a:updated", default="", namespaces=ns),
+                  "published": e.findtext("a:published", default="", namespaces=ns),
+                  "summary": e.findtext("a:summary", default="", namespaces=ns)
+              })
+          pathlib.Path("assets").mkdir(exist_ok=True)
+          with open("assets/framavox.json", "w", encoding="utf-8") as f:
+              json.dump(feed, f, ensure_ascii=False, indent=2)
+          PY
+      - name: Commit updated JSON
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update framavox feed JSON"
+          file_pattern: assets/framavox.json

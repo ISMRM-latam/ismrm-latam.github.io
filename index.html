@@ -1,33 +1,54 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <title>ISMRM-LATAM</title>
-  </head>
-  <body>
-    <!-- 1. Logo centrado -->
-    <p style="text-align: center;">
-      <img
-        src="Logo_ismrm.webp"
-        alt="Logo ISMRM"
-        style="max-width: 500px; height: auto;"
-      />
-    </p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Framavox – Latest Discussions</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    h1 { font-size: 1.6rem; margin-bottom: .5rem; }
+    .meta { color: #666; margin-bottom: 1rem; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { margin: .75rem 0; padding: .6rem .8rem; border: 1px solid #ddd; border-radius: 8px; }
+    a { text-decoration: none; }
+    .date { color: #666; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <h1>Latest Discussions</h1>
+  <div class="meta" id="feed-meta"></div>
+  <ul id="discussions"></ul>
 
-    <!-- 2. Título con "Capítulo Latinoamericano" enlazado -->
-    <h1>
-      ¡Bienvenidos al Repositorio del Capítulo Latinoamericano  de la ISMRM (
-      <a href="https://www.ismrm-latam.org/" target="_blank">ISMRM-LATAM  
-      </a>)!
-    </h1>
+  <script>
+    // Same-origin fetch → no CORS
+    fetch('/assets/framavox.json')
+      .then(r => r.json())
+      .then(feed => {
+        const meta = document.getElementById('feed-meta');
+        const ul = document.getElementById('discussions');
 
-    <p>
-      Hemos dado de alta este repositorio con el fin de compilar todos los proyectos y repositorios disponibles por nuestros miembros y con una breve descripción en español.
-    </p>
+        meta.textContent = `${feed.title || 'Framavox Group'} · Updated ${new Date(feed.updated || Date.now()).toLocaleString()}`;
 
-    <p>
-      ¿Quieres incluir tu repositorio? Contáctanos
-      <a href="mailto:ismrm.latino@gmail.com">ismrm.latino@gmail.com</a>
-    </p>
-  </body>
+        (feed.entries || []).slice(0, 20).forEach(entry => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = entry.link || '#';
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = entry.title || '(untitled)';
+          const d = document.createElement('div');
+          d.className = 'date';
+          d.textContent = entry.updated ? new Date(entry.updated).toLocaleString() :
+                           entry.published ? new Date(entry.published).toLocaleString() : '';
+          li.appendChild(a);
+          li.appendChild(d);
+          ul.appendChild(li);
+        });
+      })
+      .catch(err => {
+        document.getElementById('feed-meta').textContent = 'Failed to load discussions.';
+        console.error(err);
+      });
+  </script>
+</body>
 </html>

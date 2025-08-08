@@ -1,0 +1,28 @@
+{%- comment -%}
+  Previous projects list: shows all previous projects (past events).
+{%- endcomment -%}
+
+{% assign b = include.block %}
+<section class="section previous-projects">
+  {% if b.title %}
+    <h2>{{ b.title }}</h2>
+  {% endif %}
+  {% assign prev_projects = site.previous_projects | sort: 'date' | reverse %}
+  <div class="cards">
+    {% for project in prev_projects %}
+      <div class="card">
+        {% if project.image %}
+          <a href="{{ project.url | relative_url }}">
+            <img src="{{ project.image }}" alt="{{ project.title }}">
+          </a>
+        {% endif %}
+        <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
+        {% if project.subtitle %}
+          <p>{{ project.subtitle }}</p>
+        {% else %}
+          <p><small>{{ project.date | date: "%‑d %B %Y" }}</small></p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>

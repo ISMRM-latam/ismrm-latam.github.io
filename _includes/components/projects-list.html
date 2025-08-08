@@ -1,0 +1,30 @@
+{%- comment -%}
+  Projects list: displays all upcoming projects or events. This
+  component is similar to the projects section but without a
+  limit. Used on the events page.
+{%- endcomment -%}
+
+{% assign b = include.block %}
+<section class="section projects-list">
+  {% if b.title %}
+    <h2>{{ b.title }}</h2>
+  {% endif %}
+  {% assign projects_list = site.projects | sort: 'date' | reverse %}
+  <div class="cards">
+    {% for project in projects_list %}
+      <div class="card">
+        {% if project.image %}
+          <a href="{{ project.url | relative_url }}">
+            <img src="{{ project.image }}" alt="{{ project.title }}">
+          </a>
+        {% endif %}
+        <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
+        {% if project.subtitle %}
+          <p>{{ project.subtitle }}</p>
+        {% else %}
+          <p><small>{{ project.date | date: "%‑d %B %Y" }}</small></p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>

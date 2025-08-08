@@ -1,0 +1,8 @@
+{%- comment -%}
+  Generic content block. Renders HTML stored in `content_html`.
+{%- endcomment -%}
+
+{% assign b = include.block %}
+<section class="section content-block">
+  {{ b.content_html }}
+</section>

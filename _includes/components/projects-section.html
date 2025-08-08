@@ -1,0 +1,39 @@
+{%- comment -%}
+  Projects section: displays a few upcoming projects or events. If
+  `show_projects` is false, only the heading and optional description
+  are rendered; otherwise up to three projects are listed. A link
+  allows users to view all projects.
+{%- endcomment -%}
+
+{% assign b = include.block %}
+<section class="section projects-section">
+  {% if b.title %}
+    <h2>{{ b.title }}</h2>
+  {% endif %}
+  {% if b.description_html %}
+    <div class="section-description">{{ b.description_html }}</div>
+  {% endif %}
+  {% if b.show_projects != false %}
+    {% assign projects_list = site.projects | sort: 'date' | reverse %}
+    <div class="cards">
+      {% for project in projects_list limit:3 %}
+        <div class="card">
+          {% if project.image %}
+            <a href="{{ project.url | relative_url }}">
+              <img src="{{ project.image }}" alt="{{ project.title }}">
+            </a>
+          {% endif %}
+          <h3><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
+          {% if project.subtitle %}
+            <p>{{ project.subtitle }}</p>
+          {% else %}
+            <p><small>{{ project.date | date: "%‑d %B %Y" }}</small></p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if b.link_url %}
+    <p><a href="{{ b.link_url }}">Ver todos los eventos</a></p>
+  {% endif %}
+</section>

@@ -2,10 +2,7 @@ title: ISMRM - Latin American Chapter
 
 plugins:
   - jekyll-sitemap
-  - jekyll/tagging
 
-# or different production / staging locations.
-  - ../component-library
 
 exclude:
   - postcss.config.js

@@ -35,7 +35,12 @@
               {% endfor %}
             </ul>
           </div>
-          {% bookshop_include social-link %}
+          {%- comment -%}
+            Render social links from `_data/social_links.yml`. This
+            replaces the Bookshop component used in the CloudCannon
+            version of the site.
+          {%- endcomment -%}
+          {% include social-link.html %}
         </nav>
         <div class="nav-button">
           <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>

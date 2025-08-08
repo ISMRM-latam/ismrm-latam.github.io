@@ -1,0 +1,33 @@
+{%- comment -%}
+  Loop through a page's `content_blocks` and render a template for each
+  block type. This replaces the Bookshop plugin used in the CloudCannon
+  version of the site. Each block type corresponds to an include under
+  `_includes/components/`.
+{%- endcomment -%}
+
+{% if include.blocks and include.blocks.size > 0 %}
+  {% for block in include.blocks %}
+    {% case block._bookshop_name %}
+      {% when 'hero' %}
+        {% include components/hero.html block=block %}
+      {% when 'blog-section' %}
+        {% include components/blog-section.html block=block %}
+      {% when 'projects-section' %}
+        {% include components/projects-section.html block=block %}
+      {% when 'previous-projects-list' %}
+        {% include components/previous-projects-list.html block=block %}
+      {% when 'content' %}
+        {% include components/content.html block=block %}
+      {% when 'posts-list' %}
+        {% include components/posts-list.html block=block %}
+      {% when 'projects-list' %}
+        {% include components/projects-list.html block=block %}
+      {% when 'page-heading' %}
+        {% include components/page-heading.html block=block %}
+      {% when 'newsletter' %}
+        {% include components/newsletter.html block=block %}
+      {% else %}
+        <!-- Unknown block type: {{ block._bookshop_name }} -->
+    {% endcase %}
+  {% endfor %}
+{% endif %}

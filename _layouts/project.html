@@ -4,9 +4,20 @@ layout: default
 
 <div class="container">
 
-  {% bookshop page-heading title=page.title description=page.subtitle %}
-  {% assign page_image = site.baseurl | append: page.image %}
-  {% bookshop page-image image=page_image %}
+  <!-- Page heading -->
+  <section class="section page-heading">
+    <h2>{{ page.title }}</h2>
+    {% if page.subtitle %}
+      <p>{{ page.subtitle }}</p>
+    {% endif %}
+  </section>
+
+  <!-- Featured image -->
+  {% if page.image %}
+  <div class="section project-image">
+    <img src="{{ page.image }}" alt="{{ page.title }}">
+  </div>
+  {% endif %}
 
   <div class="page animate">
     {{ content }}

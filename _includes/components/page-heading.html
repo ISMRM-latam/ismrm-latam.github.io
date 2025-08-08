@@ -1,0 +1,14 @@
+{%- comment -%}
+  Page heading: a simple title and optional description. Used on
+  tag pages and elsewhere.
+{%- endcomment -%}
+
+{% assign b = include.block %}
+<section class="section page-heading">
+  {% if b.title %}
+    <h2>{{ b.title }}</h2>
+  {% endif %}
+  {% if b.description %}
+    <p>{{ b.description }}</p>
+  {% endif %}
+</section>

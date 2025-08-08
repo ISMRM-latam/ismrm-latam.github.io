@@ -1,4 +1,156 @@
 ---
 ---
 
-{% bookshop_scss %}
+/*
+  Main stylesheet for the ISMRM Latin American Chapter site.
+  This SCSS file replaces the Bookshop generated CSS used by
+  CloudCannon. It contains a few basic styles to structure
+  content on the page. Feel free to extend it to meet your
+  design needs.
+*/
+
+// Base styles
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+// Hero
+
+.hero {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.hero-description {
+  margin-bottom: 1rem;
+}
+
+.hero .buttons a {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  color: #ffffff;
+  background-color: #0066cc;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hero .buttons a:hover {
+  background-color: #004999;
+}
+
+// Sections
+
+.section {
+  padding: 3rem 0;
+}
+
+.section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  margin-bottom: 1rem;
+}
+
+// Cards
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid #e0e0e0;
+  padding: 1rem;
+  border-radius: 4px;
+  flex: 1 1 calc(33.333% - 1rem);
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.card h3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.card p {
+  margin: 0 0 0.5rem 0;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Responsive cards
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%;
+  }
+}
+
+// Newsletter form
+
+.newsletter form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.newsletter input[type="email"] {
+  flex: 1 1 auto;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.newsletter button {
+  padding: 0.5rem 1rem;
+  background-color: #0066cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.newsletter button:hover {
+  background-color: #004999;
+}
+
+// Visually hidden utility class for labels
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

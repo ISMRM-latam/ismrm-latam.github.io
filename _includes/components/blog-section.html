@@ -1,0 +1,39 @@
+{%- comment -%}
+  Blog section: shows a small preview of recent posts. The number of
+  posts can be controlled by `limit` below. If a link URL is provided
+  in the block, a call to the blog page is displayed.
+{%- endcomment -%}
+
+{% assign b = include.block %}
+<section class="section blog-section">
+  {% if b.title %}
+    <h2>{{ b.title }}</h2>
+  {% endif %}
+  {% if b.description_html %}
+    <div class="section-description">{{ b.description_html }}</div>
+  {% endif %}
+  {% assign posts_list = site.posts | sort: 'date' | reverse %}
+  <div class="cards">
+    {% for post in posts_list limit:3 %}
+      <div class="card">
+        {% if post.image %}
+          <a href="{{ post.url | relative_url }}">
+            <img src="{{ post.image }}" alt="{{ post.title }}">
+          </a>
+        {% endif %}
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>
+          {% if post.description %}
+            {{ post.description }}
+          {% else %}
+            {{ post.content | strip_html | truncate: 120 }}
+          {% endif %}
+        </p>
+        <p><small>{{ post.date | date: "%‑d %B %Y" }}</small></p>
+      </div>
+    {% endfor %}
+  </div>
+  {% if b.link_url %}
+    <p><a href="{{ b.link_url }}">Ver todas las noticias</a></p>
+  {% endif %}
+</section>

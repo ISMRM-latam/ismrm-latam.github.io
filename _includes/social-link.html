@@ -1,0 +1,18 @@
+{%- comment -%}
+  Social links component. Uses data from `_data/social_links.yml` to
+  output a row of icons linking to social profiles. The CSS classes
+  `.social` and `.social__link` are defined in `assets/css/custom.css`.
+{%- endcomment -%}
+
+{% assign items = site.data.social_links.social %}
+{% if items and items.size > 0 %}
+  <div class="social">
+    {% for item in items %}
+      <a class="social__link" href="{{ item.link }}" target="_blank" rel="noopener">
+        {% if item.icon %}
+          <i class="{{ item.icon }}"></i>
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}

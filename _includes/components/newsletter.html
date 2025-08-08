@@ -1,0 +1,26 @@
+{%- comment -%}
+  Newsletter signup form. If the block defines custom properties,
+  they override the defaults from `_data/newsletter.yml`. The form
+  posts to a MailChimp (or similar) endpoint provided via
+  `newsletter_identifier`.
+{%- endcomment -%}
+
+{% assign b = include.block %}
+{% assign title = b.newsletter_title | default: site.data.newsletter.newsletter_title %}
+{% assign desc = b.newsletter_description | default: site.data.newsletter.newsletter_description %}
+{% assign identifier = b.newsletter_identifier | default: site.data.newsletter.newsletter_identifier %}
+{% assign button_text = b.newsletter_button | default: site.data.newsletter.newsletter_button %}
+
+<section class="section newsletter">
+  {% if title %}
+    <h2>{{ title }}</h2>
+  {% endif %}
+  {% if desc %}
+    <p>{{ desc }}</p>
+  {% endif %}
+  <form action="https://{{ identifier }}" method="post" target="_blank">
+    <label for="newsletter-email" class="visually-hidden">Email</label>
+    <input type="email" id="newsletter-email" name="EMAIL" placeholder="Email address" required>
+    <button type="submit">{{ button_text }}</button>
+  </form>
+</section>

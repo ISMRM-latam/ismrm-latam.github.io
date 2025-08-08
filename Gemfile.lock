@@ -77,7 +77,6 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (= 4.3.3)
-  jekyll-bookshop (= 3.9.0)
   jekyll-sitemap (= 1.4.0)
   jekyll-tagging (= 1.1.0)
 

@@ -1,0 +1,31 @@
+{%- comment -%}
+  Posts list: displays all blog posts. Useful for the blog page.
+{%- endcomment -%}
+
+{% assign b = include.block %}
+<section class="section posts-list">
+  {% if b.title %}
+    <h2>{{ b.title }}</h2>
+  {% endif %}
+  {% assign posts_list = site.posts | sort: 'date' | reverse %}
+  <div class="cards">
+    {% for post in posts_list %}
+      <div class="card">
+        {% if post.image %}
+          <a href="{{ post.url | relative_url }}">
+            <img src="{{ post.image }}" alt="{{ post.title }}">
+          </a>
+        {% endif %}
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>
+          {% if post.description %}
+            {{ post.description }}
+          {% else %}
+            {{ post.content | strip_html | truncate: 120 }}
+          {% endif %}
+        </p>
+        <p><small>{{ post.date | date: "%‑d %B %Y" }}</small></p>
+      </div>
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,23 @@
+{%- comment -%}
+  Hero component: displays a big introductory section with a title,
+  rich text description, and optional call‑to‑action buttons. It uses
+  simple CSS classes defined in `assets/main.scss`.
+{%- endcomment -%}
+
+{% assign b = include.block %}
+<section class="hero">
+  {% if b.title %}
+    <h2>{{ b.title }}</h2>
+  {% endif %}
+  {% if b.description_html %}
+    <div class="hero-description">{{ b.description_html }}</div>
+  {% endif %}
+  <div class="buttons">
+    {% if b.cta_button %}
+      <a href="{{ b.cta_button_link }}">{{ b.cta_button }}</a>
+    {% endif %}
+    {% if b.works_button %}
+      <a href="{{ b.works_button_link }}">{{ b.works_button }}</a>
+    {% endif %}
+  </div>
+</section>

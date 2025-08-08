@@ -13,10 +13,15 @@
 
     {{ content }}
 
-    <!--
-        Bookshop components are accessed using the bookshop tag,
-        using the same syntax as the standard Jekyll include tag.
-    -->
+    {%- comment -%}
+      Render any content blocks defined in the page front matter. When
+      migrating from Bookshop, this include iterates over the
+      `content_blocks` array and renders appropriate partials. If the
+      page does not define any blocks, nothing will be output.
+    {%- endcomment -%}
+    {% if page.content_blocks %}
+      {% include content-blocks.html blocks=page.content_blocks %}
+    {% endif %}
 
     <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
 

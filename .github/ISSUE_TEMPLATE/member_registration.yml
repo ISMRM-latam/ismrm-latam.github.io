@@ -1,21 +1,30 @@
 name: Member Registration
 description: Add yourself to the ISMRM-LATAM Member Map
-title: "[Member]: "
+title: "Member Registration: [Your Name Here]"
 labels: ["new-member"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Welcome to the ISMRM-LATAM Community Map!
+        Please fill out the details below to join our researcher directory.
+
   - type: input
     id: name
     attributes:
       label: Full Name
+      placeholder: e.g., Carlos Milovic
     validations:
       required: true
+
   - type: input
     id: institution
     attributes:
       label: Institution / University
-      placeholder: e.g., Pontificia Universidad Católica de Chile
+      placeholder: e.g., Universidad de Chile
     validations:
       required: true
+
   - type: dropdown
     id: country
     attributes:
@@ -47,7 +56,21 @@ body:
         - Venezuela
     validations:
       required: true
+
+  - type: input
+    id: interests
+    attributes:
+      label: Research Interests
+      description: "Please separate your interests by comma (e.g., MRI, Diffusion, Pulse Sequences)"
+      placeholder: "MRI, QSM, Machine Learning"
+    validations:
+      required: true
+
   - type: textarea
     id: bio
     attributes:
-      label: Research Interests
+      label: Short Bio
+      description: "A brief professional summary that will appear when your marker is clicked."
+      placeholder: "Assistant Professor focused on neuroimaging..."
+    validations:
+      required: true

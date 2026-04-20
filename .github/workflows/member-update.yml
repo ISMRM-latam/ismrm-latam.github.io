@@ -19,27 +19,102 @@ jobs:
         run: |
           # Extract data from parser
           NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.name')
-          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.institution')
+          INST=$(echo '${{ steps.parse.outputs.data }}' | jq name: Member Registration
+description: Add yourself to the ISMRM-LATAM Member Map
+title: "Member Registration: [Your Name Here]"
+labels: ["new-member"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Welcome to the ISMRM-LATAM Community Map!
+        Please fill out the details below to join our researcher directory.
+
+  - type: input
+    id: name
+    attributes:
+      label: Full Name
+      placeholder: e.g., Carlos Milovic
+    validations:
+      required: true
+
+  - type: input
+    id: institution
+    attributes:
+      label: Institution / University
+      placeholder: e.g., Universidad de Chile
+    validations:
+      required: true
+
+  - type: dropdown
+    id: country
+    attributes:
+      label: Country
+      options:
+        - Argentina
+        - Belize
+        - Bolivia
+        - Brazil
+        - Chile
+        - Colombia
+        - Costa Rica
+        - Cuba
+        - Dominican Republic
+        - Ecuador
+        - El Salvador
+        - Guatemala
+        - Guyana
+        - Haiti
+        - Honduras
+        - Mexico
+        - Nicaragua
+        - Panama
+        - Paraguay
+        - Peru
+        - Puerto Rico
+        - Suriname
+        - Uruguay
+        - Venezuela
+    validations:
+      required: true
+
+  - type: input
+    id: interests
+    attributes:
+      label: Research Interests
+      description: "Please separate your interests by comma (e.g., MRI, Diffusion, Pulse Sequences)"
+      placeholder: "MRI, QSM, Machine Learning"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bio
+    attributes:
+      label: Short Bio
+      description: "A brief professional summary that will appear when your marker is clicked."
+      placeholder: "Assistant Professor focused on neuroimaging..."
+    validations:
+      required: true-r '.institution')
           CTRY=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.country')
           BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.bio')
 
-          # Search Nominatim (OpenStreetMap)
+          - name: Geocode and Parse Data
+        id: geocode
+        run: |
+          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.name')
+          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.institution')
+          CTRY=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.country')
+          INTERESTS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.interests')
+          BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.bio')
+
+          # Geocoding logic (Nominatim)
           QUERY=$(echo "$INST, $CTRY" | jq -sRr @uri)
-          # Inside the Geocode step:
-          RESPONSE=$(curl -s -A "ISMRM-LATAM-Bot (gsahonero@github.io)" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
-          
-          LAT=$(echo $RESPONSE | jq -r '.[0].lat')
-          LNG=$(echo $RESPONSE | jq -r '.[0].lon')
+          RESPONSE=$(curl -s -A "ISMRM-Bot" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
+          LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45') # Fallback to a default if not found
+          LNG=$(echo $RESPONSE | jq -r '.[0].lon // -70.66')
 
-          # Fallback to country center if institution not found
-          if [ "$LAT" == "null" ]; then
-            RESPONSE=$(curl -s "https://nominatim.openstreetmap.org/search?country=$CTRY&format=json&limit=1")
-            LAT=$(echo $RESPONSE | jq -r '.[0].lat')
-            LNG=$(echo $RESPONSE | jq -r '.[0].lon')
-          fi
-
-          # Create the final JSON object
-          echo "{\"name\":\"$NAME\", \"institution\":\"$INST\", \"country\":\"$CTRY\", \"lat\":$LAT, \"lng\":$LNG, \"bio\":\"$BIO\"}" > member.json
+          # Create JSON with separate fields
+          echo "{\"name\":\"$NAME\", \"institution\":\"$INST\", \"country\":\"$CTRY\", \"lat\":$LAT, \"lng\":$LNG, \"interests\":\"$INTERESTS\", \"bio\":\"$BIO\"}" > member.json
 
       - name: Update JSON File
         run: |

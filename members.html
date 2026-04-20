@@ -45,10 +45,26 @@ title: Member Community
         var country = document.getElementById('countryFilter').value;
         markers.forEach(m => map.removeLayer(m));
         
+        // Inside your filterMap() function in members.html:
+
         memberData.forEach(function(m) {
             if (country === 'all' || m.country === country) {
+                // Create a nice HTML structure for the popup
+                var popupContent = `
+                    <div style="font-family: 'Inter', sans-serif;">
+                        <h4 style="margin: 0 0 5px 0; color: #003687;">${m.name}</h4>
+                        <p style="margin: 0 0 10px 0; font-style: italic; font-size: 0.9rem;">${m.institution}</p>
+                        <div style="margin-bottom: 10px;">
+                            ${m.interests.split(',').map(tag => 
+                                `<span style="background:#eef2ff; color:#1495a7; padding:2px 6px; border-radius:4px; font-size:0.75rem; margin-right:4px;">${tag.trim()}</span>`
+                            ).join('')}
+                        </div>
+                        <p style="font-size: 0.85rem; border-top: 1px solid #eee; pt: 5px;">${m.bio}</p>
+                    </div>
+                `;
+
                 var marker = L.marker([m.lat, m.lng])
-                    .bindPopup("<b>" + m.name + "</b><br><i>" + m.institution + "</i><br><br>" + m.bio)
+                    .bindPopup(popupContent)
                     .addTo(map);
                 markers.push(marker);
             }

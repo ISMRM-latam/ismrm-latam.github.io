@@ -4,6 +4,9 @@ title: "Hola Hawai: Latin American Chapter Business Meeting"
 date: 2024-05-06
 excerpt: "Notes and highlights from our first official business meeting held during the ISMRM 2024 Annual Meeting in Honolulu."
 ---
+¡Gracias por tu participación!
+Agradecemos la participación en nuestra primera business meeting. ¡Contamos con la presencia de más de 40 miembros! Y lamentamos mucho aquellos que no pudieron participar este año, pero pueden consultar aquí la presentación y mandarnos un correo con sus dudas y comentarios. Prometemos un social event para 2026.
+
 
 During the **ISMRM 2024 Annual Meeting & Exhibition** in Honolulu, Hawaii, the Latin American Chapter held its inaugural in-person business meeting. The room was filled with energy as members from across the continent and the diaspora gathered to set the roadmap for our first year.
 

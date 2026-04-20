@@ -21,19 +21,21 @@ title: Home
 
 <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-    <div>
+<div class="home-grid">
+    <div class="home-col">
         <h3>Latest News</h3>
-        {% for post in site.posts limit:2 %}
-            <div style="margin-bottom: 20px;">
-                <a href="{{ post.url | relative_url }}" style="font-weight: 600; color: #1495a7;">{{ post.title }}</a>
-                <p style="font-size: 0.9rem; margin: 5px 0;">{{ post.date | date: "%b %d, %Y" }}</p>
+        {% assign recent_news = site.data.news | sort: 'date' | reverse | limit: 3 %}
+        {% for item in recent_news %}
+            <div class="home-item">
+                <a href="{{ item.url | relative_url }}" class="item-link">{{ item.title }}</a>
+                <p class="item-meta">{{ item.date | date: "%b %d, %Y" }}</p>
+                <p class="item-excerpt">{{ item.summary | truncate: 80 }}</p>
             </div>
         {% endfor %}
-        <a href="{{ '/news' | relative_url }}" style="font-weight: bold; text-decoration: underline;">View all news &rarr;</a>
+        <a href="{{ '/news' | relative_url }}" class="item-more">View all news &rarr;</a>
     </div>
 
-    <div>
+    <div class="home-col">
         <h3>Upcoming Events</h3>
         {% assign rightnow = "now" | date: "%Y%m%d" | plus: 0 %}
         {% assign upcoming_found = false %}
@@ -41,17 +43,52 @@ title: Home
         {% for event in site.events %}
             {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
             {% if eventdate >= rightnow %}
-                <div style="margin-bottom: 20px;">
-                    <a href="{{ event.url | relative_url }}" style="font-weight: 600; color: #003687;">{{ event.title }}</a>
-                    <p style="font-size: 0.9rem; margin: 5px 0;">{{ event.event_date | date: "%b %d, %Y" }}</p>
+                <div class="home-item">
+                    <a href="{{ event.url | relative_url }}" class="item-link alt">{{ event.title }}</a>
+                    <p class="item-meta">{{ event.event_date | date: "%b %d, %Y" }}</p>
                 </div>
                 {% assign upcoming_found = true %}
             {% endif %}
         {% endfor %}
 
         {% if upcoming_found == false %}
-            <p>No upcoming events. Check the archive.</p>
+            <p class="item-excerpt">Stay tuned for upcoming LATAM workshops.</p>
         {% endif %}
-        <a href="{{ '/events' | relative_url }}" style="font-weight: bold; text-decoration: underline;">View event calendar &rarr;</a>
+        <a href="{{ '/events' | relative_url }}" class="item-more">Event calendar &rarr;</a>
+    </div>
+
+    <div class="home-col">
+        <h3>Opportunities</h3>
+        {% assign recent_jobs = site.data.jobs | sort: 'posted' | reverse | limit: 3 %}
+        {% for job in recent_jobs %}
+            <div class="home-item">
+                <a href="{{ '/jobs' | relative_url }}" class="item-link">{{ job.title }}</a>
+                <p class="item-meta">{{ job.institution }}</p>
+            </div>
+        {% endfor %}
+        <a href="{{ '/jobs' | relative_url }}" class="item-more">Browse all jobs &rarr;</a>
     </div>
 </div>
+
+<style>
+    .home-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 40px; 
+        margin-top: 20px;
+    }
+    .home-col h3 { 
+        color: #003687; 
+        border-bottom: 2px solid #1495a7; 
+        padding-bottom: 10px; 
+        margin-bottom: 20px; 
+    }
+    .home-item { margin-bottom: 20px; }
+    .item-link { font-weight: 600; color: #1495a7; text-decoration: none; }
+    .item-link.alt { color: #003687; }
+    .item-link:hover { text-decoration: underline; }
+    .item-meta { font-size: 0.8rem; color: #888; margin: 4px 0; text-transform: uppercase; letter-spacing: 0.5px; }
+    .item-excerpt { font-size: 0.9rem; color: #555; line-height: 1.4; }
+    .item-more { font-weight: bold; font-size: 0.9rem; color: #333; text-decoration: none; display: block; margin-top: 10px; }
+    .item-more:hover { color: #1495a7; }
+</style>

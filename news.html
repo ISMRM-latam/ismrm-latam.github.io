@@ -13,8 +13,8 @@ title: News
         {% assign sorted_news = site.data.news | sort: 'date' | reverse %}
         {% for item in sorted_news %}
         <article class="news-item">
-            {% if item.image != "" and item.image != "null" %}
-                <div class="news-img-box" style="background-image: url('{{ item.image }}');"></div>
+            {% if item.image and item.image != "" and item.image != "null" %}
+                <div class="news-img-box" style="background-image: url('{{ item.image | relative_url }}');"></div>
             {% else %}
                 <div class="news-img-box default-news-bg"></div>
             {% endif %}
@@ -24,7 +24,8 @@ title: News
                 <h2>{{ item.title | remove: "News: " }}</h2>
                 <p class="news-meta">By {{ item.author }} on {{ item.date }}</p>
                 <p class="news-summ">{{ item.summary }}</p>
-                <button class="c-button small" onclick="alert('Full content: {{ item.content | escape }}')">Read More</button>
+                
+                <a href="{{ item.url | relative_url }}" class="c-button small">Read More</a>
             </div>
         </article>
         {% endfor %}
@@ -34,13 +35,16 @@ title: News
 <style>
     .news-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
     .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-    .news-item { background: white; border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: 0.3s; }
+    .news-item { background: white; border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
     .news-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
     .news-img-box { height: 180px; background-size: cover; background-position: center; }
     .default-news-bg { background: linear-gradient(135deg, #003687 0%, #1495a7 100%); }
-    .news-text { padding: 20px; }
+    .news-text { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
     .news-cat { font-size: 0.7rem; font-weight: bold; color: #1495a7; text-transform: uppercase; }
     .news-item h2 { font-size: 1.2rem; margin: 10px 0; color: #003687; }
     .news-meta { font-size: 0.8rem; color: #999; margin-bottom: 15px; }
-    .news-summ { font-size: 0.9rem; color: #555; margin-bottom: 20px; line-height: 1.4; }
+    .news-summ { font-size: 0.9rem; color: #555; margin-bottom: 20px; line-height: 1.4; flex-grow: 1; }
+    
+    /* Ensure the button stays at the bottom of the card */
+    .news-text .c-button { align-self: flex-start; }
 </style>

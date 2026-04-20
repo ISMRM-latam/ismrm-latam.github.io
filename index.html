@@ -24,28 +24,61 @@ title: Home
 <div class="home-grid">
     <div class="home-col">
         <h3>Latest News</h3>
-        {% comment %} Changed limit from 3 to 2 {% endcomment %}
         {% assign recent_news = site.data.news | sort: 'date' | reverse | limit: 2 %}
-        {% for item in recent_news %}
-            <div class="home-item">
-                <a href="{{ item.url | relative_url }}" class="item-link">{{ item.title }}</a>
-                <p class="item-meta">{{ item.date | date: "%b %d, %Y" }}</p>
-                <p class="item-excerpt">{{ item.summary | truncate: 80 }}</p>
-            </div>
-        {% endfor %}
+        {% if site.data.news %}
+            {% for item in recent_news %}
+                <div class="home-item">
+                    <a href="{{ item.url | relative_url }}" class="item-link">{{ item.title }}</a>
+                    <p class="item-meta">{{ item.date | date: "%b %d, %Y" }}</p>
+                    <p class="item-excerpt">{{ item.summary | truncate: 80 }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="item-excerpt">No news posted yet.</p>
+        {% endif %}
         <a href="{{ '/news' | relative_url }}" class="item-more">View all news &rarr;</a>
     </div>
 
     <div class="home-col">
+        <h3>Upcoming Events</h3>
+        {% assign rightnow = "now" | date: "%Y%m%d" | plus: 0 %}
+        {% assign upcoming_found = false %}
+        {% assign count = 0 %}
+        
+        {% if site.data.events %}
+            {% assign sorted_events = site.data.events | sort: 'event_date' %}
+            {% for event in sorted_events %}
+                {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
+                {% if eventdate >= rightnow and count < 2 %}
+                    <div class="home-item">
+                        <a href="{{ event.url | relative_url }}" class="item-link alt">{{ event.title }}</a>
+                        <p class="item-meta">{{ event.event_date | date: "%b %d, %Y" }} | {{ event.location }}</p>
+                    </div>
+                    {% assign upcoming_found = true %}
+                    {% assign count = count | plus: 1 %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if upcoming_found == false %}
+            <p class="item-excerpt">Stay tuned for upcoming LATAM workshops.</p>
+        {% endif %}
+        <a href="{{ '/events' | relative_url }}" class="item-more">Event calendar &rarr;</a>
+    </div>
+
+    <div class="home-col">
         <h3>Opportunities</h3>
-        {% comment %} Recommended: Change limit to 2 for visual balance {% endcomment %}
         {% assign recent_jobs = site.data.jobs | sort: 'posted' | reverse | limit: 2 %}
-        {% for job in recent_jobs %}
-            <div class="home-item">
-                <a href="{{ '/jobs' | relative_url }}" class="item-link">{{ job.title }}</a>
-                <p class="item-meta">{{ job.institution }}</p>
-            </div>
-        {% endfor %}
+        {% if site.data.jobs %}
+            {% for job in recent_jobs %}
+                <div class="home-item">
+                    <a href="{{ '/jobs' | relative_url }}" class="item-link">{{ job.title }}</a>
+                    <p class="item-meta">{{ job.institution }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+             <p class="item-excerpt">No open positions at the moment.</p>
+        {% endif %}
         <a href="{{ '/jobs' | relative_url }}" class="item-more">Browse all jobs &rarr;</a>
     </div>
 </div>

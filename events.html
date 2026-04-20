@@ -30,7 +30,7 @@ title: Events
           <p><strong>Location:</strong> {{ event.location }}</p>
           <p><strong>Type:</strong> {{ event.category }} ({{ event.modality }})</p>
           <div style="margin-top: 15px; display: flex; gap: 10px;">
-            <a href="{{ event.url | relative_url }}" class="c-button small" style="padding: 8px 16px;">Details</a>
+            <a href="{{ event.url | append: '.html' | relative_url }}" class="c-button small" style="padding: 8px 16px;">Details</a>
             {% if event.link and event.link != "" %}
               <a href="{{ event.link }}" target="_blank" class="c-button small secondary">Registration/Info</a>
             {% endif %}
@@ -59,7 +59,7 @@ title: Events
         <div class="content-card past-card">
           <h3 style="color: #666;">{{ event.title }}</h3>
           <p>Held on {{ event.event_date | date: "%B %d, %Y" }}</p>
-          <a href="{{ event.url | relative_url }}" style="font-size: 0.9rem; color: #1495a7; font-weight: bold;">View Event Archive →</a>
+          <a href="{{ event.url | append: '.html' | relative_url }}" style="font-size: 0.9rem; color: #1495a7; font-weight: bold;">View Event Archive →</a>
         </div>
       {% endif %}
     {% endfor %}

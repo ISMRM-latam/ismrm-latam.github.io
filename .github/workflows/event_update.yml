@@ -65,10 +65,12 @@ jobs:
           # We use the collection path: /events/filename (without .md)
           POST_URL="events/${EDATE}-${SLUG}.html"
           
+          EVENT_ID="${EDATE}-${SLUG}"
+          
           jq -n \
             --arg title "$TITLE" --arg org "$ORG" --arg cat "$CAT" \
             --arg edate "$EDATE" --arg modal "$MODAL" --arg loc "$LOC" \
-            --arg link "$LINK" --arg url "$POST_URL" \
+            --arg link "$LINK" --arg url "events/$EVENT_ID" \
             '{title: $title, organizer: $org, category: $cat, event_date: $edate, modality: $modal, location: $loc, link: $link, url: $url}' > event_entry.json
 
       - name: Append to Events Database

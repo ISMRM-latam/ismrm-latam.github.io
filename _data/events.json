@@ -8,5 +8,15 @@
     "location": "Here",
     "link": "We",
     "url": "events/2026-05-20-this.html"
+  },
+  {
+    "title": "HEre is the event",
+    "organizer": "We are inviting",
+    "category": "Conference",
+    "event_date": "2026-06-06",
+    "modality": "In-person",
+    "location": "HEre",
+    "link": "Tehereee",
+    "url": "events/2026-06-06-here-is-the-event.html"
   }
 ]

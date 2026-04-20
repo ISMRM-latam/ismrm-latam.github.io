@@ -14,7 +14,9 @@ title: News
         {% for item in sorted_news %}
         <article class="news-item">
             {% if item.image and item.image != "" and item.image != "null" %}
-                <div class="news-img-box" style="background-image: url('{{ item.image | relative_url }}');"></div>
+                {% comment %} Strip any accidental brackets before filtering {% endcomment %}
+                {% assign clean_image_url = item.image | remove: "<" | remove: ">" %}
+                <div class="news-img-box" style="background-image: url('{{ clean_image_url | relative_url }}');"></div>
             {% else %}
                 <div class="news-img-box default-news-bg"></div>
             {% endif %}

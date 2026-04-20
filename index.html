@@ -1,54 +1,21 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Framavox – Latest Discussions</title>
-  <style>
-    body { font-family: system-ui, sans-serif; margin: 2rem; }
-    h1 { font-size: 1.6rem; margin-bottom: .5rem; }
-    .meta { color: #666; margin-bottom: 1rem; }
-    ul { list-style: none; padding: 0; margin: 0; }
-    li { margin: .75rem 0; padding: .6rem .8rem; border: 1px solid #ddd; border-radius: 8px; }
-    a { text-decoration: none; }
-    .date { color: #666; font-size: .9rem; }
-  </style>
-</head>
-<body>
-  <h1>Latest Discussions</h1>
-  <div class="meta" id="feed-meta"></div>
-  <ul id="discussions"></ul>
+---
+layout: default
+---
 
-  <script>
-    // Same-origin fetch → no CORS
-    fetch('/assets/framavox.json')
-      .then(r => r.json())
-      .then(feed => {
-        const meta = document.getElementById('feed-meta');
-        const ul = document.getElementById('discussions');
+<section>
+    <h2>{{ site.data.content.about.title }}</h2>
+    <p>{{ site.data.content.about.description }}</p>
+</section>
 
-        meta.textContent = `${feed.title || 'Framavox Group'} · Updated ${new Date(feed.updated || Date.now()).toLocaleString()}`;
+<hr>
 
-        (feed.entries || []).slice(0, 20).forEach(entry => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = entry.link || '#';
-          a.target = '_blank';
-          a.rel = 'noopener';
-          a.textContent = entry.title || '(untitled)';
-          const d = document.createElement('div');
-          d.className = 'date';
-          d.textContent = entry.updated ? new Date(entry.updated).toLocaleString() :
-                           entry.published ? new Date(entry.published).toLocaleString() : '';
-          li.appendChild(a);
-          li.appendChild(d);
-          ul.appendChild(li);
-        });
-      })
-      .catch(err => {
-        document.getElementById('feed-meta').textContent = 'Failed to load discussions.';
-        console.error(err);
-      });
-  </script>
-</body>
-</html>
+<section>
+    <h2>Quick Links</h2>
+    <ul>
+        {% for item in site.data.content.sections %}
+        <li>
+            <strong>{{ item.name }}:</strong> {{ item.details }}
+        </li>
+        {% endfor %}
+    </ul>
+</section>

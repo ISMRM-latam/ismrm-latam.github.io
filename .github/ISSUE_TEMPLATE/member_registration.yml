@@ -9,33 +9,45 @@ body:
       label: Full Name
     validations:
       required: true
+  - type: input
+    id: institution
+    attributes:
+      label: Institution / University
+      placeholder: e.g., Pontificia Universidad Católica de Chile
+    validations:
+      required: true
   - type: dropdown
     id: country
     attributes:
       label: Country
       options:
         - Argentina
+        - Belize
+        - Bolivia
         - Brazil
         - Chile
         - Colombia
+        - Costa Rica
+        - Cuba
+        - Dominican Republic
+        - Ecuador
+        - El Salvador
+        - Guatemala
+        - Guyana
+        - Haiti
+        - Honduras
         - Mexico
+        - Nicaragua
+        - Panama
+        - Paraguay
         - Peru
-        - Other
-    validations:
-      required: true
-  - type: input
-    id: lat
-    attributes:
-      label: Latitude (e.g., -33.45)
-    validations:
-      required: true
-  - type: input
-    id: lng
-    attributes:
-      label: Longitude (e.g., -70.66)
+        - Puerto Rico
+        - Suriname
+        - Uruguay
+        - Venezuela
     validations:
       required: true
   - type: textarea
     id: bio
     attributes:
-      label: Short Bio / Research Interest
+      label: Research Interests

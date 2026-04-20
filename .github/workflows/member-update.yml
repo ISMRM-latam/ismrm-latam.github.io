@@ -9,20 +9,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Parse Issue Body
         id: parse
         uses: zentered/issue-forms-body-parser@v2.0.0
-      
-      - name: Update JSON
+
+      - name: Geocode Institution
+        id: geocode
         run: |
-          echo '${{ steps.parse.outputs.data }}' > new_member.json
-          # Use jq to append the new member to your existing data file
-          jq ". += [$(cat new_member.json)]" _data/members.json > _data/members_tmp.json && mv _data/members_tmp.json _data/members.json
+          # Extract data from parser
+          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.name')
+          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.institution')
+          CTRY=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.country')
+          BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.bio')
+
+          # Search Nominatim (OpenStreetMap)
+          QUERY=$(echo "$INST, $CTRY" | jq -sRr @uri)
+          # Inside the Geocode step:
+          RESPONSE=$(curl -s -A "ISMRM-LATAM-Bot (gsahonero@github.io)" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
           
-      - name: Commit changes
+          LAT=$(echo $RESPONSE | jq -r '.[0].lat')
+          LNG=$(echo $RESPONSE | jq -r '.[0].lon')
+
+          # Fallback to country center if institution not found
+          if [ "$LAT" == "null" ]; then
+            RESPONSE=$(curl -s "https://nominatim.openstreetmap.org/search?country=$CTRY&format=json&limit=1")
+            LAT=$(echo $RESPONSE | jq -r '.[0].lat')
+            LNG=$(echo $RESPONSE | jq -r '.[0].lon')
+          fi
+
+          # Create the final JSON object
+          echo "{\"name\":\"$NAME\", \"institution\":\"$INST\", \"country\":\"$CTRY\", \"lat\":$LAT, \"lng\":$LNG, \"bio\":\"$BIO\"}" > member.json
+
+      - name: Update JSON File
+        run: |
+          jq ". += [$(cat member.json)]" _data/members.json > tmp.json && mv tmp.json _data/members.json
+          
+      - name: Commit & Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add _data/members.json
-          git commit -m "Add new member from Issue #${{ github.event.issue.number }}"
+          git commit -m "Add member: ${{ github.event.issue.title }}"
           git push

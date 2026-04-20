@@ -18,5 +18,15 @@
     "location": "HEre",
     "link": "Tehereee",
     "url": "events/2026-06-06-here-is-the-event.html"
+  },
+  {
+    "title": "This is the event",
+    "organizer": "That",
+    "category": "Webinar",
+    "event_date": "2026-07-07",
+    "modality": "Virtual",
+    "location": "Will happen",
+    "link": "Here",
+    "url": "events/2026-07-07-this-is-the-event/"
   }
 ]

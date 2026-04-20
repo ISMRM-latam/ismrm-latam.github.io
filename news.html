@@ -1,36 +1,46 @@
 ---
 layout: default
-title: News & Updates
+title: News
 ---
 
-<div class="news-list">
-  {% for post in site.posts %}
-    <div class="news-card">
-      {% if post.image_url %}
-        <div class="news-image" style="background-image: url('{{ post.image_url }}');"></div>
-      {% else %}
-        <div class="news-image default-gradient"></div>
-      {% endif %}
-
-      <div class="news-content">
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.excerpt }}</p>
-        <a href="{{ post.url }}" class="c-button">Read More</a>
-      </div>
+<div class="content-card">
+    <div class="news-header">
+        <h1>Latest Updates</h1>
+        <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=news_registration.yml" class="c-button">+ Submit News</a>
     </div>
-  {% endfor %}
+
+    <div class="news-grid">
+        {% assign sorted_news = site.data.news | sort: 'date' | reverse %}
+        {% for item in sorted_news %}
+        <article class="news-item">
+            {% if item.image != "" and item.image != "null" %}
+                <div class="news-img-box" style="background-image: url('{{ item.image }}');"></div>
+            {% else %}
+                <div class="news-img-box default-news-bg"></div>
+            {% endif %}
+            
+            <div class="news-text">
+                <span class="news-cat">{{ item.category }}</span>
+                <h2>{{ item.title | remove: "News: " }}</h2>
+                <p class="news-meta">By {{ item.author }} on {{ item.date }}</p>
+                <p class="news-summ">{{ item.summary }}</p>
+                <button class="c-button small" onclick="alert('Full content: {{ item.content | escape }}')">Read More</button>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
 </div>
 
 <style>
-  .news-image {
-    width: 100%;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px 8px 0 0;
-}
-
-  .default-gradient {
-      background: linear-gradient(135deg, #003687 0%, #1495a7 100%);
-  }
+    .news-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+    .news-item { background: white; border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: 0.3s; }
+    .news-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .news-img-box { height: 180px; background-size: cover; background-position: center; }
+    .default-news-bg { background: linear-gradient(135deg, #003687 0%, #1495a7 100%); }
+    .news-text { padding: 20px; }
+    .news-cat { font-size: 0.7rem; font-weight: bold; color: #1495a7; text-transform: uppercase; }
+    .news-item h2 { font-size: 1.2rem; margin: 10px 0; color: #003687; }
+    .news-meta { font-size: 0.8rem; color: #999; margin-bottom: 15px; }
+    .news-summ { font-size: 0.9rem; color: #555; margin-bottom: 20px; line-height: 1.4; }
 </style>

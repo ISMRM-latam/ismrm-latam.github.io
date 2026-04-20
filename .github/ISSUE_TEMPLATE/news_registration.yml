@@ -1,0 +1,43 @@
+name: News Post Submission
+description: Submit a news article or announcement
+title: "News: [Article Title]"
+labels: ["new-news"]
+body:
+  - type: input
+    id: author
+    attributes:
+      label: Author Name
+      placeholder: e.g., Dr. Elena Rodriguez
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Research
+        - Event
+        - Chapter News
+        - Opportunity
+    validations:
+      required: true
+  - type: input
+    id: featured_image
+    attributes:
+      label: Featured Image URL
+      placeholder: "Paste GitHub asset URL or external link here"
+      description: "Pro-tip: Drag an image into this issue's description to generate a link!"
+  - type: input
+    id: summary
+    attributes:
+      label: Short Summary
+      placeholder: "A 1-2 sentence teaser for the news list page."
+    validations:
+      required: true
+  - type: textarea
+    id: content
+    attributes:
+      label: Full Article Content
+      placeholder: "Write your full article here. Markdown is supported!"
+    validations:
+      required: true

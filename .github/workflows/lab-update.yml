@@ -1,13 +1,19 @@
 name: Update Labs List
 on:
   issues:
-    types: [opened, labeled]
+    types: [labeled]
 
 jobs:
   update-labs:
+    # SECURITY GATE:
+    # 1. Trigger only if the label 'approved' is added.
+    # 2. Ensure it belongs to a 'new-lab' issue.
+    # 3. Ensure the person labeling is an authorized collaborator or the owner.
     if: |
-      contains(github.event.issue.labels.*.name, 'new-lab') || 
-      startsWith(github.event.issue.title, 'Lab Registration')
+      github.event.label.name == 'approved' && 
+      contains(github.event.issue.labels.*.name, 'new-lab') &&
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+    
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,13 +34,13 @@ jobs:
           FOCUS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."research-focus-keywords".text')
           CONTACT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."contact-information".text')
 
-          # Geocoding
+          # Geocoding via Nominatim
           QUERY=$(echo "$INST, $RESIDENCE" | jq -sRr @uri)
           RESPONSE=$(curl -s -A "ISMRM-LATAM-Bot" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
           LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45')
           LNG=$(echo $RESPONSE | jq -r '.[0].lon // -70.66')
 
-          # Create Lab JSON
+          # Create Lab JSON entry
           jq -n \
             --arg name "$NAME" \
             --arg inst "$INST" \
@@ -49,6 +55,9 @@ jobs:
 
       - name: Update Labs JSON File
         run: |
+          if [ ! -f _data/labs.json ]; then
+            echo "[]" > _data/labs.json
+          fi
           jq ". += [$(cat lab.json)]" _data/labs.json > tmp.json && mv tmp.json _data/labs.json
           
       - name: Commit & Push
@@ -56,5 +65,14 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add _data/labs.json
-          git commit -m "Add Lab: ${{ github.event.issue.title }}"
+          git commit -m "Approved Lab: ${{ github.event.issue.title }}"
           git push
+
+      - name: Close Issue and Comment
+        uses: peter-evans/close-issue@v3
+        with:
+          comment: |
+            ### 🏛️ Lab Registered!
+            The **${{ github.event.issue.title }}** has been approved and added to the research hub.
+            
+            Check it out here: [gsahonero.github.io/ismrm-latam.github.io/labs](https://gsahonero.github.io/ismrm-latam.github.io/labs)

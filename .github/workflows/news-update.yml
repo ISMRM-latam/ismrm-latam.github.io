@@ -1,0 +1,58 @@
+name: Update News List
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  update-news:
+    if: |
+      github.event.label.name == 'approved' && 
+      contains(github.event.issue.labels.*.name, 'new-news') &&
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Parse Issue Body
+        id: parse
+        uses: zentered/issue-forms-body-parser@v2.0.0
+
+      - name: Process News Data
+        id: process
+        run: |
+          AUTHOR=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."author-name".text')
+          CAT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."category".text')
+          IMG=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."featured-image-url".text')
+          SUMM=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."short-summary".text')
+          CONTENT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-article-content".text')
+          DATE=$(date +%Y-%m-%d)
+          
+          # Use jq to build the object safely
+          jq -n \
+            --arg auth "$AUTHOR" \
+            --arg cat "$CAT" \
+            --arg img "$IMG" \
+            --arg summ "$SUMM" \
+            --arg cont "$CONTENT" \
+            --arg date "$DATE" \
+            --arg title "${{ github.event.issue.title }}" \
+            '{title: $title, author: $auth, category: $cat, image: $img, summary: $summ, content: $cont, date: $date}' > news_entry.json
+
+      - name: Append to News Database
+        run: |
+          if [ ! -f _data/news.json ]; then echo "[]" > _data/news.json; fi
+          jq ". += [$(cat news_entry.json)]" _data/news.json > tmp.json && mv tmp.json _data/news.json
+
+      - name: Commit & Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _data/news.json
+          git commit -m "Published News: ${{ github.event.issue.title }}"
+          git push
+
+      - name: Close Issue
+        uses: peter-evans/close-issue@v3
+        with:
+          comment: "### 📰 News Published!\nYour article is now live on the portal."

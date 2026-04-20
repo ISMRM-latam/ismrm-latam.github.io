@@ -1,14 +1,19 @@
 name: Update Members List
 on:
   issues:
-    types: [opened, labeled]
+    types: [labeled]
 
 jobs:
   update-data:
-    # Trigger if it has the label OR if the title starts with "Member Registration"
+    # SECURITY GATE:
+    # 1. Trigger only on the 'approved' label.
+    # 2. Ensure it targets 'new-member' submissions.
+    # 3. Verify the person labeling has repo permissions or is the owner.
     if: |
-      contains(github.event.issue.labels.*.name, 'new-member') || 
-      startsWith(github.event.issue.title, 'Member Registration')
+      github.event.label.name == 'approved' && 
+      contains(github.event.issue.labels.*.name, 'new-member') &&
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+    
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,7 +25,6 @@ jobs:
       - name: Geocode and Parse Data
         id: geocode
         run: |
-          # Mapping to the exact slugified keys found in your Action logs
           NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-name".text')
           INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."current-institution-university".text')
           RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."country-of-residence".text')
@@ -49,8 +53,9 @@ jobs:
 
       - name: Update JSON File
         run: |
-          # Append the new member to the existing _data/members.json
-          # Ensure _data/members.json exists and is not empty before running this
+          if [ ! -f _data/members.json ]; then
+            echo "[]" > _data/members.json
+          fi
           jq ". += [$(cat member.json)]" _data/members.json > tmp.json && mv tmp.json _data/members.json
           
       - name: Commit & Push
@@ -58,5 +63,13 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add _data/members.json
-          git commit -m "Add member: ${{ github.event.issue.title }}"
+          git commit -m "Approved member: ${{ github.event.issue.title }}"
           git push
+
+      - name: Close Issue and Comment
+        uses: peter-evans/close-issue@v3
+        with:
+          comment: |
+            ### 🗺️ Member Added!
+            Welcome to the community, **${{ github.event.issue.title }}**! 
+            You are now visible on the [ISMRM-LATAM Members Map](https://gsahonero.github.io/ismrm-latam.github.io/members).

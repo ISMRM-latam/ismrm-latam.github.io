@@ -1,14 +1,19 @@
 name: Update Jobs List
 on:
   issues:
-    types: [opened, labeled]
+    types: [labeled]
 
 jobs:
   update-jobs:
-    # Trigger if it has the label 'new-job' OR if the title starts with "Job:"
+    # SECURITY GATE: 
+    # 1. Trigger only if the label 'approved' is added.
+    # 2. Ensure it belongs to a 'new-job' issue.
+    # 3. Ensure the person who labeled it is a Collaborator, Admin, or the Owner.
     if: |
-      contains(github.event.issue.labels.*.name, 'new-job') || 
-      startsWith(github.event.issue.title, 'Job:')
+      github.event.label.name == 'approved' && 
+      contains(github.event.issue.labels.*.name, 'new-job') &&
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+    
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,7 +25,7 @@ jobs:
       - name: Process Job Data
         id: process
         run: |
-          # Extracting data using slugified keys from the YAML template
+          # Extract variables from the parsed issue form
           TITLE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."position-title".text')
           INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."posting-institution".text')
           MODAL=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."modality".text')
@@ -29,10 +34,10 @@ jobs:
           LINK=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."how-to-apply-link-or-email".text')
           DESC=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."description".text')
           
-          # Automatically generate today's date
+          # Auto-generate current date
           POSTED_DATE=$(date +%Y-%m-%d)
 
-          # Build a clean JSON object for this specific job
+          # Create the single job entry
           jq -n \
             --arg title "$TITLE" \
             --arg inst "$INST" \
@@ -46,16 +51,12 @@ jobs:
 
       - name: Append to Jobs Database
         run: |
-          # Ensure the file exists (create empty array if not)
+          # Initialize the file if it's missing
           if [ ! -f _data/jobs.json ]; then
             echo "[]" > _data/jobs.json
           fi
           
-          # Append the new job.json to the existing array in _data/jobs.json
-          jq ". += [$(cat job.json)]" _data/members.json > tmp.json && mv tmp.json _data/jobs.json
-          
-          # NOTE: Fixed a logic error above - changed _data/members.json to _data/jobs.json 
-          # to ensure it updates the correct file!
+          # Merge new entry into the array
           jq ". += [$(cat job.json)]" _data/jobs.json > tmp.json && mv tmp.json _data/jobs.json
 
       - name: Commit & Push
@@ -63,5 +64,14 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add _data/jobs.json
-          git commit -m "New Job Posting: ${{ github.event.issue.title }}"
+          git commit -m "Approved Job Posting: ${{ github.event.issue.title }}"
           git push
+
+      - name: Close Issue and Comment
+        uses: peter-evans/close-issue@v3
+        with:
+          comment: |
+            ### 🚀 Success!
+            This opportunity has been reviewed by the ISMRM-LATAM team and is now live on the site.
+            
+            **View it here:** [gsahonero.github.io/ismrm-latam.github.io/jobs](https://gsahonero.github.io/ismrm-latam.github.io/jobs)

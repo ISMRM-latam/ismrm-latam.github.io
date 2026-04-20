@@ -1,0 +1,60 @@
+name: Update Labs List
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  update-labs:
+    if: |
+      contains(github.event.issue.labels.*.name, 'new-lab') || 
+      startsWith(github.event.issue.title, 'Lab Registration')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Parse Issue Body
+        id: parse
+        uses: zentered/issue-forms-body-parser@v2.0.0
+
+      - name: Geocode and Parse Lab Data
+        id: geocode
+        run: |
+          # Map to slugified keys from the lab_registration.yml
+          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."lab-or-group-name".text')
+          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."host-institution-university".text')
+          PI=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."principal-investigator-pi".text')
+          RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."country".text')
+          URL=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."official-website".text')
+          FOCUS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."research-focus-keywords".text')
+          CONTACT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."contact-information".text')
+
+          # Geocoding
+          QUERY=$(echo "$INST, $RESIDENCE" | jq -sRr @uri)
+          RESPONSE=$(curl -s -A "ISMRM-LATAM-Bot" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
+          LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45')
+          LNG=$(echo $RESPONSE | jq -r '.[0].lon // -70.66')
+
+          # Create Lab JSON
+          jq -n \
+            --arg name "$NAME" \
+            --arg inst "$INST" \
+            --arg pi "$PI" \
+            --arg res "$RESIDENCE" \
+            --arg url "$URL" \
+            --arg focus "$FOCUS" \
+            --arg contact "$CONTACT" \
+            --arg lat "$LAT" \
+            --arg lng "$LNG" \
+            '{name: $name, institution: $inst, pi: $pi, residence: $res, website: $url, focus: $focus, contact: $contact, lat: ($lat|tonumber), lng: ($lng|tonumber)}' > lab.json
+
+      - name: Update Labs JSON File
+        run: |
+          jq ". += [$(cat lab.json)]" _data/labs.json > tmp.json && mv tmp.json _data/labs.json
+          
+      - name: Commit & Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _data/labs.json
+          git commit -m "Add Lab: ${{ github.event.issue.title }}"
+          git push

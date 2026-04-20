@@ -2,6 +2,7 @@
   "site_name": "ISMRM Latin American Chapter",
   "navigation": [
     {"name": "Home", "link": "/"},
+    {"news": "News", "link": "/news"},
     {"name": "About", "link": "/about"},
     {"name": "Committee", "link": "/committee"},
     {"name": "Bylaws", "link": "/bylaws"},

@@ -4,32 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | ISMRM LATAM</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
 
-    <div class="header-main-logo">
-        <a href="/">
+    <header class="header-main-logo">
+        <a href="{{ '/' | relative_url }}">
             <img src="{{ '/assets/images/logo.png' | relative_url }}" class="header-logo-image" alt="ISMRM LATAM">
         </a>
-    </div>
+    </header>
 
-    <nav>
+    <nav class="main-nav">
         {% for item in site.data.content.navigation %}
-            <a href="{{ item.link | relative_url }}">{{ item.name }}</a>
+            <a href="{{ item.link | relative_url }}" class="nav__link">{{ item.name }}</a>
         {% endfor %}
     </nav>
 
     <main>
         <div class="content-card">
-            <h1>{{ page.title }}</h1>
+            {% unless page.url == "/" %}<h1>{{ page.title }}</h1>{% endunless %}
             {{ content }}
         </div>
     </main>
 
-    <footer style="text-align: center; padding: 40px; color: #777;">
-        <p>&copy; 2026 ISMRM Latin American Chapter</p>
+    <footer style="text-align: center; padding: 40px; opacity: 0.6; font-size: 0.9rem;">
+        <p>&copy; {{ "now" | date: "%Y" }} ISMRM Latin American Chapter</p>
     </footer>
 
 </body>

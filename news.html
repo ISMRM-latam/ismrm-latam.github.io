@@ -1,0 +1,15 @@
+---
+layout: default
+title: News & Updates
+---
+
+<div class="news-list">
+  {% for post in site.posts %}
+    <div class="content-card" style="margin-bottom: 20px; padding: 25px;">
+      <h3 style="margin-top: 0;"><a href="{{ post.url | relative_url }}" style="color: var(--text-dark); text-decoration: none;">{{ post.title }}</a></h3>
+      <p style="color: #666; font-size: 0.85rem;">{{ post.date | date: "%B %d, %Y" }}</p>
+      <p>{{ post.excerpt }}</p>
+      <a href="{{ post.url | relative_url }}" style="color: #1495a7; font-weight: bold;">Read more...</a>
+    </div>
+  {% endfor %}
+</div>

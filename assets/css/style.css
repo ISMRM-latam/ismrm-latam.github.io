@@ -1,82 +1,65 @@
-/* Core Variables from your main.css */
+/* ISMRM-LATAM Master Stylesheet */
+
 :root {
   --primary-gradient: linear-gradient(90deg, #1495a7 0%, #003687 167%);
   --bg-color: #f2f6ff;
   --text-dark: #110E38;
   --white: #ffffff;
+  --gray-light: #f9f9f9;
 }
 
 body {
-  font-family: "Inter", Helvetica Neue, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-dark);
-  line-height: 1.8;
+  line-height: 1.6;
   margin: 0;
 }
 
-/* Header & Logo styling from custom.css */
+/* Header & Logo - Based on your custom.css */
 .header-main-logo {
   width: 100%;
   text-align: center;
   padding: 40px 0;
   background: var(--white);
-  margin-bottom: 0;
 }
 
 .header-logo-image {
   max-height: 120px;
   width: auto;
+  display: block;
+  margin: 0 auto;
 }
 
-/* Navigation from main.css & custom.css */
-nav {
+/* Navigation - Based on your main.css */
+.main-nav {
   background: var(--white);
-  border-top: 2px solid #eee;
-  padding: 20px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
   text-align: center;
   position: sticky;
   top: 0;
-  z-index: 900;
+  z-index: 1000;
 }
 
-nav a {
-  margin: 0 15px;
+.nav__link {
+  margin: 0 20px;
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 600;
-  font-size: 16px;
-  transition: 0.3s;
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
 }
 
-nav a:hover, nav a.active {
+.nav__link:hover, .nav__link.active {
   color: #1495a7;
 }
 
-/* Hero Section / Buttons */
-.hero {
-  padding: 60px 10%;
-  text-align: center;
-}
-
-.c-button {
-  padding: 16px 32px;
-  border-radius: 16px;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-block;
-  color: var(--white);
-  background: var(--primary-gradient);
-  transition: transform 0.2s;
-  box-shadow: 0px 4px 10px rgba(20, 149, 167, 0.25);
-}
-
-.c-button:hover {
-  transform: translateY(-2px);
-}
-
-/* Cards & Content */
+/* Content Cards */
 main {
-  max-width: 1100px;
+  max-width: 900px;
   margin: 40px auto;
   padding: 0 20px;
 }
@@ -85,22 +68,41 @@ main {
   background: var(--white);
   padding: 40px;
   border-radius: 16px;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.07);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Buttons - The signature ISMRM-LATAM look */
+.c-button {
+  background: var(--primary-gradient);
+  color: var(--white) !important;
+  padding: 14px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
 }
 
-th {
-  background: var(--text-dark);
-  color: var(--white);
-  padding: 12px;
-  text-align: left;
+.c-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 15px rgba(20, 149, 167, 0.3);
 }
 
-td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
+/* Typography */
+h1, h2, h3 {
+  color: var(--text-dark);
+  margin-top: 0;
+}
+
+/* Mobile Responsiveness from custom.css */
+@media (max-width: 767px) {
+  .nav__link {
+    display: block;
+    margin: 10px 0;
+  }
+  .header-logo-image {
+    max-height: 80px;
+  }
 }

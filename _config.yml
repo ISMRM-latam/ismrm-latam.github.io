@@ -2,3 +2,7 @@ title: ISMRM LATAM Replica
 remote_theme: pages-themes/minimal@v0.2.0 # You can change this theme later
 plugins:
   - jekyll-remote-theme
+collections:
+  events:
+    output: true
+    permalink: /events/:path/

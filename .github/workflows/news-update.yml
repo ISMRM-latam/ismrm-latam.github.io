@@ -54,11 +54,14 @@ jobs:
           echo "---" >> "_posts/$FILENAME"
           echo "" >> "_posts/$FILENAME"
           
-          # 4. APPEND CONTENT SAFELY (Header + Content)
-          # We extract both fields and combine them into the temp file.
+          # 4. APPEND CONTENT SAFELY (Dynamic headers + Content)
+          # We grab every value in the JSON, keep only the .text if it exists,
+          # and exclude the metadata fields we already used in the header.
           echo "$RAW_DATA" | jq -r '
-            [."header".text, ."full-article-content".text] 
-            | filter(. != null and . != "") 
+            to_entries 
+            | map(select(.key | IN("author-name", "category", "featured-image-url", "short-summary") | not)) 
+            | map(.value.text) 
+            | select(. != null and . != "") 
             | join("\n\n")
           ' > content_tmp.txt
           

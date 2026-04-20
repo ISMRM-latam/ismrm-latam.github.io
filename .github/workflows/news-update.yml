@@ -22,48 +22,36 @@ jobs:
       - name: Process News and Generate Post
         id: process
         run: |
-          # 1. Extract Data safely with -r (raw-output)
-          AUTHOR=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."author-name".text')
-          CAT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."category".text')
-          SUMM=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."short-summary".text')
+          # 1. Extract Data
+          RAW_DATA='${{ steps.parse.outputs.data }}'
+          AUTHOR=$(echo "$RAW_DATA" | jq -r '."author-name".text // "Executive Committee"')
+          CAT=$(echo "$RAW_DATA" | jq -r '."category".text // "News"')
+          SUMM=$(echo "$RAW_DATA" | jq -r '."short-summary".text // "No summary provided"')
           
-          # Use -r to ensure content is treated as a raw string, not a JSON object
-          CONTENT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-article-content".text')
+          # Content Fallback
+          CONTENT=$(echo "$RAW_DATA" | jq -r '."full-article-content".text // ."header".text')
           
-          # SANITIZATION: Clean the URL
-          IMG_RAW=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."featured-image-url".text')
+          # URL Sanitization
+          IMG_RAW=$(echo "$RAW_DATA" | jq -r '."featured-image-url".text')
           IMG=$(echo "$IMG_RAW" | tr -d '<>' | xargs)
           
           TITLE=$(echo "${{ github.event.issue.title }}" | sed 's/News: //g')
           DATE=$(date +%Y-%m-%d)
           
           # 2. Slug generation
-          SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}')
+          SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed 's/-$//')
           FILENAME="${DATE}-${SLUG}.md"
           
-          # 3. Create the Jekyll Markdown file
-          # CRITICAL: We use <<'EOF' (with quotes) so bash doesn't touch the content inside
+          # 3. Create the Jekyll Markdown file using printf
+          # This is indentation-independent and handles newlines safely
           mkdir -p _posts
-          cat <<'EOF' > _posts/$FILENAME
----
-layout: post
-title: "$TITLE"
-date: $DATE
-author: "$AUTHOR"
-category: "$CAT"
-image: "$IMG"
-excerpt: "$SUMM"
----
-$CONTENT
-EOF
+          
+          # Define the Front Matter
+          printf -- "---\nlayout: post\ntitle: \"%s\"\ndate: %s\nauthor: \"%s\"\ncategory: \"%s\"\nimage: \"%s\"\nexcerpt: \"%s\"\n---\n\n%s" \
+            "$TITLE" "$DATE" "$AUTHOR" "$CAT" "$IMG" "$SUMM" "$CONTENT" > "_posts/$FILENAME"
 
-          # 4. Build the JSON summary (index) for the feed
-          # The URL follows the default Jekyll pattern: /year/month/day/slug.html
-          YEAR=$(date +%Y)
-          MONTH=$(date +%m)
-          DAY=$(date +%d)
-          POST_URL="/$YEAR/$MONTH/$DAY/$SLUG.html"
-
+          # 4. Build the JSON summary
+          POST_URL="/$(date +%Y/%m/%d)/$SLUG.html"
           jq -n \
             --arg title "$TITLE" \
             --arg auth "$AUTHOR" \

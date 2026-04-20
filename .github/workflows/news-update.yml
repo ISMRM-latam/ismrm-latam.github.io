@@ -25,7 +25,10 @@ jobs:
           # 1. Extract Data from Issue
           AUTHOR=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."author-name".text')
           CAT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."category".text')
-          IMG=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."featured-image-url".text')
+          
+          # SANITIZATION FIX: Strip < and > from the Image URL
+          IMG=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."featured-image-url".text' | sed 's/[<>]//g')
+          
           SUMM=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."short-summary".text')
           CONTENT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-article-content".text')
           

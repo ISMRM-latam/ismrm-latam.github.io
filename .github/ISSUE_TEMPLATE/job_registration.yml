@@ -1,0 +1,71 @@
+name: Professional Opportunity
+description: Post a job, PhD position, or Fellowship
+title: "Job: [Position Name] at [Institution]"
+labels: ["new-job"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Share an Opportunity
+        Post your open positions for the LATAM MRI community.
+
+  - type: input
+    id: title
+    attributes:
+      label: Position Title
+      placeholder: e.g., Postdoctoral Researcher in Pulse Sequence Design
+    validations:
+      required: true
+
+  - type: input
+    id: institution
+    attributes:
+      label: Posting Institution
+      placeholder: e.g., Universidad de los Andes
+    validations:
+      required: true
+
+  - type: dropdown
+    id: modality
+    attributes:
+      label: Modality
+      options:
+        - Full-time (In-person)
+        - Hybrid
+        - Remote
+        - PhD Position
+        - Master Position
+        - Internship
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      placeholder: "e.g., Bogotá, Colombia"
+    validations:
+      required: true
+
+  - type: input
+    id: deadline
+    attributes:
+      label: Application Deadline
+      placeholder: "e.g., 2026-12-31"
+      description: "Format: YYYY-MM-DD"
+
+  - type: input
+    id: apply_link
+    attributes:
+      label: How to Apply (Link or Email)
+      placeholder: "https://institution.com/careers or jobs@lab.cl"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      placeholder: "Describe the role, requirements, and benefits..."
+    validations:
+      required: true

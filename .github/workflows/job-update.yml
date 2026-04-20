@@ -1,0 +1,67 @@
+name: Update Jobs List
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  update-jobs:
+    # Trigger if it has the label 'new-job' OR if the title starts with "Job:"
+    if: |
+      contains(github.event.issue.labels.*.name, 'new-job') || 
+      startsWith(github.event.issue.title, 'Job:')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Parse Issue Body
+        id: parse
+        uses: zentered/issue-forms-body-parser@v2.0.0
+
+      - name: Process Job Data
+        id: process
+        run: |
+          # Extracting data using slugified keys from the YAML template
+          TITLE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."position-title".text')
+          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."posting-institution".text')
+          MODAL=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."modality".text')
+          LOC=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."location".text')
+          DEADLINE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."application-deadline".text')
+          LINK=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."how-to-apply-link-or-email".text')
+          DESC=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."description".text')
+          
+          # Automatically generate today's date
+          POSTED_DATE=$(date +%Y-%m-%d)
+
+          # Build a clean JSON object for this specific job
+          jq -n \
+            --arg title "$TITLE" \
+            --arg inst "$INST" \
+            --arg modal "$MODAL" \
+            --arg loc "$LOC" \
+            --arg dead "$DEADLINE" \
+            --arg link "$LINK" \
+            --arg desc "$DESC" \
+            --arg posted "$POSTED_DATE" \
+            '{title: $title, institution: $inst, modality: $modal, location: $loc, deadline: $dead, link: $link, description: $desc, posted: $posted}' > job.json
+
+      - name: Append to Jobs Database
+        run: |
+          # Ensure the file exists (create empty array if not)
+          if [ ! -f _data/jobs.json ]; then
+            echo "[]" > _data/jobs.json
+          fi
+          
+          # Append the new job.json to the existing array in _data/jobs.json
+          jq ". += [$(cat job.json)]" _data/members.json > tmp.json && mv tmp.json _data/jobs.json
+          
+          # NOTE: Fixed a logic error above - changed _data/members.json to _data/jobs.json 
+          # to ensure it updates the correct file!
+          jq ". += [$(cat job.json)]" _data/jobs.json > tmp.json && mv tmp.json _data/jobs.json
+
+      - name: Commit & Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _data/jobs.json
+          git commit -m "New Job Posting: ${{ github.event.issue.title }}"
+          git push

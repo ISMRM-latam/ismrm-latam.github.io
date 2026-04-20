@@ -80,6 +80,48 @@ title: Research Centers
         maxZoom: 18 // Match this with your map's maxZoom
     }).addTo(map);
 
+    // Function to update the sidebar based on visible map area
+function updateListFromMap() {
+    const bounds = map.getBounds();
+    const visibleLabs = labData.filter(lab => {
+        const latLng = L.latLng(lab.lat, lab.lng);
+        return bounds.contains(latLng);
+    });
+    
+    // We call a slightly modified render function that doesn't 
+    // clear the markers, only updates the sidebar.
+    updateSidebarOnly(visibleLabs);
+}
+
+    function updateSidebarOnly(data) {
+        const listContainer = document.getElementById('labList');
+        listContainer.innerHTML = '';
+
+        data.forEach((lab) => {
+            const card = document.createElement('div');
+            card.className = 'lab-card';
+            card.innerHTML = `
+                <h4>${lab.name}</h4>
+                <p>${lab.institution}, ${lab.residence}</p>
+                <span class="pi-badge">PI: ${lab.pi}</span>
+            `;
+            card.onclick = () => {
+                // Find the marker in the group to show it
+                markersGroup.eachLayer(marker => {
+                    if(marker.getLatLng().lat === lab.lat && marker.getLatLng().lng === lab.lng) {
+                        markersGroup.zoomToShowLayer(marker, () => marker.openPopup());
+                    }
+                });
+                map.flyTo([lab.lat, lab.lng], 12);
+            };
+            listContainer.appendChild(card);
+        });
+    }
+
+    // Add the listeners to the map
+    map.on('moveend', updateListFromMap);
+    map.on('zoomend', updateListFromMap);
+
     function renderLabs(data) {
         // 2. Clear both the Cluster Group and the Sidebar List
         markersGroup.clearLayers();

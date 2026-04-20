@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         ### Welcome to the ISMRM-LATAM Community Map!
-        Please fill out the details below to join our researcher directory.
+        Use this form to join our directory. We welcome researchers currently in Latin America and those abroad with LATAM roots.
 
   - type: input
     id: name
@@ -20,15 +20,25 @@ body:
   - type: input
     id: institution
     attributes:
-      label: Institution / University
-      placeholder: e.g., Universidad de Chile
+      label: Current Institution / University
+      placeholder: e.g., King's College London
+    validations:
+      required: true
+
+  - type: input
+    id: residence_country
+    attributes:
+      label: Country of Residence
+      description: "Where are you currently located? (e.g., United Kingdom, Germany, USA)"
+      placeholder: "e.g., United Kingdom"
     validations:
       required: true
 
   - type: dropdown
-    id: country
+    id: latam_origin
     attributes:
-      label: Country
+      label: LATAM Country of Origin/Affiliation
+      description: "Which Latin American country do you represent or identify with?"
       options:
         - Argentina
         - Belize
@@ -61,8 +71,7 @@ body:
     id: interests
     attributes:
       label: Research Interests
-      description: "Please separate your interests by comma (e.g., MRI, Diffusion, Pulse Sequences)"
-      placeholder: "MRI, QSM, Machine Learning"
+      description: "Separate interests by comma (e.g., MRI, Diffusion, QSM)"
     validations:
       required: true
 
@@ -70,7 +79,6 @@ body:
     id: bio
     attributes:
       label: Short Bio
-      description: "A brief professional summary that will appear when your marker is clicked."
-      placeholder: "Assistant Professor focused on neuroimaging..."
+      placeholder: "Brief professional summary..."
     validations:
       required: true

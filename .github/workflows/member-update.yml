@@ -17,33 +17,31 @@ jobs:
       - name: Geocode and Parse Data
         id: geocode
         run: |
-          # Extract data from the Issue Form
           NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.name')
           INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.institution')
-          CTRY=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.country')
+          RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.residence_country')
+          ORIGIN=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.latam_origin')
           INTERESTS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.interests')
           BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.bio')
 
-          # Geocoding logic (Nominatim)
-          # We search for the Institution + Country
-          QUERY=$(echo "$INST, $CTRY" | jq -sRr @uri)
+          # Search using Institution + Residence Country for accurate pinning
+          QUERY=$(echo "$INST, $RESIDENCE" | jq -sRr @uri)
           RESPONSE=$(curl -s -A "ISMRM-LATAM-Bot" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
           
-          # Extract Lat/Lng, fallback to Santiago, Chile center if not found
           LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45')
           LNG=$(echo $RESPONSE | jq -r '.[0].lon // -70.66')
 
-          # Create a clean JSON object for this member
-          # We use jq to handle escaping special characters in bio/interests
+          # Save BOTH residence and origin to JSON
           jq -n \
             --arg name "$NAME" \
             --arg inst "$INST" \
-            --arg ctry "$CTRY" \
+            --arg res "$RESIDENCE" \
+            --arg orig "$ORIGIN" \
             --arg lat "$LAT" \
             --arg lng "$LNG" \
             --arg int "$INTERESTS" \
             --arg bio "$BIO" \
-            '{name: $name, institution: $inst, country: $ctry, lat: ($lat|tonumber), lng: ($lng|tonumber), interests: $int, bio: $bio}' > member.json
+            '{name: $name, institution: $inst, residence: $res, country: $orig, lat: ($lat|tonumber), lng: ($lng|tonumber), interests: $int, bio: $bio}' > member.json
 
       - name: Update JSON File
         run: |

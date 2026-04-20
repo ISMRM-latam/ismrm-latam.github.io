@@ -125,7 +125,12 @@ title: Member Community
                 const popup = `
                     <div style="font-family: 'Inter', sans-serif; min-width: 200px;">
                         <h4 style="margin:0; color:#003687;">${m.name}</h4>
-                        <p style="margin:0; font-size:0.85rem; font-style:italic;">${m.institution || ''}</p>
+                        <p style="margin:0; font-size:0.85rem; font-style:italic;">
+                            ${m.institution} (${m.residence})
+                        </p>
+                        <p style="margin:0; font-size:0.8rem; color:#666;">
+                            Origin: ${m.country}
+                        </p>
                         <div style="margin: 8px 0;">
                             ${m.interests ? m.interests.split(',').map(tag => 
                                 `<span style="background:#eef2ff; color:#1495a7; padding:2px 5px; border-radius:4px; font-size:0.7rem; margin:0 3px 3px 0; display:inline-block;">${tag.trim()}</span>`

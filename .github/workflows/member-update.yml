@@ -14,93 +14,10 @@ jobs:
         id: parse
         uses: zentered/issue-forms-body-parser@v2.0.0
 
-      - name: Geocode Institution
+      - name: Geocode and Parse Data
         id: geocode
         run: |
-          # Extract data from parser
-          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.name')
-          INST=$(echo '${{ steps.parse.outputs.data }}' | jq name: Member Registration
-description: Add yourself to the ISMRM-LATAM Member Map
-title: "Member Registration: [Your Name Here]"
-labels: ["new-member"]
-body:
-  - type: markdown
-    attributes:
-      value: |
-        ### Welcome to the ISMRM-LATAM Community Map!
-        Please fill out the details below to join our researcher directory.
-
-  - type: input
-    id: name
-    attributes:
-      label: Full Name
-      placeholder: e.g., Carlos Milovic
-    validations:
-      required: true
-
-  - type: input
-    id: institution
-    attributes:
-      label: Institution / University
-      placeholder: e.g., Universidad de Chile
-    validations:
-      required: true
-
-  - type: dropdown
-    id: country
-    attributes:
-      label: Country
-      options:
-        - Argentina
-        - Belize
-        - Bolivia
-        - Brazil
-        - Chile
-        - Colombia
-        - Costa Rica
-        - Cuba
-        - Dominican Republic
-        - Ecuador
-        - El Salvador
-        - Guatemala
-        - Guyana
-        - Haiti
-        - Honduras
-        - Mexico
-        - Nicaragua
-        - Panama
-        - Paraguay
-        - Peru
-        - Puerto Rico
-        - Suriname
-        - Uruguay
-        - Venezuela
-    validations:
-      required: true
-
-  - type: input
-    id: interests
-    attributes:
-      label: Research Interests
-      description: "Please separate your interests by comma (e.g., MRI, Diffusion, Pulse Sequences)"
-      placeholder: "MRI, QSM, Machine Learning"
-    validations:
-      required: true
-
-  - type: textarea
-    id: bio
-    attributes:
-      label: Short Bio
-      description: "A brief professional summary that will appear when your marker is clicked."
-      placeholder: "Assistant Professor focused on neuroimaging..."
-    validations:
-      required: true-r '.institution')
-          CTRY=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.country')
-          BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.bio')
-
-          - name: Geocode and Parse Data
-        id: geocode
-        run: |
+          # Extract data from the Issue Form
           NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.name')
           INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.institution')
           CTRY=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.country')
@@ -108,16 +25,29 @@ body:
           BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.bio')
 
           # Geocoding logic (Nominatim)
+          # We search for the Institution + Country
           QUERY=$(echo "$INST, $CTRY" | jq -sRr @uri)
-          RESPONSE=$(curl -s -A "ISMRM-Bot" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
-          LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45') # Fallback to a default if not found
+          RESPONSE=$(curl -s -A "ISMRM-LATAM-Bot" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
+          
+          # Extract Lat/Lng, fallback to Santiago, Chile center if not found
+          LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45')
           LNG=$(echo $RESPONSE | jq -r '.[0].lon // -70.66')
 
-          # Create JSON with separate fields
-          echo "{\"name\":\"$NAME\", \"institution\":\"$INST\", \"country\":\"$CTRY\", \"lat\":$LAT, \"lng\":$LNG, \"interests\":\"$INTERESTS\", \"bio\":\"$BIO\"}" > member.json
+          # Create a clean JSON object for this member
+          # We use jq to handle escaping special characters in bio/interests
+          jq -n \
+            --arg name "$NAME" \
+            --arg inst "$INST" \
+            --arg ctry "$CTRY" \
+            --arg lat "$LAT" \
+            --arg lng "$LNG" \
+            --arg int "$INTERESTS" \
+            --arg bio "$BIO" \
+            '{name: $name, institution: $inst, country: $ctry, lat: ($lat|tonumber), lng: ($lng|tonumber), interests: $int, bio: $bio}' > member.json
 
       - name: Update JSON File
         run: |
+          # Append the new member to the existing _data/members.json
           jq ". += [$(cat member.json)]" _data/members.json > tmp.json && mv tmp.json _data/members.json
           
       - name: Commit & Push

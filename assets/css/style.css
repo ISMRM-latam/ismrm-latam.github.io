@@ -167,3 +167,58 @@ select {
 
 .member-cta h3 { color: white; }
 .member-cta p { margin-bottom: 20px; }
+
+.welcome-hero {
+    background: linear-gradient(135deg, #003687 0%, #1495a7 100%);
+    color: white;
+    padding: 60px 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.welcome-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.announcement-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.welcome-text {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.welcome-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.hero-btn {
+    background: white !important;
+    color: #003687 !important;
+    font-weight: bold;
+    padding: 12px 30px;
+}
+
+.hero-btn.secondary {
+    background: transparent !important;
+    color: white !important;
+    border: 2px solid white;
+}
+
+.hero-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}

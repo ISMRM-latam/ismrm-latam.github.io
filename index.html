@@ -3,13 +3,21 @@ layout: default
 title: Home
 ---
 
-<div style="text-align: center; padding: 40px 0;">
-    <h2 style="font-size: 2.2rem; color: #003687;">{{ site.data.content.home.title }}</h2>
-    <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 30px;">
-        {{ site.data.content.home.mission_statement }}
-    </p>
-    <a href="/about" class="c-button">Learn More About Our Mission</a>
-</div>
+<section class="welcome-hero">
+    <div class="welcome-content">
+        <h1>{{ site.data.content.welcome_message.title }}</h1>
+        <p class="announcement-subtitle">{{ site.data.content.welcome_message.subtitle }}</p>
+        
+        <div class="welcome-text">
+            {{ site.data.content.welcome_message.body | markdownify }}
+        </div>
+
+        <div class="welcome-actions">
+            <a href="/members" class="c-button hero-btn">Explore Members</a>
+            <a href="/labs" class="c-button hero-btn secondary">Research Hubs</a>
+        </div>
+    </div>
+</section>
 
 <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 

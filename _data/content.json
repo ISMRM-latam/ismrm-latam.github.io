@@ -30,5 +30,10 @@
   "history": {
     "title": "Our History",
     "content": "Established to bridge the gap between Latin American researchers and the global MR community, the chapter has grown from an inaugural board in 2024 to a vibrant network of clinics and labs."
+  },
+  "welcome_message": {
+    "title": "Welcome to ISMRM-LATAM",
+    "subtitle": "The Latin American Chapter of the ISMRM",
+    "body": "<p>Our mission is to foster the development and application of magnetic resonance techniques in medicine and biology across Latin America.</p>            <p>We invite you to explore our community map, discover regional research hubs, and join us in advancing the MRI ecosystem in our region.</p>"
   }
 }

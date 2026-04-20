@@ -1,11 +1,2 @@
 [
-  {
-    "title": "News: Testing",
-    "author": "G Sahonero",
-    "category": "Chapter News",
-    "image": "https://github.com/user-attachments/assets/2c20691c-70c4-4412-95d6-ad5593a18bb1",
-    "summary": "Testing this news pipeline.",
-    "content": "This is the content of the article! And the image",
-    "date": "2026-04-20"
-  }
 ]

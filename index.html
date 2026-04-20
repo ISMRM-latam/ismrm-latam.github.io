@@ -1,45 +1,18 @@
 ---
 layout: default
+title: Welcome
 ---
 
-<section id="about">
-    <h2>{{ site.data.content.about.title }}</h2>
-    <p>{{ site.data.content.about.description }}</p>
-</section>
+<div style="text-align: center; margin-bottom: 40px;">
+    <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 30px;">
+        {{ site.data.content.home.mission_statement }}
+    </p>
+    <a href="https://www.ismrm.org/chapters/latin-american-chapter/" class="c-button">
+        Join our Community
+    </a>
+</div>
 
 <hr>
 
-<section id="committee">
-    <h2>{{ site.data.content.committee.title }}</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Role</th>
-                <th>Name</th>
-                <th>Affiliation</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for member in site.data.content.committee.members %}
-            <tr>
-                <td><strong>{{ member.role }}</strong></td>
-                <td>{{ member.name }}</td>
-                <td>{{ member.affiliation }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</section>
-
-<hr>
-
-<section id="events">
-    <h2>{{ site.data.content.events.title }}</h2>
-    {% for event in site.data.content.events.upcoming %}
-    <div class="event-card">
-        <h3>{{ event.name }}</h3>
-        <p><em>{{ event.date }}</em></p>
-        <p>{{ event.description }}</p>
-    </div>
-    {% endfor %}
-</section>
+<h3>Latest Updates</h3>
+<p>Keep up with the latest Magnetic Resonance research developments in Latin America.</p>

@@ -5,7 +5,10 @@ on:
 
 jobs:
   update-data:
-    if: contains(github.event.issue.labels.*.name, 'Member Registration')
+    # Trigger if it has the label OR if the title starts with "Member Registration"
+    if: |
+      contains(github.event.issue.labels.*.name, 'new-member') || 
+      startsWith(github.event.issue.title, 'Member Registration')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

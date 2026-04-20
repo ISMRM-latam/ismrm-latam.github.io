@@ -68,7 +68,11 @@ jobs:
           cat content_tmp.txt >> "_posts/$FILENAME"
 
           # 5. Build JSON summary
-          POST_URL="/$(date +%Y/%m/%d)/$SLUG.html"
+          YEAR=$(date +%Y)
+          MONTH=$(date +%m)
+          DAY=$(date +%d)
+          POST_URL="$YEAR/$MONTH/$DAY/$SLUG.html"
+
           jq -n \
             --arg title "$TITLE" --arg auth "$AUTHOR" --arg cat "$CAT" \
             --arg img "$IMG" --arg summ "$SUMM" --arg date "$DATE" --arg url "$POST_URL" \

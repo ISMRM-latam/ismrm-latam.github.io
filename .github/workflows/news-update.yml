@@ -29,11 +29,15 @@ jobs:
           CAT=$(echo "$RAW_DATA" | jq -r '."category".text // "News"')
           SUMM=$(echo "$RAW_DATA" | jq -r '."short-summary".text // "No summary provided"')
           
-          # IMPROVED CONTENT EXTRACTION: 
-          # This looks for .text OR joins the .content array if .text is missing.
-          CONTENT=$(echo "$RAW_DATA" | jq -r '."full-article-content" | if .text then .text else (.content | join("\n")) end')
+          # IMPROVED CONTENT EXTRACTION:
+          # We check full-article-content first. If empty or null, we take "header".
+          CONTENT=$(echo "$RAW_DATA" | jq -r '
+            if (."full-article-content".text != null and ."full-article-content".text != "") 
+            then ."full-article-content".text 
+            else ."header".text 
+            end')
           
-          # FINAL SAFETY: If jq still returns "null" as a string, clear it.
+          # If it is still null (literally the string "null"), clear it
           if [ "$CONTENT" == "null" ]; then CONTENT=""; fi
 
           # URL Sanitization
@@ -47,10 +51,20 @@ jobs:
           SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed 's/-$//')
           FILENAME="${DATE}-${SLUG}.md"
           
-          # 3. Create the Jekyll Markdown file using printf
+          # 3. Create the Jekyll Markdown file using a HEREDOC (much safer for multi-line)
           mkdir -p _posts
-          printf -- "---\nlayout: post\ntitle: \"%s\"\ndate: %s\nauthor: \"%s\"\ncategory: \"%s\"\nimage: \"%s\"\nexcerpt: \"%s\"\n---\n\n%s" \
-            "$TITLE" "$DATE" "$AUTHOR" "$CAT" "$IMG" "$SUMM" "$CONTENT" > "_posts/$FILENAME"
+          cat > "_posts/$FILENAME" <<EOF
+---
+layout: post
+title: "$TITLE"
+date: $DATE
+author: "$AUTHOR"
+category: "$CAT"
+image: "$IMG"
+excerpt: "$SUMM"
+---
+$CONTENT
+EOF
 
           # 4. Build the JSON summary
           POST_URL="/$(date +%Y/%m/%d)/$SLUG.html"

@@ -5,7 +5,7 @@ remote_theme: pages-themes/minimal@v0.2.0 # Standard GitHub Pages base
 github_username: gsahonero
 github_repo: ismrm-latam.github.io
 url: "https://gsahonero.github.io"
-baseurl: "" # Leave empty unless your site is in a subfolder
+baseurl: "/ismrm-latam.github.io" # Leave empty unless your site is in a subfolder
 
 plugins:
   - jekyll-remote-theme

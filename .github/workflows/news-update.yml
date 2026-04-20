@@ -22,14 +22,14 @@ jobs:
       - name: Process News and Generate Post
         id: process
         run: |
-          # 1. Extract Data
+          # 1. Extract Metadata
           RAW_DATA='${{ steps.parse.outputs.data }}'
           
           AUTHOR=$(echo "$RAW_DATA" | jq -r '."author-name".text // "Executive Committee"')
           CAT=$(echo "$RAW_DATA" | jq -r '."category".text // "News"')
           SUMM=$(echo "$RAW_DATA" | jq -r '."short-summary".text // "No summary provided"')
           
-          # SANITIZATION: Clean the URL
+          # URL Sanitization
           IMG_RAW=$(echo "$RAW_DATA" | jq -r '."featured-image-url".text')
           IMG=$(echo "$IMG_RAW" | tr -d '<>' | xargs)
           
@@ -40,10 +40,9 @@ jobs:
           SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed 's/-$//')
           FILENAME="${DATE}-${SLUG}.md"
           
-          # 3. Create file - Step by step to ensure no truncation
           mkdir -p _posts
           
-          # Write the header
+          # 3. Create the Front Matter
           echo "---" > "_posts/$FILENAME"
           echo "layout: post" >> "_posts/$FILENAME"
           echo "title: \"$TITLE\"" >> "_posts/$FILENAME"
@@ -55,11 +54,12 @@ jobs:
           echo "---" >> "_posts/$FILENAME"
           echo "" >> "_posts/$FILENAME"
           
-          # IMPORTANT: Use jq to append the actual content directly to the file
-          # This avoids shell variable truncation/escaping issues.
-          echo "$RAW_DATA" | jq -r 'if (."full-article-content".text != null and ."full-article-content".text != "") then ."full-article-content".text else ."header".text end' >> "_posts/$FILENAME"
+          # 4. APPEND CONTENT SAFELY
+          # We extract the content to a temp file first to prevent shell truncation/escaping issues.
+          echo "$RAW_DATA" | jq -r 'if (."full-article-content".text != null and ."full-article-content".text != "") then ."full-article-content".text else ."header".text end' > content_tmp.txt
+          cat content_tmp.txt >> "_posts/$FILENAME"
 
-          # 4. Build JSON summary
+          # 5. Build JSON summary
           POST_URL="/$(date +%Y/%m/%d)/$SLUG.html"
           jq -n \
             --arg title "$TITLE" --arg auth "$AUTHOR" --arg cat "$CAT" \

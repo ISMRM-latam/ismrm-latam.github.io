@@ -7,13 +7,20 @@ title: Research Centers
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <div class="lab-dashboard">
-    <div class="lab-sidebar">
-        <div class="sidebar-header">
-            <h3>LATAM Research Hubs</h3>
-            <input type="text" id="labSearch" placeholder="Search labs, PIs, or topics..." onkeyup="filterLabs()">
-        </div>
-        <div id="labList" class="lab-list">
-            </div>
+   <div class="sidebar-header">
+        <h3>LATAM Research Hubs</h3>
+        <p style="font-size: 0.8rem; color: #666; margin-bottom: 15px;">
+            Discover MRI and Medical Physics groups across the region.
+        </p>
+        
+        <input type="text" id="labSearch" placeholder="Search labs, PIs, or topics..." onkeyup="filterLabs()" style="margin-bottom: 15px;">
+        
+        <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=lab_registration.yml" 
+        class="c-button" 
+        target="_blank" 
+        style="display: block; text-align: center; font-size: 0.85rem; padding: 10px;">
+        + Register your Lab
+        </a>
     </div>
 
     <div id="labMap" class="lab-map-container"></div>
@@ -65,6 +72,16 @@ title: Research Centers
         const listContainer = document.getElementById('labList');
         listContainer.innerHTML = '';
 
+        if (data.length === 0) {
+            listContainer.innerHTML = `
+                <div style="padding: 20px; text-align: center; color: #666;">
+                    <p>No labs found matching your search.</p>
+                    <p style="font-size: 0.8rem;">Is your lab missing? Use the button above to add it!</p>
+                </div>
+            `;
+            return;
+        }
+        
         data.forEach((lab, index) => {
             // 1. Add to Sidebar
             const card = document.createElement('div');

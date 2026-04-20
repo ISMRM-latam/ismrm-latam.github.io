@@ -8,13 +8,21 @@ title: Events
 <h2>Upcoming Events</h2>
 <div class="events-container">
   {% assign upcoming_count = 0 %}
-  {% for event in site.events %}
+  {% comment %} 
+    Pulling from site.data.events (the JSON) is faster than site.events (the collection) 
+    if you have dozens of historical records.
+  {% endcomment %}
+  {% assign sorted_events = site.data.events | sort: 'event_date' %}
+  
+  {% for event in sorted_events %}
     {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
     {% if eventdate >= rightnow %}
-      <div class="content-card">
+      <div class="content-card event-upcoming">
+        <div class="event-badge">Upcoming</div>
         <h3>{{ event.title }}</h3>
         <p><strong>Date:</strong> {{ event.event_date | date: "%B %d, %Y" }}</p>
         <p><strong>Location:</strong> {{ event.location }}</p>
+        <p><strong>Type:</strong> {{ event.category }} ({{ event.modality }})</p>
         <a href="{{ event.url | relative_url }}" class="c-button" style="padding: 8px 16px;">Details</a>
       </div>
       {% assign upcoming_count = upcoming_count | plus: 1 %}
@@ -22,22 +30,34 @@ title: Events
   {% endfor %}
   
   {% if upcoming_count == 0 %}
-    <p>No upcoming events scheduled. Stay tuned!</p>
+    <p>No upcoming events scheduled. Check back soon!</p>
   {% endif %}
 </div>
 
 <hr style="margin: 50px 0;">
 
 <h2>Past Events</h2>
-<div class="events-container" style="opacity: 0.7;">
-  {% for event in site.events %}
+<div class="events-container past-section">
+  {% for event in sorted_events reversed %}
     {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
     {% if eventdate < rightnow %}
-      <div class="content-card">
-        <h3 style="text-decoration: line-through;">{{ event.title }}</h3>
+      <div class="content-card past-card">
+        <h3 style="color: #666;">{{ event.title }}</h3>
         <p>Held on {{ event.event_date | date: "%B %d, %Y" }}</p>
-        <a href="{{ event.url | relative_url }}">View Summary</a>
+        <a href="{{ event.url | relative_url }}" style="font-size: 0.9rem; color: #1495a7;">View Event Archive →</a>
       </div>
     {% endif %}
   {% endfor %}
 </div>
+
+<style>
+  .event-upcoming { border-left: 4px solid #1495a7; position: relative; }
+  .event-badge { 
+    position: absolute; top: 10px; right: 10px; 
+    background: #e0f2f1; color: #00695c; 
+    padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;
+  }
+  .past-section { opacity: 0.7; }
+  .past-card { border-left: 4px solid #ccc; background: #fafafa !important; }
+  .events-container { display: grid; gap: 20px; }
+</style>

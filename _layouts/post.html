@@ -2,20 +2,88 @@
 layout: default
 ---
 <article class="content-card">
-  <header style="margin-bottom: 30px;">
-    <span class="news-cat">{{ page.category }}</span>
-    <h1 style="color: #003687; margin: 10px 0;">{{ page.title }}</h1>
-    <p style="color: #666;">By {{ page.author }} | {{ page.date | date: "%B %e, %Y" }}</p>
+  {% comment %} 
+    The 'default' layout in the Minimal theme often renders a title. 
+    If you see a title above your card, we can suppress it in CSS or 
+    simply style this one to be the definitive "Article Header".
+  {% endcomment %}
+  
+  <header class="post-header">
+    <div class="post-labels">
+      <span class="news-cat">{{ page.category }}</span>
+    </div>
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <span class="author">By <strong>{{ page.author }}</strong></span>
+      <span class="divider">|</span>
+      <span class="date">{{ page.date | date: "%B %e, %Y" }}</span>
+    </div>
   </header>
 
-  {% if page.image %}
-    <img src="{{ page.image | relative_url }}" style="width: 100%; border-radius: 12px; margin-bottom: 30px;">
+  {% if page.image and page.image != "" and page.image != "null" %}
+    <div class="featured-image-container">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="featured-image">
+    </div>
   {% endif %}
 
-  <div class="post-content" style="line-height: 1.8; font-size: 1.1rem;">
+  <div class="post-content">
     {{ content }}
   </div>
 
-  <hr style="margin: 40px 0; border: 0; border-top: 1px solid #eee;">
-  <a href="{{ '/news' | relative_url }}" style="color: #1495a7; text-decoration: none; font-weight: bold;">← Back to News</a>
+  <footer class="post-footer">
+    <hr>
+    <a href="{{ '/news' | relative_url }}" class="back-link">← Back to News</a>
+  </footer>
 </article>
+
+<style>
+  /* Premium Typography & Spacing */
+  .post-header { margin-bottom: 40px; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px; }
+  .news-cat { 
+    background: #1495a7; 
+    color: white; 
+    padding: 4px 12px; 
+    border-radius: 20px; 
+    font-size: 0.75rem; 
+    font-weight: bold; 
+    text-transform: uppercase;
+  }
+  .post-title { 
+    color: #003687; 
+    font-size: 2.5rem; 
+    margin: 15px 0 10px 0; 
+    line-height: 1.2;
+    font-weight: 800;
+  }
+  .post-meta { color: #666; font-size: 0.95rem; }
+  .post-meta .divider { margin: 0 10px; color: #ccc; }
+
+  .featured-image-container { margin-bottom: 40px; }
+  .featured-image { 
+    width: 100%; 
+    max-height: 500px; 
+    object-fit: cover; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .post-content { 
+    line-height: 1.8; 
+    font-size: 1.15rem; 
+    color: #333; 
+  }
+  /* Style Markdown elements inside content */
+  .post-content h2, .post-content h3 { color: #003687; margin-top: 40px; }
+  .post-content p { margin-bottom: 20px; }
+  .post-content code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+
+  .post-footer { margin-top: 60px; }
+  .post-footer hr { border: 0; border-top: 1px solid #eee; margin-bottom: 20px; }
+  .back-link { 
+    color: #1495a7; 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: 0.2s;
+  }
+  .back-link:hover { color: #003687; text-decoration: underline; }
+</style>

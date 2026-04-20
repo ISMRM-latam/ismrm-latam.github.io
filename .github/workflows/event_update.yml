@@ -1,0 +1,82 @@
+name: Update Events List
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  update-events:
+    if: |
+      github.event.label.name == 'approved' && 
+      contains(github.event.issue.labels.*.name, 'new-event') &&
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse Issue Body
+        id: parse
+        uses: zentered/issue-forms-body-parser@v2.0.0
+
+      - name: Process Event and Generate File
+        id: process
+        run: |
+          RAW_DATA='${{ steps.parse.outputs.data }}'
+          
+          ORG=$(echo "$RAW_DATA" | jq -r '."organizer".text')
+          CAT=$(echo "$RAW_DATA" | jq -r '."category".text')
+          EDATE=$(echo "$RAW_DATA" | jq -r '."event-date".text')
+          MODAL=$(echo "$RAW_DATA" | jq -r '."modality".text')
+          LOC=$(echo "$RAW_DATA" | jq -r '."where-will-it-happen".text')
+          LINK=$(echo "$RAW_DATA" | jq -r '."registration-or-info-link".text')
+          DESC=$(echo "$RAW_DATA" | jq -r '."description".text')
+          
+          TITLE=$(echo "${{ github.event.issue.title }}" | sed 's/Event: //g')
+          
+          # 1. Create a URL-safe slug from the first 5 words of the TITLE
+          SLUG=$(echo "$TITLE" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed -E 's/-+$//' | sed -E 's/^-|-$//g')
+          FILENAME="${EDATE}-${SLUG}.md"
+          
+          mkdir -p _events
+          
+          # 2. Create the Event Markdown using safe step-by-step echo
+          echo "---" > "_events/$FILENAME"
+          echo "layout: post" >> "_events/$FILENAME"
+          echo "title: \"$TITLE\"" >> "_events/$FILENAME"
+          echo "event_date: $EDATE" >> "_events/$FILENAME"
+          echo "organizer: \"$ORG\"" >> "_events/$FILENAME"
+          echo "category: \"$CAT\"" >> "_events/$FILENAME"
+          echo "modality: \"$MODAL\"" >> "_events/$FILENAME"
+          echo "location: \"$LOC\"" >> "_events/$FILENAME"
+          echo "link: \"$LINK\"" >> "_events/$FILENAME"
+          echo "---" >> "_events/$FILENAME"
+          echo "" >> "_events/$FILENAME"
+          echo "$DESC" >> "_events/$FILENAME"
+
+          # 3. Build JSON summary for index.html / events.json
+          # We use the collection path: /events/filename (without .md)
+          POST_URL="events/${EDATE}-${SLUG}.html"
+          
+          jq -n \
+            --arg title "$TITLE" --arg org "$ORG" --arg cat "$CAT" \
+            --arg edate "$EDATE" --arg modal "$MODAL" --arg loc "$LOC" \
+            --arg link "$LINK" --arg url "$POST_URL" \
+            '{title: $title, organizer: $org, category: $cat, event_date: $edate, modality: $modal, location: $loc, link: $link, url: $url}' > event_entry.json
+
+      - name: Append to Events Database
+        run: |
+          if [ ! -f _data/events.json ]; then echo "[]" > _data/events.json; fi
+          jq ". += [$(cat event_entry.json)]" _data/events.json > tmp.json && mv tmp.json _data/events.json
+
+      - name: Commit & Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _events/*.md _data/events.json
+          git commit -m "Approved Event: ${{ github.event.issue.title }}"
+          git push
+
+      - name: Close Issue
+        uses: peter-evans/close-issue@v3
+        with:
+          comment: "### 📅 Event Registered!\nThe event is now live in the calendar and on the homepage."

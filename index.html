@@ -24,7 +24,8 @@ title: Home
 <div class="home-grid">
     <div class="home-col">
         <h3>Latest News</h3>
-        {% assign recent_news = site.data.news | sort: 'date' | reverse | limit: 3 %}
+        {% comment %} Changed limit from 3 to 2 {% endcomment %}
+        {% assign recent_news = site.data.news | sort: 'date' | reverse | limit: 2 %}
         {% for item in recent_news %}
             <div class="home-item">
                 <a href="{{ item.url | relative_url }}" class="item-link">{{ item.title }}</a>
@@ -36,30 +37,9 @@ title: Home
     </div>
 
     <div class="home-col">
-        <h3>Upcoming Events</h3>
-        {% assign rightnow = "now" | date: "%Y%m%d" | plus: 0 %}
-        {% assign upcoming_found = false %}
-        
-        {% for event in site.events %}
-            {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
-            {% if eventdate >= rightnow %}
-                <div class="home-item">
-                    <a href="{{ event.url | relative_url }}" class="item-link alt">{{ event.title }}</a>
-                    <p class="item-meta">{{ event.event_date | date: "%b %d, %Y" }}</p>
-                </div>
-                {% assign upcoming_found = true %}
-            {% endif %}
-        {% endfor %}
-
-        {% if upcoming_found == false %}
-            <p class="item-excerpt">Stay tuned for upcoming LATAM workshops.</p>
-        {% endif %}
-        <a href="{{ '/events' | relative_url }}" class="item-more">Event calendar &rarr;</a>
-    </div>
-
-    <div class="home-col">
         <h3>Opportunities</h3>
-        {% assign recent_jobs = site.data.jobs | sort: 'posted' | reverse | limit: 3 %}
+        {% comment %} Recommended: Change limit to 2 for visual balance {% endcomment %}
+        {% assign recent_jobs = site.data.jobs | sort: 'posted' | reverse | limit: 2 %}
         {% for job in recent_jobs %}
             <div class="home-item">
                 <a href="{{ '/jobs' | relative_url }}" class="item-link">{{ job.title }}</a>

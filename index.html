@@ -9,12 +9,12 @@ title: Home
         <p class="announcement-subtitle">{{ site.data.content.welcome_message.subtitle }}</p>
         
         <div class="welcome-text">
-            {{ site.data.content.welcome_message.body | markdownify }}
+            {{ site.data.content.welcome_message.body }}
         </div>
 
         <div class="welcome-actions">
-            <a href="/members" class="c-button hero-btn">Explore Members</a>
-            <a href="/labs" class="c-button hero-btn secondary">Research Hubs</a>
+            <a href="{{ '/members' | relative_url }}" class="c-button hero-btn">Explore Members</a>
+            <a href="{{ '/labs' | relative_url }}" class="c-button hero-btn secondary">Research Hubs</a>
         </div>
     </div>
 </section>

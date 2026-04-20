@@ -64,14 +64,20 @@ title: Research Centers
 
 <script>
     const labData = {{ site.data.labs | jsonify }};
-    const map = L.map('labMap').setView([15, -85], 2);
+    
+    const map = L.map('labMap', {
+        maxZoom: 18,   // This satisfies the MarkerCluster requirement
+        minZoom: 2
+    }).setView([15, -85], 2);
     
     // 1. Initialize the Cluster Group
     const markersGroup = L.markerClusterGroup();
     map.addLayer(markersGroup);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; CARTO'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 18 // Match this with your map's maxZoom
     }).addTo(map);
 
     function renderLabs(data) {

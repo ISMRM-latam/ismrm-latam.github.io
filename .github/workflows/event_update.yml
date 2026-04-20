@@ -25,7 +25,15 @@ jobs:
           
           ORG=$(echo "$RAW_DATA" | jq -r '."organizer".text')
           CAT=$(echo "$RAW_DATA" | jq -r '."category".text')
-          EDATE=$(echo "$RAW_DATA" | jq -r '."event-date".text')
+          
+          # Improved Date Extraction
+          EDATE=$(echo "$RAW_DATA" | jq -r '."event-date".text // ."when-will-it-happen".text')
+          
+          # Safety check: If date is still null or empty, use today's date so the build doesn't crash
+          if [ "$EDATE" == "null" ] || [ -z "$EDATE" ]; then
+            EDATE=$(date +%Y-%m-%d)
+          fi          
+          
           MODAL=$(echo "$RAW_DATA" | jq -r '."modality".text')
           LOC=$(echo "$RAW_DATA" | jq -r '."where-will-it-happen".text')
           LINK=$(echo "$RAW_DATA" | jq -r '."registration-or-info-link".text')

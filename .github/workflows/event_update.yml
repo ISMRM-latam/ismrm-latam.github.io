@@ -23,9 +23,9 @@ jobs:
         run: |
           RAW_DATA='${{ steps.parse.outputs.data }}'
           
-          ORG=$(echo "$RAW_DATA" | jq -r '."organizer".text')
-          CAT=$(echo "$RAW_DATA" | jq -r '."category".text')
-          
+          ORG=$(echo "$RAW_DATA" | jq -r '."organizer".text // ."who-is-inviting".text')          
+          CAT=$(echo "$RAW_DATA" | jq -r '."category".text // ."event-type".text')
+
           # Improved Date Extraction
           EDATE=$(echo "$RAW_DATA" | jq -r '."event-date".text // ."when-will-it-happen".text')
           
@@ -34,8 +34,8 @@ jobs:
             EDATE=$(date +%Y-%m-%d)
           fi          
           
-          MODAL=$(echo "$RAW_DATA" | jq -r '."modality".text')
-          LOC=$(echo "$RAW_DATA" | jq -r '."where-will-it-happen".text')
+          MODAL=$(echo "$RAW_DATA" | jq -r '."modality".text')          
+          LOC=$(echo "$RAW_DATA" | jq -r '."where-will-it-happen".text // ."location".text')
           LINK=$(echo "$RAW_DATA" | jq -r '."registration-or-info-link".text')
           DESC=$(echo "$RAW_DATA" | jq -r '."description".text')
           

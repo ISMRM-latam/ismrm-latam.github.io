@@ -15,7 +15,7 @@ plugins:
 collections:
   events:
     output: true
-    permalink: /events/:path/
+    permalink: /events/:path.html  # Added .html here
 
 # Markdown Settings
 markdown: kramdown

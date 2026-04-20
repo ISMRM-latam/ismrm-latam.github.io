@@ -1,7 +1,7 @@
 name: Update Members List
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 
 jobs:
   update-data:
@@ -20,6 +20,7 @@ jobs:
       - name: Geocode and Parse Data
         id: geocode
         run: |
+          # Extract data from parser using IDs from the YML template
           NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.name')
           INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.institution')
           RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.residence_country')
@@ -34,7 +35,7 @@ jobs:
           LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45')
           LNG=$(echo $RESPONSE | jq -r '.[0].lon // -70.66')
 
-          # Save BOTH residence and origin to JSON
+          # Build the JSON object safely using jq arguments
           jq -n \
             --arg name "$NAME" \
             --arg inst "$INST" \
@@ -49,6 +50,7 @@ jobs:
       - name: Update JSON File
         run: |
           # Append the new member to the existing _data/members.json
+          # Ensure _data/members.json exists and is not empty before running this
           jq ". += [$(cat member.json)]" _data/members.json > tmp.json && mv tmp.json _data/members.json
           
       - name: Commit & Push

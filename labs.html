@@ -5,6 +5,9 @@ title: Research Centers
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
 <div class="lab-dashboard">
     <div class="lab-sidebar">
@@ -62,55 +65,61 @@ title: Research Centers
 <script>
     const labData = {{ site.data.labs | jsonify }};
     const map = L.map('labMap').setView([15, -85], 2);
-    let markers = [];
+    
+    // 1. Initialize the Cluster Group
+    const markersGroup = L.markerClusterGroup();
+    map.addLayer(markersGroup);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; CARTO'
     }).addTo(map);
 
     function renderLabs(data) {
-        markers.forEach(m => map.removeLayer(m));
-        markers = [];
+        // 2. Clear both the Cluster Group and the Sidebar List
+        markersGroup.clearLayers();
         
         const listContainer = document.getElementById('labList');
-        if (!listContainer) return; // Safety check
+        if (!listContainer) return;
         listContainer.innerHTML = '';
 
         if (data.length === 0) {
-            listContainer.innerHTML = `
-                <div style="padding: 20px; text-align: center; color: #666;">
-                    <p>No labs found matching your search.</p>
-                    <p style="font-size: 0.8rem;">Is your lab missing? Use the button above to add it!</p>
-                </div>
-            `;
+            listContainer.innerHTML = `<div style="padding: 20px; text-align: center;">No labs found.</div>`;
             return;
         }
         
-        data.forEach((lab, index) => {
+        data.forEach((lab) => {
+            // Add to Sidebar
             const card = document.createElement('div');
             card.className = 'lab-card';
             card.innerHTML = `
                 <h4>${lab.name}</h4>
                 <p>${lab.institution}, ${lab.residence}</p>
                 <span class="pi-badge">PI: ${lab.pi}</span>
-                <p style="font-size: 0.75rem; color: #888;">${lab.focus ? lab.focus.substring(0, 80) : ''}...</p>
             `;
-            card.onclick = () => {
-                map.flyTo([lab.lat, lab.lng], 10);
-                markers[index].openPopup();
-            };
-            listContainer.appendChild(card);
-
+            
+            // Add to Map
             const popupHtml = `
                 <div style="min-width: 200px;">
                     <h4 style="margin:0; color:#1495a7;">${lab.name}</h4>
-                    <p style="margin:5px 0; font-size:0.9rem;"><b>PI:</b> ${lab.pi}</p>
+                    <p style="margin:5px 0;"><b>PI:</b> ${lab.pi}</p>
                     <a href="${lab.website}" target="_blank" class="c-button" style="font-size: 0.7rem; padding: 4px 8px; display:inline-block; margin-top:5px;">View Website</a>
                 </div>
             `;
+            
             const marker = L.marker([lab.lat, lab.lng]).bindPopup(popupHtml);
-            marker.addTo(map);
-            markers.push(marker);
+            
+            // Interaction: Clicking sidebar flies to marker and opens it
+            card.onclick = () => {
+                markersGroup.zoomToShowLayer(marker, () => {
+                    marker.openPopup();
+                });
+                map.flyTo([lab.lat, lab.lng], 12);
+            };
+
+            listContainer.appendChild(card);
+            
+            // 3. Add marker to the Cluster Group instead of directly to map
+            markersGroup.addLayer(marker);
         });
     }
 
@@ -119,8 +128,7 @@ title: Research Centers
         const filtered = labData.filter(lab => 
             (lab.name && lab.name.toLowerCase().includes(query)) || 
             (lab.pi && lab.pi.toLowerCase().includes(query)) || 
-            (lab.focus && lab.focus.toLowerCase().includes(query)) ||
-            (lab.residence && lab.residence.toLowerCase().includes(query))
+            (lab.focus && lab.focus.toLowerCase().includes(query))
         );
         renderLabs(filtered);
     }

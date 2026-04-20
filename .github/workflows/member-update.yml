@@ -5,7 +5,7 @@ on:
 
 jobs:
   update-data:
-    if: contains(github.event.issue.labels.*.name, 'new-member')
+    if: contains(github.event.issue.labels.*.name, 'Member Registration')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

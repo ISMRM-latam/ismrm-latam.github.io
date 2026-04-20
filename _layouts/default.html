@@ -3,22 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ site.data.content.hero.title }}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>{{ page.title }} | {{ site.data.content.site_name }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
+    <nav>
+        {% for item in site.data.content.navigation %}
+            <a href="{{ item.link | relative_url }}">{{ item.name }}</a>
+        {% endfor %}
+    </nav>
+
+    {% if page.url == "/" %}
     <header>
         <h1>{{ site.data.content.hero.title }}</h1>
-        <p><strong>{{ site.data.content.hero.subtitle }}</strong></p>
-        <button>{{ site.data.content.hero.button_text }}</button>
+        <p>{{ site.data.content.hero.subtitle }}</p>
+        <a href="{{ site.data.content.hero.button_link }}" class="btn-primary">
+            {{ site.data.content.hero.button_text }}
+        </a>
     </header>
+    {% endif %}
 
     <main>
+        {% unless page.url == "/" %}<h1>{{ page.title }}</h1>{% endunless %}
         {{ content }}
     </main>
 
     <footer>
-        <p>&copy; 2026 ISMRM LATAM Replica</p>
+        <p>&copy; 2026 {{ site.data.content.site_name }}</p>
     </footer>
 </body>
 </html>

@@ -5,59 +5,86 @@ title: Events
 
 {% assign rightnow = "now" | date: "%Y%m%d" | plus: 0 %}
 
+<div class="news-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <h1>Events Calendar</h1>
+    <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=event_registration.yml" class="c-button">+ Register Event</a>
+</div>
+
 <h2>Upcoming Events</h2>
 <div class="events-container">
   {% assign upcoming_count = 0 %}
-  {% comment %} 
-    Pulling from site.data.events (the JSON) is faster than site.events (the collection) 
-    if you have dozens of historical records.
-  {% endcomment %}
-  {% assign sorted_events = site.data.events | sort: 'event_date' %}
   
-  {% for event in sorted_events %}
-    {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
-    {% if eventdate >= rightnow %}
-      <div class="content-card event-upcoming">
-        <div class="event-badge">Upcoming</div>
-        <h3>{{ event.title }}</h3>
-        <p><strong>Date:</strong> {{ event.event_date | date: "%B %d, %Y" }}</p>
-        <p><strong>Location:</strong> {{ event.location }}</p>
-        <p><strong>Type:</strong> {{ event.category }} ({{ event.modality }})</p>
-        <a href="{{ event.url | relative_url }}" class="c-button" style="padding: 8px 16px;">Details</a>
-      </div>
-      {% assign upcoming_count = upcoming_count | plus: 1 %}
-    {% endif %}
-  {% endfor %}
+  {% comment %} 
+    CRITICAL FIX: Only attempt to sort if site.data.events exists to avoid build errors.
+  {% endcomment %}
+  {% if site.data.events %}
+    {% assign sorted_events = site.data.events | sort: 'event_date' %}
+    
+    {% for event in sorted_events %}
+      {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
+      {% if eventdate >= rightnow %}
+        <div class="content-card event-upcoming">
+          <div class="event-badge">Upcoming</div>
+          <h3>{{ event.title }}</h3>
+          <p><strong>Date:</strong> {{ event.event_date | date: "%B %d, %Y" }}</p>
+          <p><strong>Location:</strong> {{ event.location }}</p>
+          <p><strong>Type:</strong> {{ event.category }} ({{ event.modality }})</p>
+          <div style="margin-top: 15px; display: flex; gap: 10px;">
+            <a href="{{ event.url | relative_url }}" class="c-button small" style="padding: 8px 16px;">Details</a>
+            {% if event.link and event.link != "" %}
+              <a href="{{ event.link }}" target="_blank" class="c-button small secondary">Registration/Info</a>
+            {% endif %}
+          </div>
+        </div>
+        {% assign upcoming_count = upcoming_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
   
   {% if upcoming_count == 0 %}
     <p>No upcoming events scheduled. Check back soon!</p>
   {% endif %}
 </div>
 
-<hr style="margin: 50px 0;">
+<hr style="margin: 50px 0; border: 0; border-top: 1px solid #eee;">
 
 <h2>Past Events</h2>
 <div class="events-container past-section">
-  {% for event in sorted_events reversed %}
-    {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
-    {% if eventdate < rightnow %}
-      <div class="content-card past-card">
-        <h3 style="color: #666;">{{ event.title }}</h3>
-        <p>Held on {{ event.event_date | date: "%B %d, %Y" }}</p>
-        <a href="{{ event.url | relative_url }}" style="font-size: 0.9rem; color: #1495a7;">View Event Archive →</a>
-      </div>
-    {% endif %}
-  {% endfor %}
+  {% if site.data.events %}
+    {% comment %} Show the most recent past events first {% endcomment %}
+    {% assign historical_events = site.data.events | sort: 'event_date' | reverse %}
+    {% for event in historical_events %}
+      {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
+      {% if eventdate < rightnow %}
+        <div class="content-card past-card">
+          <h3 style="color: #666;">{{ event.title }}</h3>
+          <p>Held on {{ event.event_date | date: "%B %d, %Y" }}</p>
+          <a href="{{ event.url | relative_url }}" style="font-size: 0.9rem; color: #1495a7; font-weight: bold;">View Event Archive →</a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <p>The archive is currently empty.</p>
+  {% endif %}
 </div>
 
 <style>
-  .event-upcoming { border-left: 4px solid #1495a7; position: relative; }
-  .event-badge { 
-    position: absolute; top: 10px; right: 10px; 
-    background: #e0f2f1; color: #00695c; 
-    padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;
-  }
-  .past-section { opacity: 0.7; }
-  .past-card { border-left: 4px solid #ccc; background: #fafafa !important; }
   .events-container { display: grid; gap: 20px; }
+  .event-upcoming { border-left: 5px solid #1495a7; position: relative; transition: transform 0.2s; }
+  .event-upcoming:hover { transform: translateX(5px); }
+  
+  .event-badge { 
+    position: absolute; top: 15px; right: 15px; 
+    background: #e0f2f1; color: #00695c; 
+    padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .past-section { opacity: 0.8; }
+  .past-card { border-left: 5px solid #ccc; background: #fafafa !important; }
+  .past-card h3 { font-size: 1.1rem; margin-bottom: 5px; }
+
+  /* Utility for the registration button to match your site style */
+  .secondary { background-color: #666; }
+  .secondary:hover { background-color: #444; }
 </style>

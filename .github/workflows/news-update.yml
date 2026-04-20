@@ -29,11 +29,7 @@ jobs:
           CAT=$(echo "$RAW_DATA" | jq -r '."category".text // "News"')
           SUMM=$(echo "$RAW_DATA" | jq -r '."short-summary".text // "No summary provided"')
           
-          # Content Extraction with fallback
-          CONTENT=$(echo "$RAW_DATA" | jq -r 'if (."full-article-content".text != null and ."full-article-content".text != "") then ."full-article-content".text else ."header".text end')
-          if [ "$CONTENT" == "null" ]; then CONTENT=""; fi
-
-          # URL Sanitization
+          # SANITIZATION: Clean the URL
           IMG_RAW=$(echo "$RAW_DATA" | jq -r '."featured-image-url".text')
           IMG=$(echo "$IMG_RAW" | tr -d '<>' | xargs)
           
@@ -44,9 +40,10 @@ jobs:
           SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed 's/-$//')
           FILENAME="${DATE}-${SLUG}.md"
           
-          # 3. Create file using safe string injection
-          # We write each line individually to avoid EOF white-space issues
+          # 3. Create file - Step by step to ensure no truncation
           mkdir -p _posts
+          
+          # Write the header
           echo "---" > "_posts/$FILENAME"
           echo "layout: post" >> "_posts/$FILENAME"
           echo "title: \"$TITLE\"" >> "_posts/$FILENAME"
@@ -57,7 +54,10 @@ jobs:
           echo "excerpt: \"$SUMM\"" >> "_posts/$FILENAME"
           echo "---" >> "_posts/$FILENAME"
           echo "" >> "_posts/$FILENAME"
-          echo "$CONTENT" >> "_posts/$FILENAME"
+          
+          # IMPORTANT: Use jq to append the actual content directly to the file
+          # This avoids shell variable truncation/escaping issues.
+          echo "$RAW_DATA" | jq -r 'if (."full-article-content".text != null and ."full-article-content".text != "") then ."full-article-content".text else ."header".text end' >> "_posts/$FILENAME"
 
           # 4. Build JSON summary
           POST_URL="/$(date +%Y/%m/%d)/$SLUG.html"

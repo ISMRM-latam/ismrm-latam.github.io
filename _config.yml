@@ -33,5 +33,7 @@ defaults:
       type: "events"
     values:
       layout: "post"
-
+  
 permalink: /:year/:month/:day/:title.html
+
+future: true

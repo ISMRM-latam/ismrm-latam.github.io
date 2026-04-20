@@ -10,13 +10,13 @@
     "bio": "Quantitative Susceptibility Mapping and MRI Reconstruction."
   },
   {
-    "name": "null",
-    "institution": "null",
-    "residence": "null",
-    "country": "null",
-    "lat": 48.1790402,
-    "lng": 16.3698964,
-    "interests": "null",
-    "bio": "null"
+    "name": "Jessica Martinez",
+    "institution": "NIST",
+    "residence": "USA",
+    "country": "Mexico",
+    "lat": 39.1316116,
+    "lng": -77.2165406,
+    "interests": "Electromagnetic Tissue Properties, Low Field MRI, MR Safety, Quantitative MR",
+    "bio": "Me interesa mezclar métodos cuantitativos de MRI con MR safety para evaluar la la interacción del campo de RF con el cuerpo, sobretodo electrical-properties tomography para la generación de mapas de SAR."
   }
 ]

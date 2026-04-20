@@ -37,7 +37,7 @@ jobs:
           DATE=$(date +%Y-%m-%d)
           
           # 2. Slug and Filename
-          SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed 's/-$//')
+          SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed -E 's/-+/-/g' | sed -E 's/^-|-$//g')
           FILENAME="${DATE}-${SLUG}.md"
           
           mkdir -p _posts
@@ -54,9 +54,14 @@ jobs:
           echo "---" >> "_posts/$FILENAME"
           echo "" >> "_posts/$FILENAME"
           
-          # 4. APPEND CONTENT SAFELY
-          # We extract the content to a temp file first to prevent shell truncation/escaping issues.
-          echo "$RAW_DATA" | jq -r 'if (."full-article-content".text != null and ."full-article-content".text != "") then ."full-article-content".text else ."header".text end' > content_tmp.txt
+          # 4. APPEND CONTENT SAFELY (Header + Content)
+          # We extract both fields and combine them into the temp file.
+          echo "$RAW_DATA" | jq -r '
+            [."header".text, ."full-article-content".text] 
+            | filter(. != null and . != "") 
+            | join("\n\n")
+          ' > content_tmp.txt
+          
           cat content_tmp.txt >> "_posts/$FILENAME"
 
           # 5. Build JSON summary

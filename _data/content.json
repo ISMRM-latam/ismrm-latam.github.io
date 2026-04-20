@@ -1,14 +1,14 @@
 {
   "site_name": "ISMRM Latin American Chapter",
   "navigation": [
-    {"name": "Home", "link": "/"},
-    {"news": "News", "link": "/news"},
+    { "name": "Home", "link": "/"},
+    { "name": "News", "link": "/news" },
     { "name": "Events", "link": "/events" },
-    {"name": "Committee", "link": "/committee"},
+    { "name": "Committee", "link": "/committee"},
     { "name": "Members", "link": "/members" },
-    {"name": "Bylaws", "link": "/bylaws"},
-    {"name": "History", "link": "/history"},
-    {"name": "About", "link": "/about"}
+    { "name": "Bylaws", "link": "/bylaws"},
+    { "name": "History", "link": "/history"},
+    { "name": "About", "link": "/about"}
   ],
   "home": {
     "title": "Welcome to ISMRM-LATAM",

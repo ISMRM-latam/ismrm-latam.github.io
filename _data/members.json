@@ -1,9 +1,11 @@
 [
   {
     "name": "Carlos Milovic",
+    "institution": "Pontificia Universidad Católica de Chile",
     "country": "Chile",
     "lat": -33.45,
     "lng": -70.66,
+    "interests": "QSM, MRI Reconstruction, Optimization",
     "bio": "Quantitative Susceptibility Mapping and MRI Reconstruction."
   }
 ]

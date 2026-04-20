@@ -20,23 +20,22 @@ jobs:
       - name: Geocode and Parse Data
         id: geocode
         run: |
-          # Robust extraction: Looking for the value AFTER the specific header
-          # This works even if the IDs in the YAML get mixed up
-          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Full Name" // .name')
-          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Current Institution / University" // .institution')
-          RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Country of Residence" // .residence_country')
-          ORIGIN=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."LATAM Country of Origin/Affiliation" // .latam_origin')
-          INTERESTS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Research Interests" // .interests')
-          BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Short Bio" // .bio')
+          # Mapping to the exact slugified keys found in your Action logs
+          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-name".text')
+          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."current-institution-university".text')
+          RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."country-of-residence".text')
+          ORIGIN=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."latam-country-of-origin-affiliation".text')
+          INTERESTS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."research-interests".text')
+          BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."short-bio".text')
 
-          # Geocoding with fallback
+          # Geocoding logic
           QUERY=$(echo "$INST, $RESIDENCE" | jq -sRr @uri)
           RESPONSE=$(curl -s -A "ISMRM-LATAM-Bot" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
           
           LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45')
           LNG=$(echo $RESPONSE | jq -r '.[0].lon // -70.66')
 
-          # Write clean JSON
+          # Build the JSON object
           jq -n \
             --arg name "$NAME" \
             --arg inst "$INST" \

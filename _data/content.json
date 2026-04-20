@@ -5,6 +5,7 @@
     {"news": "News", "link": "/news"},
     { "name": "Events", "link": "/events" },
     {"name": "Committee", "link": "/committee"},
+    { "name": "Members", "link": "/members" },
     {"name": "Bylaws", "link": "/bylaws"},
     {"name": "History", "link": "/history"},
     {"name": "About", "link": "/about"}

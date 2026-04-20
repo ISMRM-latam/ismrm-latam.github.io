@@ -1,0 +1,59 @@
+---
+layout: default
+title: Community Map
+---
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<div class="content-card">
+    <div class="filter-bar">
+        <div>
+            <label><strong>Filter by Country:</strong></label>
+            <select id="countryFilter" onchange="filterMap()">
+                <option value="all">All Countries</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Chile">Chile</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Peru">Peru</option>
+            </select>
+        </div>
+        <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=member_registration.yml" class="c-button" style="font-size: 0.8rem;">+ Join Map</a>
+    </div>
+
+    <div id="map"></div>
+</div>
+
+<div class="member-cta">
+    <h3>Are you an MR researcher in LATAM?</h3>
+    <p>Help us grow the community by adding your location and research interests to our global map.</p>
+    <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=member_registration.yml" class="c-button" style="background: white; color: #003687 !important;">Submit your Info</a>
+</div>
+
+<script>
+    var map = L.map('map').setView([-15, -60], 3); 
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var memberData = {{ site.data.members | jsonify }};
+    var markers = [];
+
+    function filterMap() {
+        var country = document.getElementById('countryFilter').value;
+        markers.forEach(m => map.removeLayer(m));
+        markers = [];
+
+        memberData.forEach(function(m) {
+            if (country === 'all' || m.country === country) {
+                var marker = L.marker([m.lat, m.lng])
+                    .bindPopup("<b>" + m.name + "</b><br>" + m.bio)
+                    .addTo(map);
+                markers.push(marker);
+            }
+        });
+    }
+    filterMap();
+</script>

@@ -1,0 +1,41 @@
+name: Member Registration
+description: Add yourself to the ISMRM-LATAM Member Map
+title: "[Member]: "
+labels: ["new-member"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Full Name
+    validations:
+      required: true
+  - type: dropdown
+    id: country
+    attributes:
+      label: Country
+      options:
+        - Argentina
+        - Brazil
+        - Chile
+        - Colombia
+        - Mexico
+        - Peru
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: lat
+    attributes:
+      label: Latitude (e.g., -33.45)
+    validations:
+      required: true
+  - type: input
+    id: lng
+    attributes:
+      label: Longitude (e.g., -70.66)
+    validations:
+      required: true
+  - type: textarea
+    id: bio
+    attributes:
+      label: Short Bio / Research Interest

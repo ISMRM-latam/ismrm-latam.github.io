@@ -1,0 +1,28 @@
+name: Update Members List
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  update-data:
+    if: contains(github.event.issue.labels.*.name, 'new-member')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Parse Issue Body
+        id: parse
+        uses: zentered/issue-forms-body-parser@v2.0.0
+      
+      - name: Update JSON
+        run: |
+          echo '${{ steps.parse.outputs.data }}' > new_member.json
+          # Use jq to append the new member to your existing data file
+          jq ". += [$(cat new_member.json)]" _data/members.json > _data/members_tmp.json && mv _data/members_tmp.json _data/members.json
+          
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _data/members.json
+          git commit -m "Add new member from Issue #${{ github.event.issue.number }}"
+          git push

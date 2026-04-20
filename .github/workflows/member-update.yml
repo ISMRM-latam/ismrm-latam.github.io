@@ -20,22 +20,23 @@ jobs:
       - name: Geocode and Parse Data
         id: geocode
         run: |
-          # Extract data from parser using IDs from the YML template
-          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.name')
-          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.institution')
-          RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.residence_country')
-          ORIGIN=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.latam_origin')
-          INTERESTS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.interests')
-          BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '.bio')
+          # Robust extraction: Looking for the value AFTER the specific header
+          # This works even if the IDs in the YAML get mixed up
+          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Full Name" // .name')
+          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Current Institution / University" // .institution')
+          RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Country of Residence" // .residence_country')
+          ORIGIN=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."LATAM Country of Origin/Affiliation" // .latam_origin')
+          INTERESTS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Research Interests" // .interests')
+          BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."Short Bio" // .bio')
 
-          # Search using Institution + Residence Country for accurate pinning
+          # Geocoding with fallback
           QUERY=$(echo "$INST, $RESIDENCE" | jq -sRr @uri)
           RESPONSE=$(curl -s -A "ISMRM-LATAM-Bot" "https://nominatim.openstreetmap.org/search?q=$QUERY&format=json&limit=1")
           
           LAT=$(echo $RESPONSE | jq -r '.[0].lat // -33.45')
           LNG=$(echo $RESPONSE | jq -r '.[0].lon // -70.66')
 
-          # Build the JSON object safely using jq arguments
+          # Write clean JSON
           jq -n \
             --arg name "$NAME" \
             --arg inst "$INST" \

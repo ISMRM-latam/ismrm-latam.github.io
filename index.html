@@ -30,7 +30,7 @@ title: Home
                 <p style="font-size: 0.9rem; margin: 5px 0;">{{ post.date | date: "%b %d, %Y" }}</p>
             </div>
         {% endfor %}
-        <a href="/news" style="font-weight: bold; text-decoration: underline;">View all news &rarr;</a>
+        <a href="{{ '/news' | relative_url }}" style="font-weight: bold; text-decoration: underline;">View all news &rarr;</a>
     </div>
 
     <div>
@@ -52,6 +52,6 @@ title: Home
         {% if upcoming_found == false %}
             <p>No upcoming events. Check the archive.</p>
         {% endif %}
-        <a href="/events" style="font-weight: bold; text-decoration: underline;">View event calendar &rarr;</a>
+        <a href="{{ '/events' | relative_url }}" style="font-weight: bold; text-decoration: underline;">View event calendar &rarr;</a>
     </div>
 </div>

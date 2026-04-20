@@ -1,18 +1,49 @@
 ---
 layout: default
-title: Welcome
+title: Home
 ---
 
-<div style="text-align: center; margin-bottom: 40px;">
+<div style="text-align: center; padding: 40px 0;">
+    <h2 style="font-size: 2.2rem; color: #003687;">{{ site.data.content.home.title }}</h2>
     <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 30px;">
         {{ site.data.content.home.mission_statement }}
     </p>
-    <a href="https://www.ismrm.org/chapters/latin-american-chapter/" class="c-button">
-        Join our Community
-    </a>
+    <a href="/about" class="c-button">Learn More About Our Mission</a>
 </div>
 
-<hr>
+<hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
-<h3>Latest Updates</h3>
-<p>Keep up with the latest Magnetic Resonance research developments in Latin America.</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+    <div>
+        <h3>Latest News</h3>
+        {% for post in site.posts limit:2 %}
+            <div style="margin-bottom: 20px;">
+                <a href="{{ post.url | relative_url }}" style="font-weight: 600; color: #1495a7;">{{ post.title }}</a>
+                <p style="font-size: 0.9rem; margin: 5px 0;">{{ post.date | date: "%b %d, %Y" }}</p>
+            </div>
+        {% endfor %}
+        <a href="/news" style="font-weight: bold; text-decoration: underline;">View all news &rarr;</a>
+    </div>
+
+    <div>
+        <h3>Upcoming Events</h3>
+        {% assign rightnow = "now" | date: "%Y%m%d" | plus: 0 %}
+        {% assign upcoming_found = false %}
+        
+        {% for event in site.events %}
+            {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
+            {% if eventdate >= rightnow %}
+                <div style="margin-bottom: 20px;">
+                    <a href="{{ event.url | relative_url }}" style="font-weight: 600; color: #003687;">{{ event.title }}</a>
+                    <p style="font-size: 0.9rem; margin: 5px 0;">{{ event.event_date | date: "%b %d, %Y" }}</p>
+                </div>
+                {% assign upcoming_found = true %}
+            {% endif %}
+        {% endfor %}
+
+        {% if upcoming_found == false %}
+            <p>No upcoming events. Check the archive.</p>
+        {% endif %}
+        <a href="/events" style="font-weight: bold; text-decoration: underline;">View event calendar &rarr;</a>
+    </div>
+</div>

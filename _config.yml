@@ -1,8 +1,28 @@
-title: ISMRM LATAM Replica
-remote_theme: pages-themes/minimal@v0.2.0 # You can change this theme later
+title: ISMRM Latin American Chapter
+remote_theme: pages-themes/minimal@v0.2.0 # Standard GitHub Pages base
 plugins:
   - jekyll-remote-theme
+  - jekyll-feed # Good for news SEO
+
+# Collections Setup
 collections:
   events:
     output: true
     permalink: /events/:path/
+
+# Markdown Settings
+markdown: kramdown
+highlighter: rouge
+
+# This ensures posts are handled correctly
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "events"
+    values:
+      layout: "post"

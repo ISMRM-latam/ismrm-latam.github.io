@@ -3,10 +3,11 @@
   "navigation": [
     {"name": "Home", "link": "/"},
     {"news": "News", "link": "/news"},
-    {"name": "About", "link": "/about"},
+    { "name": "Events", "link": "/events" },
     {"name": "Committee", "link": "/committee"},
     {"name": "Bylaws", "link": "/bylaws"},
-    {"name": "History", "link": "/history"}
+    {"name": "History", "link": "/history"},
+    {"name": "About", "link": "/about"}
   ],
   "home": {
     "title": "Welcome to ISMRM-LATAM",

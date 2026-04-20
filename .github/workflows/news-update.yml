@@ -22,41 +22,40 @@ jobs:
       - name: Process News and Generate Post
         id: process
         run: |
-          # 1. Extract Data from Issue
+          # 1. Extract Data safely with -r (raw-output)
           AUTHOR=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."author-name".text')
           CAT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."category".text')
+          SUMM=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."short-summary".text')
           
-          # IMPROVED SANITIZATION:
-          # We use 'tr' to delete brackets and 'xargs' to trim whitespace
+          # Use -r to ensure content is treated as a raw string, not a JSON object
+          CONTENT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-article-content".text')
+          
+          # SANITIZATION: Clean the URL
           IMG_RAW=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."featured-image-url".text')
           IMG=$(echo "$IMG_RAW" | tr -d '<>' | xargs)
           
-          SUMM=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."short-summary".text')
-          CONTENT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-article-content".text')
-          
-          # Remove "News: " prefix from title if present
           TITLE=$(echo "${{ github.event.issue.title }}" | sed 's/News: //g')
           DATE=$(date +%Y-%m-%d)
           
-          # 2. Create a URL-safe slug from the first 5 words of the summary
-          # Removes special characters and replaces spaces with hyphens
+          # 2. Slug generation
           SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}')
           FILENAME="${DATE}-${SLUG}.md"
           
-          # 3. Create the Jekyll Markdown post file
+          # 3. Create the Jekyll Markdown file
+          # CRITICAL: We use <<'EOF' (with quotes) so bash doesn't touch the content inside
           mkdir -p _posts
-          cat <<EOF > _posts/$FILENAME
-          ---
-          layout: post
-          title: "$TITLE"
-          date: $DATE
-          author: "$AUTHOR"
-          category: "$CAT"
-          image: "$IMG"
-          excerpt: "$SUMM"
-          ---
-          $CONTENT
-          EOF
+          cat <<'EOF' > _posts/$FILENAME
+---
+layout: post
+title: "$TITLE"
+date: $DATE
+author: "$AUTHOR"
+category: "$CAT"
+image: "$IMG"
+excerpt: "$SUMM"
+---
+$CONTENT
+EOF
 
           # 4. Build the JSON summary (index) for the feed
           # The URL follows the default Jekyll pattern: /year/month/day/slug.html

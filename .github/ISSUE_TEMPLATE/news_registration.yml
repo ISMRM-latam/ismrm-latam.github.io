@@ -4,7 +4,7 @@ title: "News: [Article Title]"
 labels: ["new-news"]
 body:
   - type: input
-    id: author
+    id: author-name  # Matches script: author-name
     attributes:
       label: Author Name
       placeholder: e.g., Dr. Elena Rodriguez
@@ -22,20 +22,20 @@ body:
     validations:
       required: true
   - type: input
-    id: featured_image
+    id: featured-image-url # Matches script: featured-image-url
     attributes:
       label: Featured Image URL
       placeholder: "Paste GitHub asset URL or external link here"
-      description: "Pro-tip: Drag an image into this issue's description to generate a link!"
+      description: "Pro-tip: Drag an image into this issue description to generate a link!"
   - type: input
-    id: summary
+    id: short-summary # Matches script: short-summary
     attributes:
       label: Short Summary
       placeholder: "A 1-2 sentence teaser for the news list page."
     validations:
       required: true
   - type: textarea
-    id: content
+    id: full-article-content # Matches script: full-article-content
     attributes:
       label: Full Article Content
       placeholder: "Write your full article here. Markdown is supported!"

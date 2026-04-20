@@ -7,5 +7,14 @@
     "summary": "Testing this news pipeline.",
     "content": "This is the content of the article! And the image",
     "date": "2026-04-20"
+  },
+  {
+    "title": "The tester",
+    "author": "G Sahonero",
+    "category": "Research",
+    "image": "<https://github.com/user-attachments/assets/40cca92d-ca05-40f1-8628-1a2bccf06a3c>",
+    "summary": "This is the new tester, yei!",
+    "date": "2026-04-20",
+    "url": "/2026/04/20/this-is-the-new-tester-.html"
   }
 ]

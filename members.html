@@ -2,74 +2,145 @@
 layout: default
 title: Member Community
 ---
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
 <div class="content-card">
-    <div class="filter-bar">
-        <select id="countryFilter" onchange="filterMap()">
-            <option value="all">All of Latin America</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Brazil">Brazil</option>
-            <option value="Chile">Chile</option>
-            <option value="Colombia">Colombia</option>
-            <option value="Mexico">Mexico</option>
-            <option value="Peru">Peru</option>
-            <option value="Uruguay">Uruguay</option>
-            <option value="Venezuela">Venezuela</option>
-        </select>
-        <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=member_registration.yml" 
-        class="c-button" 
-        target="_blank">
-        + Join the Map
-        </a>
+    <div class="filter-container">
+        <div class="filter-group">
+            <label for="countryFilter"><strong>Filter by Country:</strong></label>
+            <select id="countryFilter" onchange="applyFilters()">
+                <option value="all">All of Latin America</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label><strong>Research Areas:</strong></label>
+            <div id="interestPills" class="pill-container">
+                <button class="pill active" onclick="setInterest(null, this)">All Areas</button>
+            </div>
+        </div>
     </div>
 
-    
     <div id="map"></div>
+
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=member_registration.yml" 
+           class="c-button" target="_blank">+ Add me to the map</a>
+    </div>
 </div>
 
+<style>
+    .filter-container { margin-bottom: 20px; }
+    .filter-group { margin-bottom: 15px; }
+    .pill-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
+    .pill {
+        background: #f0f4f8;
+        border: 1px solid #d1d9e6;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .pill:hover { background: #e2e8f0; }
+    .pill.active {
+        background: var(--primary-gradient, #1495a7);
+        color: white;
+        border-color: transparent;
+    }
+    #map { height: 550px; border-radius: 12px; border: 1px solid #eee; }
+</style>
+
 <script>
+    // Initialize Data
+    const memberData = {{ site.data.members | jsonify }};
+    let currentInterest = null;
+    
+    // Initialize Map
     var map = L.map('map').setView([-15, -60], 3); 
-    // Replace your old L.tileLayer code with this:
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
         subdomains: 'abcd',
         maxZoom: 20
     }).addTo(map);
 
-    var memberData = {{ site.data.members | jsonify }};
-    var markers = [];
+    // Initialize Clusters
+    var markersGroup = L.markerClusterGroup();
+    map.addLayer(markersGroup);
 
-    function filterMap() {
-        var country = document.getElementById('countryFilter').value;
-        markers.forEach(m => map.removeLayer(m));
+    // --- LOGIC FUNCTIONS ---
+
+    function populateFilters() {
+        const countrySelect = document.getElementById('countryFilter');
+        const pillBox = document.getElementById('interestPills');
         
-        // Inside your filterMap() function in members.html:
+        // 1. Unique Countries
+        const countries = [...new Set(memberData.map(m => m.country))].sort();
+        countries.forEach(c => {
+            let opt = document.createElement('option');
+            opt.value = c; opt.innerHTML = c;
+            countrySelect.appendChild(opt);
+        });
 
-        memberData.forEach(function(m) {
-            if (country === 'all' || m.country === country) {
-                // Create a nice HTML structure for the popup
-                // Replace your popupContent logic with this:
-                var popupContent = `
+        // 2. Unique Interests (Split by comma)
+        let allInterests = [];
+        memberData.forEach(m => {
+            if(m.interests) {
+                m.interests.split(',').forEach(i => allInterests.push(i.trim()));
+            }
+        });
+        const uniqueInterests = [...new Set(allInterests)].sort();
+        
+        uniqueInterests.forEach(interest => {
+            let btn = document.createElement('button');
+            btn.className = 'pill';
+            btn.innerHTML = interest;
+            btn.onclick = function() { setInterest(interest, btn); };
+            pillBox.appendChild(btn);
+        });
+    }
+
+    function setInterest(interest, element) {
+        currentInterest = interest;
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        element.classList.add('active');
+        applyFilters();
+    }
+
+    function applyFilters() {
+        const country = document.getElementById('countryFilter').value;
+        markersGroup.clearLayers();
+
+        memberData.forEach(m => {
+            const matchesCountry = (country === 'all' || m.country === country);
+            const matchesInterest = (!currentInterest || (m.interests && m.interests.includes(currentInterest)));
+
+            if (matchesCountry && matchesInterest) {
+                const popup = `
                     <div style="font-family: 'Inter', sans-serif; min-width: 200px;">
-                        <h4 style="margin: 0 0 5px 0; color: #003687;">${m.name}</h4>
-                        <p style="margin: 0 0 10px 0; font-style: italic; font-size: 0.9rem;">${m.institution || 'Independent Researcher'}</p>
-                        <div style="margin-bottom: 10px;">
+                        <h4 style="margin:0; color:#003687;">${m.name}</h4>
+                        <p style="margin:0; font-size:0.85rem; font-style:italic;">${m.institution || ''}</p>
+                        <div style="margin: 8px 0;">
                             ${m.interests ? m.interests.split(',').map(tag => 
-                                `<span style="background:#eef2ff; color:#1495a7; padding:2px 6px; border-radius:4px; font-size:0.75rem; margin-right:4px; display:inline-block; margin-bottom:4px;">${tag.trim()}</span>`
+                                `<span style="background:#eef2ff; color:#1495a7; padding:2px 5px; border-radius:4px; font-size:0.7rem; margin:0 3px 3px 0; display:inline-block;">${tag.trim()}</span>`
                             ).join('') : ''}
                         </div>
-                        <p style="font-size: 0.85rem; border-top: 1px solid #eee; padding-top: 8px; margin-top: 5px;">${m.bio || ''}</p>
+                        <p style="font-size:0.8rem; border-top:1px solid #eee; padding-top:5px;">${m.bio || ''}</p>
                     </div>
                 `;
-
-                var marker = L.marker([m.lat, m.lng])
-                    .bindPopup(popupContent)
-                    .addTo(map);
-                markers.push(marker);
+                const marker = L.marker([m.lat, m.lng]).bindPopup(popup);
+                markersGroup.addLayer(marker);
             }
         });
     }
-    filterMap();
+
+    // Run on startup
+    populateFilters();
+    applyFilters();
 </script>

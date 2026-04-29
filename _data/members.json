@@ -4,8 +4,8 @@
     "institution": "NIST",
     "residence": "USA",
     "country": "Mexico",
-    "lat": 39.995129,
-    "lng": -105.260239,
+    "lat": 39.1316116,
+    "lng": -77.2165406,
     "interests": "Electromagnetic Tissue Properties, Low Field MRI, MR Safety, Quantitative MR",
     "bio": "Me interesa mezclar métodos cuantitativos de MRI con MR safety para evaluar la la interacción del campo de RF con el cuerpo, sobretodo electrical-properties tomography para la generación de mapas de SAR."
   },
@@ -14,8 +14,8 @@
     "institution": "Imperial College London",
     "residence": "Reino Unido",
     "country": "Chile",
-    "lat": 51.497799,
-    "lng": -0.17922,
+    "lat": 51.4989595,
+    "lng": -0.1756407,
     "interests": "Cardiac MR, Diffusion, Motion Detection & Correction, PET-MRI, Quantitative MR",
     "bio": "Mi investigación se enfoca en el desarrollo de técnicas de difusión por resonancia magnética para mejorar nuestro entendimiento de la microestructura del corazón."
   },
@@ -34,8 +34,8 @@
     "institution": "Vanderbilt University Medical Center",
     "residence": "USA",
     "country": "Colombia",
-    "lat": 36.1418788,
-    "lng": -86.8041827,
+    "lat": 36.1409238,
+    "lng": -86.8016342,
     "interests": "Electromagnetic Tissue Properties, Imaging Neurofluids, Quantitative MR",
     "bio": "Mi investigación se centra en el desarrollo e implementación de biomarcadores de neuroimagen para detectar de manera temprana y precisa los cambios cerebrales en enfermedades neurodegenerativas, con el objetivo de mejorar el diagnóstico, la estratificación de pacientes y la evaluación de terapias."
   },
@@ -47,15 +47,15 @@
     "lat": -41.1136987,
     "lng": -71.4167019,
     "interests": "Diffusion, Hyperpolarization, Molecular & Cellular Imaging, Quantitative MR",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Carlos Castillo Passi",
     "institution": "Stanford University",
     "residence": "USA",
     "country": "Chile",
-    "lat": 37.429104,
-    "lng": -122.1772089,
+    "lat": 37.4313138,
+    "lng": -122.1693654,
     "interests": "Cardiac MR, Image Reconstruction and Analysis, Quantitative MR, Reproducible Research",
     "bio": "Hice mi doctorado en un programa conjunto entre la Pontificia Universidad Católica de Chile y el King's College London. Ahí investigué en resonancia magnética cardíaca de bajo campo y simulaciones de resonancia magnética. Recientemente comencé en Stanford como postdoc, donde trabajaré principalmente en resonancia magnética de difusión cardíaca."
   },
@@ -64,8 +64,8 @@
     "institution": "Pontificia Universidad Catolica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4698213,
-    "lng": -70.6682754,
+    "lat": -33.4417749,
+    "lng": -70.6403258,
     "interests": "Body MRI, Electromagnetic Tissue Properties, Image Reconstruction and Analysis, Low Field MRI, Quantitative MR",
     "bio": "Soy un estudiante de Doctorado de la Pontificia Universidad Católica de Chile (UC Chile). Mi investigación se especializa en la mejora de los algoritmos actuales para QSM en la región abdominotorácica."
   },
@@ -84,68 +84,68 @@
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.52269,
-    "lng": -70.794248,
+    "lat": -33.4417749,
+    "lng": -70.6403258,
     "interests": "Electromagnetic Tissue Properties",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Fernando Calamate",
     "institution": "The University of Sydney",
     "residence": "Australia",
     "country": "Argentina",
-    "lat": -33.8883996,
-    "lng": 151.1841899,
+    "lat": -33.8889072,
+    "lng": 151.1894111,
     "interests": "Brain Function, Diffusion, MR in Psychiatry, Perfusion, PET-MRI, Quantitative MR, White Matter",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Gonzalo Gabriel Rodriguez",
     "institution": "Max Planck Institute for Multidisciplinary Sciences",
     "residence": "Alemania",
     "country": "Argentina",
-    "lat": 51.5565434,
-    "lng": 9.9433371,
+    "lat": 51.5626382,
+    "lng": 9.9706114,
     "interests": "Hyperpolarization, Image Reconstruction and Analysis, Low Field MRI, MR Engineering, X-Nuclei Imaging",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Javier Bisbal Zenteno",
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.52269,
-    "lng": -70.794248,
+    "lat": -33.4417749,
+    "lng": -70.6403258,
     "interests": "Cardiac MR, MR Flow & Motion Quantitation",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Luis Concha",
     "institution": "Universidad Nacional Autónoma de México",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 20.7048036,
-    "lng": -100.4484412,
+    "lat": 19.321597,
+    "lng": -99.1849259,
     "interests": "Brain Function, Diffusion, White Matter",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Marisleydis García Saborit",
     "institution": "Facultad de Ingeniería, Universidad de Santiago de Chile ",
     "residence": "Chile",
     "country": "Cuba",
-    "lat": -33.4473235,
-    "lng": -70.7019342,
+    "lat": -33.452758,
+    "lng": -70.6610509,
     "interests": "Electromagnetic Tissue Properties, MR in Psychiatry",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Guillermo Sahonero Alvarez",
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Bolivia",
-    "lat": -33.4697497,
-    "lng": -70.6591268,
+    "lat": -33.4417749,
+    "lng": -70.6403258,
     "interests": "Image Reconstruction and Analysis, Low Field MRI, MR Engineering, Quantitative MR, Reproducible Research",
     "bio": "Trabajo en la optimización de secuencias de resonancia magnética a bajo campo. Me enfoco principalmente en imágenes T1w y T2w del cerebro. Además, me interesa el hardware detrás de los resonadores open-source. Antes, trabajé en aprendizaje profundo y visión por computador, interfaces cerebro computador con EEG, videojuegos serios, y educación en ingeniería."
   },
@@ -154,18 +154,18 @@
     "institution": "Pontificia Universidad Catolica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.438404,
-    "lng": -70.638101,
+    "lat": -33.4417749,
+    "lng": -70.6403258,
     "interests": "Diffusion, Image Reconstruction and Analysis, Low Field MRI, Motion Detection & Correction, Quantitative MR",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Abraham Jotssel Cisneros Mejorado",
     "institution": "Instituto de Neurobiología, UNAM",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 20.7006391,
-    "lng": -100.4456595,
+    "lat": 20.7004807,
+    "lng": -100.4454703,
     "interests": "Brain Function, Diffusion, White Matter",
     "bio": "Actualmente, junto con el gran equipo de trabajo en el Laboratorio de Neurofisiología Celular del INB-UNAM, estamos interesados en investigar sobre la comunicación entre neuronas y el linaje oligodendroglial, principalmente para conocer mejor cómo se lleva a cabo el proceso de mielinización en el cerebro. Más aún, empleando diversas estrategias experimentales, evaluamos constantemente la posibilidad de modular este fenómeno en escenarios en donde ha habido daños de la mielina en distintas etapas. Sitio web personal https://www.abraham-cisneros-mejorado.com"
   },
@@ -174,18 +174,18 @@
     "institution": "University of Manchester",
     "residence": "Reino Unido",
     "country": "Mexico",
-    "lat": 53.4656853,
-    "lng": -2.2352809,
+    "lat": 53.4660226,
+    "lng": -2.2330858,
     "interests": "Diffusion",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Jonathan Rafael Patino Lopez",
     "institution": "EPFL",
     "residence": "Suiza",
     "country": "Mexico",
-    "lat": 46.5193592,
-    "lng": 6.5622522,
+    "lat": 46.5186594,
+    "lng": 6.5665615,
     "interests": "Diffusion, Image Reconstruction and Analysis, MR Engineering, Musculoskeletal MR, Ultra-High Field MR, White Matter",
     "bio": "Diffusion MRI, Microstructure Imaging, Monte-Carlo Simulations, Methods and validation. "
   },
@@ -224,8 +224,8 @@
     "institution": "Fleni",
     "residence": "Argentina",
     "country": "Argentina",
-    "lat": -34.5549614,
-    "lng": -58.4533656,
+    "lat": -34.5549194,
+    "lng": -58.4504959,
     "interests": "Brain Function, Image Reconstruction and Analysis, White Matter",
     "bio": "El Dr. Hernán Chaves se recibió de Médico en la Universidad de Buenos Aires en el año 2009. Ingresó a la Residencia de Diagnóstico por Imágenes de Fleni en el año 2010, continuando su formación como Jefe de Residentes e Instructor de Residentes. Desde el año 2017, se desempeña como Coordinador Docente del Departamento de Diagnóstico por Imágenes.\n\nDurante su formación, realizó rotaciones de Neuroradiología en los Hospitales Fernández y Gutiérrez de la Ciudad de Buenos Aires, así como en el Hospital for Sick Children de Toronto, Canadá. Recibió becas de la Sociedad Argentina de Radiología para asistir al Radiologic Pathologic Correlation Course organizado por el American Institute for Radiologic Pathology (AIRP) en 2014 y de la Radiological Society of North America (RSNA) para participar en el seminario Introduction to Research for International Young Academics (IRIYA) en 2016.\n\nHa publicado más de 40 trabajos en revistas nacionales e internacionales y realizado numerosas presentaciones en congresos, simposios y jornadas. Sus líneas de investigación incluyen el análisis morfométrico de imágenes cerebrales, la aplicación de herramientas de inteligencia artificial para el análisis de imágenes médicas y la evaluación de nuevas herramientas diagnósticas en Neuroradiología.\n\nEn el área clínica, coordina la sección neurovascular del Departamento de Diagnóstico por Imágenes, colaborando y participando activamente en discusiones multidisciplinarias relacionadas con pacientes que presentan patologías cerebrovasculares.\n\nDesde el año 2019, se desempeña como Jefe de la Sección de Neurorradiología del Servicio de Tomografía Computada, y en noviembre de 2024 asumió la Jefatura del Servicio de Tomografía Computada."
   },
@@ -234,8 +234,8 @@
     "institution": "Universidad Nacional Autónoma de México",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 20.700079,
-    "lng": -100.446137,
+    "lat": 19.321597,
+    "lng": -99.1849259,
     "interests": "Brain Function, Diffusion",
     "bio": "Estudiante de doctorado en ciencias biomédicas en el Instituto de Neurobiología, actualmente trabajo con resonancia magnética funcional y estructural para comparar poblaciones que difieren en sus niveles de sincronización auditivomotora. "
   },
@@ -244,18 +244,18 @@
     "institution": "Pontificia Universidad Catolica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4415842,
-    "lng": -70.6421833,
+    "lat": -33.4417749,
+    "lng": -70.6403258,
     "interests": "Cardiac MR, Image Reconstruction and Analysis, Low Field MRI, Motion Detection & Correction, Quantitative MR",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Pamela Guevara",
     "institution": "Universidad de Concepción",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -36.8302549,
-    "lng": -73.0367615,
+    "lat": -36.8310137,
+    "lng": -73.0346809,
     "interests": "Diffusion, White Matter",
     "bio": "Desarrollo de métodos para el análisis de datos de tractografía cerebral."
   },
@@ -267,15 +267,15 @@
     "lat": -31.4092054,
     "lng": -64.1942855,
     "interests": "Diffusion, MR Elastography (MRE), Perfusion",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Isabela Castro de Moraes",
     "institution": "CNPEM",
     "residence": "Brasil",
     "country": "Brasil",
-    "lat": -22.8025823,
-    "lng": -47.0556397,
+    "lat": -22.8058685,
+    "lng": -47.0529836,
     "interests": "MR Engineering",
     "bio": "Soy Física Biomédica y trabajo en el Centro Nacional de Pesquisas em Energia e Materiais (CNPEM) de Brasil desde 2018. Entre finales de 2022 y principios de 2024, formé parte del equipo del proyecto de imagen por resonancia magnética (IRM), trabajando en la comprensión global de subsistemas, con especial atención a las simulaciones magnéticas de bobinas e imanes. Nuestro proyecto pretende construir un prototipo de resonancia magnética para animales pequeños, con la perspectiva a largo plazo de avanzar hacia la resonancia magnética en humanos, en línea con las demandas nacionales. Actualmente trabajo en la gestión de asociaciones, buscando nuevas colaboraciones e iniciativas estratégicas para reforzar nuestros proyectos. Este evento será una excelente oportunidad para ampliar conexiones, fortalecer la comunidad de la IRM e intercambiar conocimientos sobre los avances y retos en este campo."
   },
@@ -294,18 +294,18 @@
     "institution": "Imperial College London",
     "residence": "UK",
     "country": "Chile",
-    "lat": 51.499421,
-    "lng": -0.17446,
+    "lat": 51.4989595,
+    "lng": -0.1756407,
     "interests": "Cardiac MR, Diffusion",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Alfredo Rodriguez",
     "institution": "Universidad Autonoma Metropolitana Iztapalapa",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 19.3624967,
-    "lng": -99.0752222,
+    "lat": 19.3620769,
+    "lng": -99.0728976,
     "interests": "Cardiac MR, Electromagnetic Tissue Properties, Low Field MRI, MR Engineering, MR Flow & Motion Quantitation, MRI Coils, X-Nuclei Imaging",
     "bio": "Alfredo O. Rodríguez obtuvo su licenciatura en ingeniería física de la Universidad Autónoma Metropolitana Atzcapotzalco en 1990, México, y su doctorado en filosofía (imagenología por resonancia magnética: IRM) en 1997 del Sir Peter Mansfield Imaging Centre de la Universidad de Nottingham, Inglaterra. Durante su doctorado trabajó baja la dirección Professor Peter Mansfield, laureado con el premio Nobel Fisiología o Medicina en el año 2003, desarrollando antenas de RF e imagenología de flujo para estudiar hemodinamia en humanos a 0.5 Tesla. Posteriormente se incorporó al Departamento de Ingeniería Eléctrica de la Universidad Autónoma Metropolitana Iztapalapa, México en 1998. Sus intereses científicos se centran en el desarrollo de estudios numéricos de los campos electromagnéticos generados por las antenas RF para IRM, aplicaciones novedosas en diversas áreas, y el uso del concepto de la onda viajera para genera imágenes de grandes regiones de interés para sistemas de campo magnéticos ultra altos. El estudio de la interacción de la radiación de RF producida por las antenas RF y materia viva, además del estudio de guías de onda junto con metamateriales para aplicaciones de la onda viajera.\nHa impartido cursos de licenciatura y posgrado sobre IRM y temas afines, además de cursos de capacitación para técnicos radiólogos.\n\nlista de sus publicaciones: https://scholar.google.ca/citations?user=jFSW8PUAAAAJ&hl=en sitio oficial: http://die.izt.uam.mx/alfredo-odon-rodriguez-gonzalez/\n "
   },
@@ -314,8 +314,8 @@
     "institution": "Instituto de Neurobiología, UNAM",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 20.700933,
-    "lng": -100.446183,
+    "lat": 20.7004807,
+    "lng": -100.4454703,
     "interests": "Diffusion, Quantitative MR",
     "bio": "Mi trabajo se centra particularmente en el estudio de modelos displasias cerebrales mediante el uso de resonancia magnética por difusión (dMRI) y modelos biofísicos. "
   },
@@ -324,8 +324,8 @@
     "institution": "Western University",
     "residence": "Canada",
     "country": "Mexico",
-    "lat": 43.009601,
-    "lng": -81.2763085,
+    "lat": 43.0054234,
+    "lng": -81.274801,
     "interests": "Diffusion, Quantitative MR, Reproducible Research, White Matter",
     "bio": "Actualmente soy un postdoctorante mexicano residiendo en Canadá. Mi invstigacion ronda a las aplicaciones de ténicas avanzadas de DW-MRI para neurodegeneración. Tambien apoyo mucho las practicas de ciencia libre y reproducibilidad. Me da gusto ver este capítulo nacer y espero podemos formar buenos vínculos con los hermanos latinoamericanos para crecer la comunidad hispanohablante."
   },
@@ -334,10 +334,10 @@
     "institution": "Memorial Sloan Kettering Cancer Center",
     "residence": "USA",
     "country": "Peru",
-    "lat": 40.7641965,
-    "lng": -73.9588152,
+    "lat": 40.7644418,
+    "lng": -73.9569549,
     "interests": "Body MRI, Image Reconstruction and Analysis",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Ronal Manuel Coronado",
@@ -354,8 +354,8 @@
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4412552,
-    "lng": -70.6434272,
+    "lat": -33.4417749,
+    "lng": -70.6403258,
     "interests": "Electromagnetic Tissue Properties",
     "bio": "QSM"
   },
@@ -364,8 +364,8 @@
     "institution": "Pontificia Universidad Católica de Valparaíso",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -30.2448143,
-    "lng": -73.6056354,
+    "lat": -33.0449391,
+    "lng": -71.6067573,
     "interests": "Cardiac MR, MR Flow & Motion Quantitation, Quantitative MR",
     "bio": "My research focuses on the use of magnetic resonance imaging (MRI) to improve the diagnosis of cardiovascular diseases. This includes the acquisition and processing of MRI images, as well as the development of new methods for the biomechanical quantification of the heart and other organs. My work aims to improve our understanding of cardiovascular diseases and ultimately contribute to better treatment and higher quality of life for patients."
   },
@@ -374,8 +374,8 @@
     "institution": "Pontificia Universidad Catolica De Chile",
     "residence": "Chile",
     "country": "Colombia",
-    "lat": -33.4420911,
-    "lng": -70.6444031,
+    "lat": -33.4417748,
+    "lng": -70.6403258,
     "interests": "Electromagnetic Tissue Properties, Quantitative MR",
     "bio": "Desarrollo de Redes Neuronales para la reconstrucción del Tensor de Susceptibilidad Magnética"
   },
@@ -384,8 +384,8 @@
     "institution": "UNSAM / CONICET",
     "residence": "Argentina",
     "country": "Argentina",
-    "lat": -34.6085454,
-    "lng": -58.3994646,
+    "lat": -35.6226866,
+    "lng": -57.9944463,
     "interests": "Brain Function, Diffusion, Image Reconstruction and Analysis, MR in Psychiatry, MR Spectroscopy, Musculoskeletal MR, Perfusion, Quantitative MR, White Matter",
     "bio": "Martín Belzunce es Ingeniero en Electrónica y Doctor en Ingeniería mención Procesamiento de Imágenes y Señales por la UTN-FRBA, Buenos Aires, Argentina. Ha sido Postdoctoral Research Associate en King’s College London y Senior Research Associate en el NHS del Reino Unido. Actualmente es investigador del CONICET y docente de la UNSAM. Desarrolla su labor en el Instituto de Ciencias Físicas (ICIFI) UNSAM-CONICET y en el Centro Universitario de Imágenes Médicas (CEUNIM) de la UNSAM. Se dedica al estudio de algoritmos de reconstrucción, procesamiento y análisis de imágenes médicas y su traslación a la investigación básica y/o clínica, con particular interés en el estudio de neurodegeneración y sarcopenia."
   },
@@ -394,8 +394,8 @@
     "institution": "Universidad Nacional Autónoma de México",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 20.700502,
-    "lng": -100.44569,
+    "lat": 19.321597,
+    "lng": -99.1849259,
     "interests": "Diffusion, Pediatric MR, Placenta & Fetus",
     "bio": "Actualmente me desempeño como Técnico académico de tiempo completo en la Unidad de investigación de neurodesarrollo perteneciente al instituto de neurobiología UNAM, México.\nMi labor se centra en el procesamiento de imágenes de difusión de niños entre 0 y 8 años de edad. Estoy particularmente interesado en el seguimiento longitudinal y patologías asociadas al neurodesarrollo neonatal."
   },
@@ -414,8 +414,8 @@
     "institution": "DRCMR",
     "residence": "Denmark",
     "country": "Mexico",
-    "lat": 55.6494801,
-    "lng": 12.4635364,
+    "lat": 55.6494633,
+    "lng": 12.4650789,
     "interests": "Diffusion, Pediatric MR, Quantitative MR, White Matter",
     "bio": "I have worked with many different MRI modalities to date. In most projects, I was responsible for data processing and analysis. At the DRCMR, I want to pursue my interest in diffusion tensor imaging (DTI) and use it in combination with other MRI modalities to study tissue properties non-invasively"
   },
@@ -424,20 +424,20 @@
     "institution": "UAM Iztapalapa",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 19.3624967,
-    "lng": -99.0752222,
+    "lat": 19.3620769,
+    "lng": -99.0728976,
     "interests": "Diffusion, MR Safety",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Julio García Flores",
     "institution": "University of Calgary",
     "residence": "Canada",
     "country": "Mexico",
-    "lat": 51.0666402,
-    "lng": -114.1360377,
+    "lat": 51.075054,
+    "lng": -114.138805,
     "interests": "Cardiac MR, MR Flow & Motion Quantitation",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Benito De Celis Alonso",
@@ -447,15 +447,15 @@
     "lat": 19.0026164,
     "lng": -98.2061646,
     "interests": "Brain Function",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Joshua Harper",
     "institution": "Universidad Politécnica Taiwán Paraguay",
     "residence": "Paraguay",
     "country": "Paraguay",
-    "lat": -25.3036985,
-    "lng": -57.6586425,
+    "lat": -25.2575376,
+    "lng": -57.5338393,
     "interests": "Low Field MRI",
     "bio": "Soy investigador y ingeniero de low field mri enfocado en métodos de fabricación y implementación de la tecnología en sistemas de salud de bajos recursos "
   },
@@ -464,8 +464,8 @@
     "institution": "BUAP",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 19.003327,
-    "lng": -98.1996,
+    "lat": 19.0060324,
+    "lng": -98.2051995,
     "interests": "Body MRI, Cardiac MR",
     "bio": "deseoso de entrar a esta organizacion para compartir y ampliar el conocimiento en resonancia "
   },
@@ -487,7 +487,7 @@
     "lat": 9.9384662,
     "lng": -84.0564257,
     "interests": "Cardiac MR, Image Reconstruction and Analysis, Perfusion",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Nilser Laines Medina ",
@@ -504,10 +504,10 @@
     "institution": "University of Michigan",
     "residence": "USA",
     "country": "Chile",
-    "lat": 42.2771489,
-    "lng": -83.743078,
+    "lat": 42.2942142,
+    "lng": -83.7100389,
     "interests": "Image Reconstruction and Analysis",
-    "bio": null
+    "bio": ""
   },
   {
     "name": " Pablo Jimenez",
@@ -517,35 +517,35 @@
     "lat": 49.4144175,
     "lng": 8.6703858,
     "interests": "Diffusion, MR Engineering",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Ana Cecilia Saavedra Bazan",
     "institution": "University of Michigan",
     "residence": "USA",
     "country": "Peru",
-    "lat": 42.2771489,
-    "lng": -83.743078,
+    "lat": 42.2942142,
+    "lng": -83.7100389,
     "interests": "Cardiac MR, Image Reconstruction and Analysis, Quantitative MR",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Jorge Campos",
     "institution": "McGill University",
     "residence": "Canada",
     "country": "Ecuador",
-    "lat": 45.5060221,
-    "lng": -73.5808984,
+    "lat": 45.5068861,
+    "lng": -73.5787118,
     "interests": "Body MRI, Electromagnetic Tissue Properties, Image Reconstruction and Analysis, MR Safety, MR Spectroscopy, Quantitative MR",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Luis Carlos Sanmiguel ",
     "institution": "Ghent University ",
     "residence": "Belgium",
     "country": "Colombia",
-    "lat": 51.0466617,
-    "lng": 3.7247984,
+    "lat": 51.0078485,
+    "lng": 3.7108831,
     "interests": "Body MRI, Perfusion, Renal MRI",
     "bio": "Multiparametric MRI in the kidney "
   },
@@ -554,8 +554,8 @@
     "institution": "Pontificia Universidad Católica de Chile ",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4420911,
-    "lng": -70.6444031,
+    "lat": -33.4417748,
+    "lng": -70.6403258,
     "interests": "Cardiac MR, Image Reconstruction and Analysis, Low Field MRI, Motion Detection & Correction, Quantitative MR",
     "bio": "Estudiante de doctorado, investigación centrada en mapas cuantitativos de corazón en low-field, reconstrucción y corrección de movimiento "
   },
@@ -574,18 +574,18 @@
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4420911,
-    "lng": -70.6444031,
+    "lat": -33.4417749,
+    "lng": -70.6403258,
     "interests": "Cardiac MR, Low Field MRI",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Carlos Valle",
     "institution": "iHealth",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.498303,
-    "lng": -70.6143896,
+    "lat": 51.5197458,
+    "lng": -0.1469718,
     "interests": "Low Field MRI, Pulmonary MR",
     "bio": "Evaluación funcional del pulmón en resonador de bajo campo"
   },
@@ -594,8 +594,8 @@
     "institution": "Memorial Sloan Kettering Cancer Center",
     "residence": "USA",
     "country": "Paraguay",
-    "lat": 40.7641965,
-    "lng": -73.9588152,
+    "lat": 40.7644418,
+    "lng": -73.9569549,
     "interests": "Body MRI, Image Reconstruction and Analysis, MR in Radiation Therapy, MR of Cancer, Pediatric MR",
     "bio": "- Algoritmos de reconstrucción de imágenes usando IA para acelerar la adquisición de imágenes\n- MRI pediatrico sin anestesia \n- Radioterapia guiada por MRI\n"
   },
@@ -604,8 +604,8 @@
     "institution": "Pontificia Universidad Católica de Valparaíso",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.0842658,
-    "lng": -71.6661522,
+    "lat": -33.0449391,
+    "lng": -71.6067573,
     "interests": "Cardiac MR, Image Reconstruction and Analysis, MR Flow & Motion Quantitation, Quantitative MR",
     "bio": "Soy un estudiante de Magister de la Pontificia Universidad Católica de Valparaíso (PUCV). Mi investigación se centra en el comportamiento no newtoniano de la sangre utilizando resonancia magnética, particularmente imágenes 4D Flow MRI. Evalúo cómo el hematocrito y las tasas de cizallamiento influyen en el comportamiento hemodinámico, con el objetivo de mejorar la comprensión de las alteraciones del flujo en patologías cardiovasculares."
   },
@@ -614,8 +614,8 @@
     "institution": "NYU School of Medicine",
     "residence": "USA",
     "country": "Colombia",
-    "lat": 40.7435895,
-    "lng": -73.9794932,
+    "lat": 40.7415246,
+    "lng": -73.9737223,
     "interests": "Body MRI, Brain Function, MRI of Neuromodulation, Musculoskeletal MR, Placenta & Fetus",
     "bio": "Me especializo en MRI preclinico. Además soy miembro del centro de imágenes preclinicas que provee servicios de adquisición de imágenes en MRI además en ultrasonido, BLI, PET,CT, Spect, y CFT"
   },
@@ -634,18 +634,18 @@
     "institution": "Vista AI, inc.",
     "residence": "USA",
     "country": "Chile",
-    "lat": 37.4470636,
-    "lng": -122.1623927,
+    "lat": 31.7925214,
+    "lng": -106.3893006,
     "interests": "Cardiac MR, Interventional MR, Image Reconstruction and Analysis, Low Field MRI, Reproducible Research",
-    "bio": null
+    "bio": ""
   },
   {
     "name": "Daniel Álvarez Placencia ",
     "institution": "Pontificia Universidad Católica de Valparaíso",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.0842658,
-    "lng": -71.6661522,
+    "lat": -33.0449391,
+    "lng": -71.6067573,
     "interests": "Cardiac MR, MR Engineering",
     "bio": "Soy estudiante de magíster en ciencias de la ingeniería con mención en ingeniería eléctrica. Trabajo como Asistente de investigación y Ayudante revisor del profesor Dr. Hernan Mella.\nActualmente me encuentro investigando la corrección de imágenes de resonancia magnética cardiaca utilizando inteligencia artificial.\nEn concreto estudio el comportamiento de redes neuronales Unet para filtrar el artefacto de baja frecuencia presente en imágenes SPAMM el cual disminuye progresivamente el contraste de los tags debido al tiempo de relajación t1\nHasta el momento hemos obtenido resultados prometedores utilizando SSIM RMSE y MAE para evaluar cuantitativamente los resultados.\nActualmente se están estudiando distintas funciones de pérdida y distintos hiperparametros de la red para obtener un modelo robusto y rápido. "
   },
@@ -684,8 +684,8 @@
     "institution": "Polytechnique Montréal",
     "residence": "Canada",
     "country": "Peru",
-    "lat": 45.5047939,
-    "lng": -73.615758,
+    "lat": 45.5045875,
+    "lng": -73.612996,
     "interests": "Quantitative MR",
     "bio": "Soy Sebastian, estudie ing. biomedica en Peru donde conoci por primera vez el mundo del MRI. Luego de terminar mis estudios opte por intentar un carril academico y logre conseguir venir a vivir a Montreal. Una ciudad con mucha investigacion en MRI donde tambien puedo continuar mi otra gran pasion - el tennis. Me gustaria unirme al capitulo para explorar formas en como llevar investigacion en MRI a mi pais y a mi alma mater - la Pontificia Universidad Catolica del Peru."
   },
@@ -714,8 +714,8 @@
     "institution": "Universidad Juan Agustín Maza",
     "residence": "Argentina",
     "country": "Argentina",
-    "lat": -32.8992007,
-    "lng": -68.8131759,
+    "lat": -32.8907579,
+    "lng": -68.8458149,
     "interests": "Body MRI, Brain Function, Chemical Exchane Saturation Transfer (CEST), Diffusion, Electromagnetic Tissue Properties, Hyperpolarization, Imaging Neurofluids, Molecular & Cellular Imaging, Motion Detection & Correction, MR Flow & Motion Quantitation, MR in Psychiatry, MR of Cancer, MR Spectroscopy, MRI Coils, MRI of Neuromodulation, Pediatric MR, Perfusion, Placenta & Fetus, Renal MRI, Reproducible Research, White Matter",
     "bio": "Me gustaría participar, desarrollar e investigar en los cambios en la polaridad de membrana en exposiciones prolongadas a la RF.\nEstoy a disposición para aportar desde mi lugar. Espero tener respuesta afirmativa de ustedes. Saludos cordiales. \nJavier"
   },
@@ -724,8 +724,8 @@
     "institution": "Centro de Investigación en Matemáticas",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 21.0419801,
-    "lng": -101.2630729,
+    "lat": 21.0420869,
+    "lng": -101.2607521,
     "interests": "Body MRI, Brain Function, Diffusion, MR in Psychiatry, Quantitative MR, White Matter",
     "bio": "Soy maestra en ciencias con orientación en estadística y probabilidad y estoy investigando acerca de la variabilidad de los softwares de RMI"
   },
@@ -734,8 +734,8 @@
     "institution": "University of Basel",
     "residence": "Switzerland",
     "country": "Mexico",
-    "lat": 47.5585281,
-    "lng": 7.5812943,
+    "lat": 47.5612651,
+    "lng": 7.5752961,
     "interests": "Diffusion, Quantitative MR, White Matter",
     "bio": "PhD en Ciencias de la Computación. Actualmente, trabajo con MRI del cerebro de personas con esclerosis múltiple "
   }

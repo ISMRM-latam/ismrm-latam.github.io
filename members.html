@@ -35,7 +35,16 @@ title: Member Community
         </div>
     </div>
 
-    <div id="map"></div>
+    <div class="map-layout">
+        <div id="map"></div>
+        <div id="clusterPanel" class="cluster-panel">
+            <div class="panel-header">
+                <h4 id="panelTitle">Members in this area</h4>
+                <button onclick="closePanel()" class="close-btn">&times;</button>
+            </div>
+            <div id="memberList" class="member-list"></div>
+        </div>
+    </div>
 
     <div style="margin-top: 20px; text-align: center;">
         <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=member_registration.yml" 
@@ -62,11 +71,45 @@ title: Member Community
     }
     .pill:hover { background: #e2e8f0; }
     .pill.active {
-        background: var(--primary-gradient, #1495a7);
+        background: #1495a7;
         color: white;
         border-color: transparent;
     }
-    #map { height: 550px; border-radius: 12px; border: 1px solid #eee; }
+
+    /* Map Layout with Panel */
+    .map-layout { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid #eee; }
+    #map { height: 550px; width: 100%; }
+    
+    .cluster-panel {
+        position: absolute;
+        top: 10px;
+        right: -320px; /* Hidden by default */
+        width: 300px;
+        height: calc(100% - 20px);
+        background: white;
+        z-index: 1001;
+        transition: right 0.3s ease;
+        box-shadow: -4px 0 15px rgba(0,0,0,0.15);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+    }
+    .cluster-panel.open { right: 10px; }
+    .panel-header { padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .panel-header h4 { margin: 0; font-size: 1rem; color: #003687; }
+    .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
+    
+    .member-list { overflow-y: auto; flex-grow: 1; }
+    .member-item { 
+        padding: 12px; 
+        border-bottom: 1px solid #f9f9f9; 
+        cursor: pointer; 
+        transition: background 0.2s;
+    }
+    .member-item:hover { background: #f0f9fa; }
+    .member-item h5 { margin: 0 0 4px 0; color: #1495a7; font-size: 0.9rem; }
+    .member-item p { margin: 0; font-size: 0.75rem; color: #666; }
+
     .search-wrapper { position: relative; width: 100%; max-width: 400px; }
     #memberSearch { 
         width: 100%; padding: 10px; border-radius: 8px; 
@@ -77,37 +120,59 @@ title: Member Community
         border-radius: 0 0 8px 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         z-index: 1000; max-height: 200px; overflow-y: auto; display: none;
     }
-    .search-item {
-        padding: 10px; border-bottom: 1px solid #f0f0f0; cursor: pointer;
-    }
+    .search-item { padding: 10px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
     .search-item:hover { background: #f8fafc; color: #1495a7; }
-    .search-item span { display: block; font-size: 0.75rem; color: #666; }
 </style>
 
 <script>
-    // Initialize Data
     const memberData = {{ site.data.members | jsonify }};
     let currentInterest = null;
     
-    // Initialize Map
-    var map = L.map('map').setView([-15, -85], 2); 
+    var map = L.map('map').setView([-15, -65], 3); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+        attribution: '&copy; CARTO',
         subdomains: 'abcd',
         maxZoom: 20
     }).addTo(map);
 
-    // Initialize Clusters
-    var markersGroup = L.markerClusterGroup();
+    // Initialize Clusters with Custom Logic
+    var markersGroup = L.markerClusterGroup({
+        showCoverageOnHover: false,
+        zoomToBoundsOnClick: false // We disable auto-zoom to show our list instead
+    });
+
+    // --- CLUSTER CLICK LOGIC ---
+    markersGroup.on('clusterclick', function (a) {
+        const clusterMarkers = a.layer.getAllChildMarkers();
+        const memberListDiv = document.getElementById('memberList');
+        memberListDiv.innerHTML = '';
+
+        clusterMarkers.forEach(marker => {
+            const m = marker.options.memberReference;
+            const item = document.createElement('div');
+            item.className = 'member-item';
+            item.innerHTML = `
+                <h5>${m.name}</h5>
+                <p>${m.institution}</p>
+                <p style="font-style:italic;">${m.residence}</p>
+            `;
+            item.onclick = () => focusOnMember(m);
+            memberListDiv.appendChild(item);
+        });
+
+        document.getElementById('clusterPanel').classList.add('open');
+    });
+
     map.addLayer(markersGroup);
 
-    // --- LOGIC FUNCTIONS ---
+    function closePanel() {
+        document.getElementById('clusterPanel').classList.remove('open');
+    }
 
     function populateFilters() {
         const countrySelect = document.getElementById('countryFilter');
         const pillBox = document.getElementById('interestPills');
         
-        // 1. Unique Countries
         const countries = [...new Set(memberData.map(m => m.country))].sort();
         countries.forEach(c => {
             let opt = document.createElement('option');
@@ -115,7 +180,6 @@ title: Member Community
             countrySelect.appendChild(opt);
         });
 
-        // 2. Unique Interests (Split by comma)
         let allInterests = [];
         memberData.forEach(m => {
             if(m.interests) {
@@ -149,15 +213,10 @@ title: Member Community
             const matchesInterest = (!currentInterest || (m.interests && m.interests.includes(currentInterest)));
 
             if (matchesCountry && matchesInterest) {
-                const popup = `
-                    <div style="font-family: 'Inter', sans-serif; min-width: 200px;">
+                const popupContent = `
+                    <div style="font-family: sans-serif; min-width: 200px;">
                         <h4 style="margin:0; color:#003687;">${m.name}</h4>
-                        <p style="margin:0; font-size:0.85rem; font-style:italic;">
-                            ${m.institution} (${m.residence})
-                        </p>
-                        <p style="margin:0; font-size:0.8rem; color:#666;">
-                            Origin: ${m.country}
-                        </p>
+                        <p style="margin:0; font-size:0.85rem;">${m.institution}</p>
                         <div style="margin: 8px 0;">
                             ${m.interests ? m.interests.split(',').map(tag => 
                                 `<span style="background:#eef2ff; color:#1495a7; padding:2px 5px; border-radius:4px; font-size:0.7rem; margin:0 3px 3px 0; display:inline-block;">${tag.trim()}</span>`
@@ -166,8 +225,25 @@ title: Member Community
                         <p style="font-size:0.8rem; border-top:1px solid #eee; padding-top:5px;">${m.bio || ''}</p>
                     </div>
                 `;
-                const marker = L.marker([m.lat, m.lng]).bindPopup(popup);
+                // We attach the member data to the marker options for retrieval during cluster clicks
+                const marker = L.marker([m.lat, m.lng], { memberReference: m }).bindPopup(popupContent);
                 markersGroup.addLayer(marker);
+            }
+        });
+    }
+
+    function focusOnMember(member) {
+        closePanel();
+        document.getElementById('searchResults').style.display = 'none';
+
+        map.flyTo([member.lat, member.lng], 12, { animate: true, duration: 1.2 });
+
+        markersGroup.eachLayer(function(marker) {
+            const ref = marker.options.memberReference;
+            if (ref.name === member.name && ref.lat === member.lat) {
+                markersGroup.zoomToShowLayer(marker, function() {
+                    marker.openPopup();
+                });
             }
         });
     }
@@ -192,7 +268,7 @@ title: Member Community
             matches.forEach(m => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
-                div.innerHTML = `<strong>${m.name}</strong><span>${m.institution}</span>`;
+                div.innerHTML = `<strong>${m.name}</strong><br><small>${m.institution}</small>`;
                 div.onclick = () => focusOnMember(m);
                 resultsContainer.appendChild(div);
             });
@@ -201,30 +277,6 @@ title: Member Community
         }
     }
 
-    function focusOnMember(member) {
-        // 1. Clear search
-        document.getElementById('searchResults').style.display = 'none';
-        document.getElementById('memberSearch').value = member.name;
-
-        // 2. Fly to the location
-        map.flyTo([member.lat, member.lng], 8, {
-            animate: true,
-            duration: 1.5
-        });
-
-        // 3. Find and open the popup
-        // Since we use clustering, we need to get the visible marker
-        markersGroup.eachLayer(function(marker) {
-            if (marker.getLatLng().lat === member.lat && marker.getLatLng().lng === member.lng) {
-                // If the marker is inside a cluster, zoom into it first
-                markersGroup.zoomToShowLayer(marker, function() {
-                    marker.openPopup();
-                });
-            }
-        });
-    }
-
-    // Run on startup
     populateFilters();
     applyFilters();
 </script>

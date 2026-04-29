@@ -1,54 +1,107 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Framavox – Latest Discussions</title>
-  <style>
-    body { font-family: system-ui, sans-serif; margin: 2rem; }
-    h1 { font-size: 1.6rem; margin-bottom: .5rem; }
-    .meta { color: #666; margin-bottom: 1rem; }
-    ul { list-style: none; padding: 0; margin: 0; }
-    li { margin: .75rem 0; padding: .6rem .8rem; border: 1px solid #ddd; border-radius: 8px; }
-    a { text-decoration: none; }
-    .date { color: #666; font-size: .9rem; }
-  </style>
-</head>
-<body>
-  <h1>Latest Discussions</h1>
-  <div class="meta" id="feed-meta"></div>
-  <ul id="discussions"></ul>
+---
+layout: default
+title: Home
+---
 
-  <script>
-    // Same-origin fetch → no CORS
-    fetch('/assets/framavox.json')
-      .then(r => r.json())
-      .then(feed => {
-        const meta = document.getElementById('feed-meta');
-        const ul = document.getElementById('discussions');
+<section class="welcome-hero">
+    <div class="welcome-content">
+        <h1>{{ site.data.content.welcome_message.title }}</h1>
+        <p class="announcement-subtitle">{{ site.data.content.welcome_message.subtitle }}</p>
+        
+        <div class="welcome-text">
+            {{ site.data.content.welcome_message.body }}
+        </div>
 
-        meta.textContent = `${feed.title || 'Framavox Group'} · Updated ${new Date(feed.updated || Date.now()).toLocaleString()}`;
+        <div class="welcome-actions">
+            <a href="{{ '/members' | relative_url }}" class="c-button hero-btn">Explore Members</a>
+            <a href="{{ '/labs' | relative_url }}" class="c-button hero-btn secondary">Research Hubs</a>
+        </div>
+    </div>
+</section>
 
-        (feed.entries || []).slice(0, 20).forEach(entry => {
-          const li = document.createElement('li');
-          const a = document.createElement('a');
-          a.href = entry.link || '#';
-          a.target = '_blank';
-          a.rel = 'noopener';
-          a.textContent = entry.title || '(untitled)';
-          const d = document.createElement('div');
-          d.className = 'date';
-          d.textContent = entry.updated ? new Date(entry.updated).toLocaleString() :
-                           entry.published ? new Date(entry.published).toLocaleString() : '';
-          li.appendChild(a);
-          li.appendChild(d);
-          ul.appendChild(li);
-        });
-      })
-      .catch(err => {
-        document.getElementById('feed-meta').textContent = 'Failed to load discussions.';
-        console.error(err);
-      });
-  </script>
-</body>
-</html>
+<hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
+
+<div class="home-grid">
+    <div class="home-col">
+        <h3>Latest News</h3>
+        {% assign recent_news = site.data.news | sort: 'date' | reverse | limit: 2 %}
+        {% if site.data.news %}
+            {% for item in recent_news %}
+                <div class="home-item">
+                    <a href="{{ item.url | relative_url }}" class="item-link">{{ item.title }}</a>
+                    <p class="item-meta">{{ item.date | date: "%b %d, %Y" }}</p>
+                    <p class="item-excerpt">{{ item.summary | truncate: 80 }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="item-excerpt">No news posted yet.</p>
+        {% endif %}
+        <a href="{{ '/news' | relative_url }}" class="item-more">View all news &rarr;</a>
+    </div>
+
+    <div class="home-col">
+        <h3>Upcoming Events</h3>
+        {% assign rightnow = "now" | date: "%Y%m%d" | plus: 0 %}
+        {% assign upcoming_found = false %}
+        {% assign count = 0 %}
+        
+        {% if site.data.events %}
+            {% assign sorted_events = site.data.events | sort: 'event_date' %}
+            {% for event in sorted_events %}
+                {% assign eventdate = event.event_date | date: "%Y%m%d" | plus: 0 %}
+                {% if eventdate >= rightnow and count < 2 %}
+                    <div class="home-item">
+                        <a href="{{ event.url | relative_url }}" class="item-link alt">{{ event.title }}</a>
+                        <p class="item-meta">{{ event.event_date | date: "%b %d, %Y" }} | {{ event.location }}</p>
+                    </div>
+                    {% assign upcoming_found = true %}
+                    {% assign count = count | plus: 1 %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if upcoming_found == false %}
+            <p class="item-excerpt">Stay tuned for upcoming LATAM workshops.</p>
+        {% endif %}
+        <a href="{{ '/events' | relative_url }}" class="item-more">Event calendar &rarr;</a>
+    </div>
+
+    <div class="home-col">
+        <h3>Opportunities</h3>
+        {% assign recent_jobs = site.data.jobs | sort: 'posted' | reverse | limit: 2 %}
+        {% if site.data.jobs %}
+            {% for job in recent_jobs %}
+                <div class="home-item">
+                    <a href="{{ '/jobs' | relative_url }}" class="item-link">{{ job.title }}</a>
+                    <p class="item-meta">{{ job.institution }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+             <p class="item-excerpt">No open positions at the moment.</p>
+        {% endif %}
+        <a href="{{ '/jobs' | relative_url }}" class="item-more">Browse all jobs &rarr;</a>
+    </div>
+</div>
+
+<style>
+    .home-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 40px; 
+        margin-top: 20px;
+    }
+    .home-col h3 { 
+        color: #003687; 
+        border-bottom: 2px solid #1495a7; 
+        padding-bottom: 10px; 
+        margin-bottom: 20px; 
+    }
+    .home-item { margin-bottom: 20px; }
+    .item-link { font-weight: 600; color: #1495a7; text-decoration: none; }
+    .item-link.alt { color: #003687; }
+    .item-link:hover { text-decoration: underline; }
+    .item-meta { font-size: 0.8rem; color: #888; margin: 4px 0; text-transform: uppercase; letter-spacing: 0.5px; }
+    .item-excerpt { font-size: 0.9rem; color: #555; line-height: 1.4; }
+    .item-more { font-weight: bold; font-size: 0.9rem; color: #333; text-decoration: none; display: block; margin-top: 10px; }
+    .item-more:hover { color: #1495a7; }
+</style>

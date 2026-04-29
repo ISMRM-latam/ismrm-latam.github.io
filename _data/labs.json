@@ -1,0 +1,13 @@
+[
+  {
+    "name": "Biomedical Imaging Center (CIB)",
+    "institution": "Pontificia Universidad Católica de Chile",
+    "pi": "Dr. Marcelo Andia",
+    "residence": "Chile",
+    "website": "https://cib.uc.cl/",
+    "focus": "Cardiovascular MRI, Metabolic Imaging, Contrast Agents",
+    "contact": "contact@cib.cl",
+    "lat": -33.4836,
+    "lng": -70.6351
+  }
+]

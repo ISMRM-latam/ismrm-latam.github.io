@@ -1,0 +1,97 @@
+name: Update News List
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  update-news:
+    # Security Gate: Only trigger on 'approved' label by authorized users
+    if: |
+      github.event.label.name == 'approved' && 
+      contains(github.event.issue.labels.*.name, 'new-news') &&
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Parse Issue Body
+        id: parse
+        uses: zentered/issue-forms-body-parser@v2.0.0
+
+      - name: Process News and Generate Post
+        id: process
+        run: |
+          # 1. Extract Metadata
+          RAW_DATA='${{ steps.parse.outputs.data }}'
+          
+          AUTHOR=$(echo "$RAW_DATA" | jq -r '."author-name".text // "Executive Committee"')
+          CAT=$(echo "$RAW_DATA" | jq -r '."category".text // "News"')
+          SUMM=$(echo "$RAW_DATA" | jq -r '."short-summary".text // "No summary provided"')
+          
+          # URL Sanitization
+          IMG_RAW=$(echo "$RAW_DATA" | jq -r '."featured-image-url".text')
+          IMG=$(echo "$IMG_RAW" | tr -d '<>' | xargs)
+          
+          TITLE=$(echo "${{ github.event.issue.title }}" | sed 's/News: //g')
+          DATE=$(date +%Y-%m-%d)
+          
+          # 2. Slug and Filename
+          SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed -E 's/-+/-/g' | sed -E 's/^-|-$//g')
+          FILENAME="${DATE}-${SLUG}.md"
+          
+          mkdir -p _posts
+          
+          # 3. Create the Front Matter
+          echo "---" > "_posts/$FILENAME"
+          echo "layout: post" >> "_posts/$FILENAME"
+          echo "title: \"$TITLE\"" >> "_posts/$FILENAME"
+          echo "date: $DATE" >> "_posts/$FILENAME"
+          echo "author: \"$AUTHOR\"" >> "_posts/$FILENAME"
+          echo "category: \"$CAT\"" >> "_posts/$FILENAME"
+          echo "image: \"$IMG\"" >> "_posts/$FILENAME"
+          echo "excerpt: \"$SUMM\"" >> "_posts/$FILENAME"
+          echo "---" >> "_posts/$FILENAME"
+          echo "" >> "_posts/$FILENAME"
+          
+          # 4. APPEND CONTENT SAFELY (Dynamic headers + Content)
+          # We grab every value in the JSON, keep only the .text if it exists,
+          # and exclude the metadata fields we already used in the header.
+          echo "$RAW_DATA" | jq -r '
+            to_entries 
+            | map(select(.key | IN("author-name", "category", "featured-image-url", "short-summary") | not)) 
+            | map(.value.text) 
+            | select(. != null and . != "") 
+            | join("\n\n")
+          ' > content_tmp.txt
+          
+          cat content_tmp.txt >> "_posts/$FILENAME"
+
+          # 5. Build JSON summary
+          YEAR=$(date +%Y)
+          MONTH=$(date +%m)
+          DAY=$(date +%d)
+          POST_URL="$YEAR/$MONTH/$DAY/$SLUG.html"
+
+          jq -n \
+            --arg title "$TITLE" --arg auth "$AUTHOR" --arg cat "$CAT" \
+            --arg img "$IMG" --arg summ "$SUMM" --arg date "$DATE" --arg url "$POST_URL" \
+            '{title: $title, author: $auth, category: $cat, image: $img, summary: $summ, date: $date, url: $url}' > news_entry.json
+
+      - name: Append to News Database
+        run: |
+          if [ ! -f _data/news.json ]; then echo "[]" > _data/news.json; fi
+          jq ". += [$(cat news_entry.json)]" _data/news.json > tmp.json && mv tmp.json _data/news.json
+
+      - name: Commit & Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _data/news.json _posts/*.md
+          git commit -m "Approved & Published News: ${{ github.event.issue.title }}"
+          git push
+
+      - name: Close Issue
+        uses: peter-evans/close-issue@v3
+        with:
+          comment: "### 📰 News Published!\nYour article has been converted to a post and is now live on the portal."

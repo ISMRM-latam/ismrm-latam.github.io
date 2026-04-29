@@ -1,0 +1,61 @@
+name: Event Registration
+description: Submit a workshop, webinar, or meeting
+title: "Event: [Event Name]"
+labels: ["new-event"]
+body:
+  - type: input
+    id: organizer
+    attributes:
+      label: Who is inviting?
+      placeholder: e.g., ISMRM-LATAM Executive Committee / University of Chile
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Event Type
+      options:
+        - Webinar
+        - Workshop
+        - Conference
+        - Social Event
+        - Chapter Meeting
+    validations:
+      required: true
+  - type: input
+    id: event-date
+    attributes:
+      label: When will it happen?
+      placeholder: "YYYY-MM-DD"
+      description: "Format: YYYY-MM-DD (e.g., 2026-05-15)"
+    validations:
+      required: true
+  - type: dropdown
+    id: modality
+    attributes:
+      label: Modality
+      options:
+        - Virtual
+        - In-person
+        - Hybrid
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Where will it happen?
+      placeholder: "e.g., Zoom / Santiago, Chile / Honolulu, HI"
+    validations:
+      required: true
+  - type: input
+    id: registration-link
+    attributes:
+      label: Registration or Info Link
+      placeholder: "https://..."
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      placeholder: "Provide a brief overview of the event..."
+    validations:
+      required: true

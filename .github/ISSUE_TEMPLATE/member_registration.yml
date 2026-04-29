@@ -1,0 +1,84 @@
+name: Member Registration
+description: Add yourself to the ISMRM-LATAM Member Map
+title: "Member Registration: [Your Name Here]"
+labels: ["new-member"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Welcome to the ISMRM-LATAM Community Map!
+        Use this form to join our directory. We welcome researchers currently in Latin America and those abroad with LATAM roots.
+
+  - type: input
+    id: name
+    attributes:
+      label: Full Name
+      placeholder: e.g., Carlos Milovic
+    validations:
+      required: true
+
+  - type: input
+    id: institution
+    attributes:
+      label: Current Institution / University
+      placeholder: e.g., King's College London
+    validations:
+      required: true
+
+  - type: input
+    id: residence_country
+    attributes:
+      label: Country of Residence
+      description: "Where are you currently located? (e.g., United Kingdom, Germany, USA)"
+      placeholder: "e.g., United Kingdom"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: latam_origin
+    attributes:
+      label: LATAM Country of Origin/Affiliation
+      description: "Which Latin American country do you represent or identify with?"
+      options:
+        - Argentina
+        - Belize
+        - Bolivia
+        - Brazil
+        - Chile
+        - Colombia
+        - Costa Rica
+        - Cuba
+        - Dominican Republic
+        - Ecuador
+        - El Salvador
+        - Guatemala
+        - Guyana
+        - Haiti
+        - Honduras
+        - Mexico
+        - Nicaragua
+        - Panama
+        - Paraguay
+        - Peru
+        - Puerto Rico
+        - Suriname
+        - Uruguay
+        - Venezuela
+    validations:
+      required: true
+
+  - type: input
+    id: interests
+    attributes:
+      label: Research Interests
+      description: "Separate interests by comma (e.g., MRI, Diffusion, QSM)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bio
+    attributes:
+      label: Short Bio
+      placeholder: "Brief professional summary..."
+    validations:
+      required: true

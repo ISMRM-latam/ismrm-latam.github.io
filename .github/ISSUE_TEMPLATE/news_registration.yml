@@ -1,0 +1,43 @@
+name: News Post Submission
+description: Submit a news article or announcement
+title: "News: [Article Title]"
+labels: ["new-news"]
+body:
+  - type: input
+    id: author-name  # Matches script: author-name
+    attributes:
+      label: Author Name
+      placeholder: e.g., Dr. Elena Rodriguez
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Research
+        - Event
+        - Chapter News
+        - Opportunity
+    validations:
+      required: true
+  - type: input
+    id: featured-image-url # Matches script: featured-image-url
+    attributes:
+      label: Featured Image URL
+      placeholder: "Paste GitHub asset URL or external link here"
+      description: "Pro-tip: Drag an image into this issue description to generate a link!"
+  - type: input
+    id: short-summary # Matches script: short-summary
+    attributes:
+      label: Short Summary
+      placeholder: "A 1-2 sentence teaser for the news list page."
+    validations:
+      required: true
+  - type: textarea
+    id: full-article-content # Matches script: full-article-content
+    attributes:
+      label: Full Article Content
+      placeholder: "Write your full article here. Markdown is supported! BUT, don't use ### headers in this section as they will interfere with the auto-generated header. Use bold or italics for subheadings instead."
+    validations:
+      required: true

@@ -1,0 +1,39 @@
+{
+  "site_name": "ISMRM Latin American Chapter",
+  "navigation": [
+    
+    { "name": "Home", "link": "/"},
+    { "name": "Events", "link": "/events" },
+    { "name": "Labs", "link": "/labs" },
+    { "name": "Members", "link": "/members" },
+    { "name": "News", "link": "/news" },
+    { "name": "Opportunities", "link": "/jobs" },
+    { "name": "About", "link": "/about"}
+    
+  ],
+  "home": {
+    "title": "Welcome to ISMRM-LATAM",
+    "mission_statement": "The Latin America Chapter promotes opportunities for scientific collaboration between professionals of MR in medicine and biology working or studying in Latin America and the rest of the world."
+  },
+  "committee": [
+    { "role": "Chair", "name": "Carlos Milovic, Ph.D.", "affiliation": "Pontificia Universidad Católica de Chile" },
+    { "role": "Vice-Chair", "name": "Camila Munoz, PhD.", "affiliation": "Imperial College London" },
+    { "role": "Secretary", "name": "Analia Zwick, Ph.D.", "affiliation": "Centro Atómico Bariloche & Instituto Balseiro" },
+    { "role": "Treasurer", "name": "Paula Trujillo, Ph.D.", "affiliation": "Vanderbilt University Medical Center" },
+    { "role": "Communications", "name": "Jessica Martínez, Ph.D.", "affiliation": "NIST" },
+    { "role": "Trainee Rep", "name": "Guillermo Sahonero, Ph.D. (c)", "affiliation": "Pontificia Universidad Católica de Chile" }
+  ],
+  "bylaws": {
+    "title": "Chapter Bylaws",
+    "content": "The Chapter operates under the International Society for Magnetic Resonance in Medicine. Our bylaws ensure equitable representation across Latin American nations and the promotion of MR education."
+  },
+  "history": {
+    "title": "Our History",
+    "content": "Established to bridge the gap between Latin American researchers and the global MR community, the chapter has grown from an inaugural board in 2024 to a vibrant network of clinics and labs."
+  },
+  "welcome_message": {
+    "title": "Welcome to ISMRM-LATAM",
+    "subtitle": "The Latin American Chapter of the ISMRM",
+    "body": "<p>Our mission is to foster the development and application of magnetic resonance techniques in medicine and biology across Latin America.</p>            <p>We invite you to explore our community map, discover regional research hubs, and join us in advancing the MRI ecosystem in our region.</p>"
+  }
+}

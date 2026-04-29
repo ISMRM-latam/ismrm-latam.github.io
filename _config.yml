@@ -1,0 +1,39 @@
+title: ISMRM Latin American Chapter
+remote_theme: pages-themes/minimal@v0.2.0 # Standard GitHub Pages base
+
+# Site Identity
+github_username: gsahonero
+github_repo: ismrm-latam.github.io
+url: "https://gsahonero.github.io"
+baseurl: "/ismrm-latam.github.io" # Leave empty unless your site is in a subfolder
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed # Good for news SEO
+
+# Collections Setup
+collections:
+  events:
+    output: true
+    permalink: /events/:name/  # Added .html here
+
+# Markdown Settings
+markdown: kramdown
+highlighter: rouge
+
+# This ensures posts are handled correctly
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "events"
+    values:
+      layout: "post"
+  
+permalink: /:year/:month/:day/:title.html
+
+future: true

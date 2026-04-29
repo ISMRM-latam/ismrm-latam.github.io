@@ -1,0 +1,65 @@
+name: Lab/Institution Registration
+description: Register a Lab, Group, or Research Center in Latin America
+title: "Lab Registration: [Lab Name Here]"
+labels: ["new-lab"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Register your Research Group
+        Help us build a directory of MRI and medical physics labs across Latin America. 
+
+  - type: input
+    id: lab_name
+    attributes:
+      label: Lab or Group Name
+      placeholder: e.g., Biomedical Imaging Center (CIB)
+    validations:
+      required: true
+
+  - type: input
+    id: institution
+    attributes:
+      label: Host Institution / University
+      placeholder: e.g., Pontificia Universidad Católica de Chile
+    validations:
+      required: true
+
+  - type: input
+    id: pi_name
+    attributes:
+      label: Principal Investigator (PI)
+      placeholder: e.g., Dr. Jane Doe
+    validations:
+      required: true
+
+  - type: input
+    id: residence_country
+    attributes:
+      label: Country
+      placeholder: e.g., Argentina
+    validations:
+      required: true
+
+  - type: input
+    id: lab_website
+    attributes:
+      label: Official Website
+      placeholder: https://www.yourlab.com
+      description: "If no website exists, you can provide a LinkedIn or ResearchGate group link."
+
+  - type: textarea
+    id: lab_focus
+    attributes:
+      label: Research Focus & Keywords
+      description: "Briefly describe the lab's main areas of work (e.g., Cardiac MRI, Spectroscopy, AI)."
+    validations:
+      required: true
+
+  - type: textarea
+    id: contact_info
+    attributes:
+      label: Contact Information
+      description: "Public email or 'Contact via website' instructions."
+    validations:
+      required: true

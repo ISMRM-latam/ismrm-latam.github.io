@@ -53,6 +53,11 @@ title: Research Centers
     .lab-card p { margin: 5px 0; font-size: 0.85rem; color: #666; }
     .lab-card .pi-badge { font-weight: bold; color: #333; display: block; margin-top: 5px; font-size: 0.85rem; }
     
+    /* Added styles for Focus and Contact */
+    .lab-card .lab-focus { font-size: 0.8rem; color: #555; margin-top: 6px; line-height: 1.3; }
+    .lab-card .lab-contact { font-size: 0.8rem; color: #1495a7; text-decoration: none; display: inline-block; margin-top: 8px; font-weight: 600; }
+    .lab-card .lab-contact:hover { text-decoration: underline; color: #003687; }
+
     /* Map Styling */
     .lab-map-container { width: 65%; height: 100%; }
 
@@ -81,17 +86,17 @@ title: Research Centers
     }).addTo(map);
 
     // Function to update the sidebar based on visible map area
-function updateListFromMap() {
-    const bounds = map.getBounds();
-    const visibleLabs = labData.filter(lab => {
-        const latLng = L.latLng(lab.lat, lab.lng);
-        return bounds.contains(latLng);
-    });
-    
-    // We call a slightly modified render function that doesn't 
-    // clear the markers, only updates the sidebar.
-    updateSidebarOnly(visibleLabs);
-}
+    function updateListFromMap() {
+        const bounds = map.getBounds();
+        const visibleLabs = labData.filter(lab => {
+            const latLng = L.latLng(lab.lat, lab.lng);
+            return bounds.contains(latLng);
+        });
+        
+        // We call a slightly modified render function that doesn't 
+        // clear the markers, only updates the sidebar.
+        updateSidebarOnly(visibleLabs);
+    }
 
     function updateSidebarOnly(data) {
         const listContainer = document.getElementById('labList');
@@ -104,6 +109,8 @@ function updateListFromMap() {
                 <h4>${lab.name}</h4>
                 <p>${lab.institution}, ${lab.residence}</p>
                 <span class="pi-badge">PI: ${lab.pi}</span>
+                ${lab.focus ? `<p class="lab-focus"><b>Focus:</b> ${lab.focus}</p>` : ''}
+                ${lab.contact ? `<a href="mailto:${lab.contact}" class="lab-contact" onclick="event.stopPropagation()">✉️ Contact Lab</a>` : ''}
             `;
             card.onclick = () => {
                 // Find the marker in the group to show it
@@ -143,14 +150,22 @@ function updateListFromMap() {
                 <h4>${lab.name}</h4>
                 <p>${lab.institution}, ${lab.residence}</p>
                 <span class="pi-badge">PI: ${lab.pi}</span>
+                ${lab.focus ? `<p class="lab-focus"><b>Focus:</b> ${lab.focus}</p>` : ''}
+                ${lab.contact ? `<a href="mailto:${lab.contact}" class="lab-contact" onclick="event.stopPropagation()">✉️ Contact Lab</a>` : ''}
             `;
             
-            // Add to Map
+            // Add to Map with Focus and Contact fields
             const popupHtml = `
-                <div style="min-width: 200px;">
-                    <h4 style="margin:0; color:#1495a7;">${lab.name}</h4>
-                    <p style="margin:5px 0;"><b>PI:</b> ${lab.pi}</p>
-                    <a href="${lab.website}" target="_blank" class="c-button" style="font-size: 0.7rem; padding: 4px 8px; display:inline-block; margin-top:5px;">View Website</a>
+                <div style="min-width: 220px; font-family: sans-serif;">
+                    <h4 style="margin:0 0 8px 0; color:#1495a7;">${lab.name}</h4>
+                    <p style="margin:0 0 5px 0; font-size: 0.85rem;"><b>Institution:</b> ${lab.institution}</p>
+                    <p style="margin:0 0 5px 0; font-size: 0.85rem;"><b>PI:</b> ${lab.pi}</p>
+                    ${lab.focus ? `<p style="margin:8px 0; font-size: 0.8rem; color:#555; background:#f8fafc; padding:6px; border-radius:4px;"><b>Focus:</b> ${lab.focus}</p>` : ''}
+                    
+                    <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+                        ${lab.contact ? `<a href="mailto:${lab.contact}" style="font-size: 0.85rem; color:#1495a7; text-decoration:none; font-weight:bold;">✉️ ${lab.contact}</a>` : ''}
+                        ${lab.website ? `<a href="${lab.website}" target="_blank" class="c-button" style="font-size: 0.7rem; padding: 6px 10px; display:inline-block; text-align:center;">View Website</a>` : ''}
+                    </div>
                 </div>
             `;
             

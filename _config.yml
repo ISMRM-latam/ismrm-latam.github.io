@@ -30,9 +30,14 @@ defaults:
       layout: "post"
   - scope:
       path: ""
-      type: "events"
+      type: "news"
     values:
       layout: "post"
+  - scope:
+      path: ""
+      type: "events"
+    values:
+      layout: "event"
   
 permalink: /:year/:month/:day/:title.html
 

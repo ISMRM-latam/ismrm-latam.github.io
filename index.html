@@ -24,9 +24,10 @@ title: Home
 <div class="home-grid">
     <div class="home-col">
         <h3>Latest News</h3>
-        {% assign recent_news = site.data.news | sort: 'date' | reverse | limit: 2 %}
         {% if site.data.news %}
-            {% for item in recent_news %}
+            {% assign sorted_news = site.data.news | sort: 'date' | reverse %}
+            
+            {% for item in sorted_news limit: 2 %}
                 <div class="home-item">
                     <a href="{{ item.url | relative_url }}" class="item-link">{{ item.title }}</a>
                     <p class="item-meta">{{ item.date | date: "%b %d, %Y" }}</p>
@@ -68,9 +69,10 @@ title: Home
 
     <div class="home-col">
         <h3>Opportunities</h3>
-        {% assign recent_jobs = site.data.jobs | sort: 'posted' | reverse | limit: 2 %}
         {% if site.data.jobs %}
-            {% for job in recent_jobs %}
+            {% assign sorted_jobs = site.data.jobs | sort: 'posted' | reverse %}
+            
+            {% for job in sorted_jobs limit: 2 %}
                 <div class="home-item">
                     <a href="{{ '/jobs' | relative_url }}" class="item-link">{{ job.title }}</a>
                     <p class="item-meta">{{ job.institution }}</p>

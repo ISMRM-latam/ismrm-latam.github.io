@@ -78,7 +78,7 @@ title: Member Community
 
     /* Map Layout with Panel */
     .map-layout { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid #eee; }
-    #map { height: 550px; width: 100%; }
+    #map { height: 550px; width: 100%; z-index: 1; }
     
     .cluster-panel {
         position: absolute;
@@ -122,18 +122,53 @@ title: Member Community
     }
     .search-item { padding: 10px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
     .search-item:hover { background: #f8fafc; color: #1495a7; }
+
+    /* Custom Map Reset Button Styling */
+    .leaflet-control-reset a {
+        font-size: 18px !important;
+        line-height: 30px !important;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        background-color: white;
+        color: #333;
+        width: 34px;
+        height: 34px;
+    }
+    .leaflet-control-reset a:hover {
+        background-color: #f4f4f4;
+    }
 </style>
 
 <script>
     const memberData = {{ site.data.members | jsonify }};
     let currentInterest = null;
     
-    var map = L.map('map').setView([-15, -65], 3); 
+    // Store initial map configuration
+    const initialCenter = [-15, -65];
+    const initialZoom = 3;
+
+    var map = L.map('map').setView(initialCenter, initialZoom); 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; CARTO',
         subdomains: 'abcd',
         maxZoom: 20
     }).addTo(map);
+
+    // --- ADD RESET BUTTON CONTROL ---
+    var resetControl = L.control({position: 'topleft'});
+    resetControl.onAdd = function() {
+        var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-reset');
+        div.innerHTML = `<a href="#" title="Reset Map View">🏠</a>`;
+        div.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closePanel(); // Close the side panel if it's open
+            map.flyTo(initialCenter, initialZoom, { animate: true, duration: 1.2 });
+        };
+        return div;
+    };
+    resetControl.addTo(map);
 
     // Initialize Clusters with Custom Logic
     var markersGroup = L.markerClusterGroup({

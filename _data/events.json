@@ -10,33 +10,43 @@
     "url": "events/2025-01-15-ismrm-trainee/"
   },
   {
-  "title": "Scientific Meeting: ISMRM-LATAM Member Highlights",
-  "organizer": "ISMRM Latin American Chapter",
-  "category": "Scientific Meeting",
-  "event_date": "2024-11-20",
-  "modality": "Virtual",
-  "location": "Virtual",
-  "link": "#",
-  "url": "events/2024-11-20-member-highlights/"
-},
+    "title": "Scientific Meeting: ISMRM-LATAM Member Highlights",
+    "organizer": "ISMRM Latin American Chapter",
+    "category": "Scientific Meeting",
+    "event_date": "2024-11-20",
+    "modality": "Virtual",
+    "location": "Virtual",
+    "link": "#",
+    "url": "events/2024-11-20-member-highlights/"
+  },
   {
-  "title": "Virtual Meeting: Growth of MR in the region",
-  "organizer": "ISMRM Latin American Chapter",
-  "category": "Virtual Meeting",
-  "event_date": "2024-09-04",
-  "modality": "Virtual",
-  "location": "Virtual",
-  "link": "#",
-  "url": "events/2024-09-04-virtual-meeting/"
-},
-{
-  "title": "Hola Hawai: Latin American Chapter Business Meeting",
-  "organizer": "ISMRM Latin American Chapter",
-  "category": "Business Meeting",
-  "event_date": "2024-05-06",
-  "modality": "In-Person",
-  "location": "Honolulu, Hawai",
-  "link": "https://www.ismrm.org/24m/",
-  "url": "events/2024-05-06-hola-hawai/"
-}
+    "title": "Virtual Meeting: Growth of MR in the region",
+    "organizer": "ISMRM Latin American Chapter",
+    "category": "Virtual Meeting",
+    "event_date": "2024-09-04",
+    "modality": "Virtual",
+    "location": "Virtual",
+    "link": "#",
+    "url": "events/2024-09-04-virtual-meeting/"
+  },
+  {
+    "title": "Hola Hawai: Latin American Chapter Business Meeting",
+    "organizer": "ISMRM Latin American Chapter",
+    "category": "Business Meeting",
+    "event_date": "2024-05-06",
+    "modality": "In-Person",
+    "location": "Honolulu, Hawai",
+    "link": "https://www.ismrm.org/24m/",
+    "url": "events/2024-05-06-hola-hawai/"
+  },
+  {
+    "title": "Latin American Chapter Business Meeting",
+    "organizer": "ISRMM Latin American Chapter",
+    "category": "Chapter Meeting",
+    "event_date": "2026-05-12",
+    "modality": "In-person",
+    "location": "Cape Town, ISMRM 2026 Annual Meeting",
+    "link": "*No response*",
+    "url": "events/2026-05-12-latin-american-chapter-business-meeting/"
+  }
 ]

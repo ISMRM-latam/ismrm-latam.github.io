@@ -57,7 +57,7 @@ jobs:
           
           # 2. Create the Event Markdown using safe step-by-step echo
           echo "---" > "_events/$FILENAME"
-          echo "layout: post" >> "_events/$FILENAME"
+          echo "layout: event" >> "_events/$FILENAME"
           echo "title: \"$TITLE\"" >> "_events/$FILENAME"
           echo "event_date: $EDATE" >> "_events/$FILENAME"
           echo "organizer: \"$ORG\"" >> "_events/$FILENAME"

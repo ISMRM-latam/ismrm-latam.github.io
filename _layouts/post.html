@@ -5,12 +5,21 @@ layout: default
 <article class="content-card">
   <header class="post-header">
     <div class="post-labels">
-      <span class="news-cat">{{ page.category }}</span>
+      <span class="news-cat">{{ page.category | default: "News" }}</span>
     </div>
+    
     <h1 class="post-title">{{ page.title }}</h1>
+    
+    {% comment %} Incorporating the Excerpt as a Lead Paragraph {% endcomment %}
+    {% if page.excerpt and page.excerpt != "" and page.excerpt != "null" %}
+      <p class="post-excerpt">{{ page.excerpt }}</p>
+    {% endif %}
+
     <div class="post-meta">
-      <span class="author">By <strong>{{ page.author }}</strong></span>
-      <span class="divider">|</span>
+      {% if page.author and page.author != "" and page.author != "null" %}
+        <span class="author">By <strong>{{ page.author }}</strong></span>
+        <span class="divider">|</span>
+      {% endif %}
       <span class="date">{{ page.date | date: "%B %e, %Y" }}</span>
     </div>
   </header>
@@ -33,7 +42,8 @@ layout: default
 
 <style>
   /* Premium Typography & Spacing */
-  .post-header { margin-bottom: 40px; border-bottom: 1px solid #f0f0f0; padding-bottom: 20px; }
+  .post-header { margin-bottom: 40px; border-bottom: 1px solid #f0f0f0; padding-bottom: 25px; }
+  
   .news-cat { 
     background: #1495a7; 
     color: white; 
@@ -42,16 +52,38 @@ layout: default
     font-size: 0.75rem; 
     font-weight: bold; 
     text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
   }
+  
   .post-title { 
     color: #003687; 
     font-size: 2.5rem; 
-    margin: 15px 0 10px 0; 
+    margin: 0 0 15px 0; 
     line-height: 1.2;
     font-weight: 800;
   }
-  .post-meta { color: #666; font-size: 0.95rem; }
-  .post-meta .divider { margin: 0 10px; color: #ccc; }
+
+  /* Styling for the newly added Excerpt */
+  .post-excerpt {
+    font-size: 1.25rem;
+    color: #475569;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    font-weight: 400;
+  }
+
+  .post-meta { 
+    color: #64748b; 
+    font-size: 0.95rem; 
+    display: flex;
+    align-items: center;
+  }
+  
+  .post-meta .divider { 
+    margin: 0 12px; 
+    color: #cbd5e1; 
+  }
 
   .featured-image-container { margin-bottom: 40px; }
   .featured-image { 
@@ -59,19 +91,20 @@ layout: default
     max-height: 500px; 
     object-fit: cover; 
     border-radius: 12px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   }
 
   .post-content { 
     line-height: 1.8; 
     font-size: 1.15rem; 
-    color: #333; 
+    color: #334155; 
   }
   
   /* Style Markdown elements inside content */
-  .post-content h2, .post-content h3 { color: #003687; margin-top: 40px; }
+  .post-content h2, .post-content h3 { color: #003687; margin-top: 40px; margin-bottom: 15px; }
   .post-content p { margin-bottom: 20px; }
-  .post-content code { background: #f4f4f4; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+  .post-content code { background: #f1f5f9; padding: 3px 6px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+  .post-content blockquote { border-left: 4px solid #1495a7; padding-left: 15px; color: #64748b; font-style: italic; margin-left: 0; }
   
   /* Ensure images inside the post don't overflow */
   .post-content img {
@@ -82,12 +115,12 @@ layout: default
   }
 
   .post-footer { margin-top: 60px; }
-  .post-footer hr { border: 0; border-top: 1px solid #eee; margin-bottom: 20px; }
+  .post-footer hr { border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 20px; }
   .back-link { 
     color: #1495a7; 
     text-decoration: none; 
-    font-weight: bold; 
-    transition: 0.2s;
+    font-weight: 600; 
+    transition: color 0.2s;
   }
   .back-link:hover { color: #003687; text-decoration: underline; }
 </style>

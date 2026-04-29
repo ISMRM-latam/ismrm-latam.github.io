@@ -23,10 +23,14 @@
     </nav>
 
     <main>
-        <div class="content-card">
-            {% unless page.url == "/" %}<h1>{{ page.title }}</h1>{% endunless %}
+        {% if page.layout == "post" %}
             {{ content }}
-        </div>
+        {% else %}
+            <div class="content-card">
+                {% unless page.url == "/" %}<h1>{{ page.title }}</h1>{% endunless %}
+                {{ content }}
+            </div>
+        {% endif %}
     </main>
 
     <footer style="text-align: center; padding: 40px; opacity: 0.6; font-size: 0.9rem;">

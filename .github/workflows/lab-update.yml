@@ -12,7 +12,8 @@ jobs:
     if: |
       github.event.label.name == 'approved' && 
       contains(github.event.issue.labels.*.name, 'new-lab') &&
-      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero' ||
+        github.event.repository.owner.login == 'ISMRM-latam')
     
     runs-on: ubuntu-latest
     steps:
@@ -74,5 +75,3 @@ jobs:
           comment: |
             ### 🏛️ Lab Registered!
             The **${{ github.event.issue.title }}** has been approved and added to the research hub.
-            
-            Check it out here: [gsahonero.github.io/ismrm-latam.github.io/labs](https://gsahonero.github.io/ismrm-latam.github.io/labs)

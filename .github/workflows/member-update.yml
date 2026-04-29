@@ -12,7 +12,8 @@ jobs:
     if: |
       github.event.label.name == 'approved' && 
       contains(github.event.issue.labels.*.name, 'new-member') &&
-      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero' ||
+        github.event.repository.owner.login == 'ISMRM-latam')
     
     runs-on: ubuntu-latest
     steps:
@@ -72,4 +73,3 @@ jobs:
           comment: |
             ### 🗺️ Member Added!
             Welcome to the community, **${{ github.event.issue.title }}**! 
-            You are now visible on the [ISMRM-LATAM Members Map](https://gsahonero.github.io/ismrm-latam.github.io/members).

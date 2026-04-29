@@ -12,7 +12,8 @@ jobs:
     if: |
       github.event.label.name == 'approved' && 
       contains(github.event.issue.labels.*.name, 'new-job') &&
-      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero')
+      (github.event.sender.role == 'COLLABORATOR' || github.event.sender.role == 'ADMIN' || github.event.sender.login == 'gsahonero' ||
+        github.event.repository.owner.login == 'ISMRM-latam')
     
     runs-on: ubuntu-latest
     steps:
@@ -73,5 +74,3 @@ jobs:
           comment: |
             ### 🚀 Success!
             This opportunity has been reviewed by the ISMRM-LATAM team and is now live on the site.
-            
-            **View it here:** [gsahonero.github.io/ismrm-latam.github.io/jobs](https://gsahonero.github.io/ismrm-latam.github.io/jobs)

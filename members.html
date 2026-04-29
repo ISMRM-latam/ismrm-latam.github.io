@@ -10,28 +10,23 @@ title: Member Community
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
-<div class="content-card">
-    <div class="filter-container">
-        <div class="filter-group">
-            <label for="countryFilter"><strong>Filter by Country:</strong></label>
-            <select id="countryFilter" onchange="applyFilters()">
-                <option value="all">All of Latin America</option>
+<div class="content-card directory-wrapper">
+    
+    <div class="controls-bar">
+        <div class="search-wrapper">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="memberSearch" placeholder="Search name or institution..." onkeyup="searchMembers()">
+            <div id="searchResults" class="search-results-dropdown"></div>
+        </div>
+
+        <div class="filter-dropdowns">
+            <select id="countryFilter" class="pro-select" onchange="applyFilters()">
+                <option value="all">🌎 All of Latin America</option>
             </select>
-        </div>
-
-        <div class="filter-group">
-            <label><strong>Research Areas:</strong></label>
-            <div id="interestPills" class="pill-container">
-                <button class="pill active" onclick="setInterest(null, this)">All Areas</button>
-            </div>
-        </div>
-
-        <div class="filter-group">
-            <label for="memberSearch"><strong>Find a Member:</strong></label>
-            <div class="search-wrapper">
-                <input type="text" id="memberSearch" placeholder="Search name or institution..." onkeyup="searchMembers()">
-                <div id="searchResults" class="search-results-dropdown"></div>
-            </div>
+            
+            <select id="interestFilter" class="pro-select" onchange="applyFilters()">
+                <option value="all">🔬 All Research Areas</option>
+            </select>
         </div>
     </div>
 
@@ -46,84 +41,143 @@ title: Member Community
         </div>
     </div>
 
-    <div style="margin-top: 20px; text-align: center;">
+    <div class="map-footer">
         <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/issues/new?template=member_registration.yml" 
            class="c-button" target="_blank">+ Add me to the map</a>
            
-           <p>
+        <p class="support-text">
             If you'd like to update your info, please reach us at <a href="mailto:contacto@ismrm-latam.org">contacto@ismrm-latam.org</a>
-           </p>
+        </p>
     </div>
 </div>
 
 <style>
-    .filter-container { margin-bottom: 20px; }
-    .filter-group { margin-bottom: 15px; }
-    .pill-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
-    .pill {
-        background: #f0f4f8;
-        border: 1px solid #d1d9e6;
-        padding: 5px 12px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.2s;
-    }
-    .pill:hover { background: #e2e8f0; }
-    .pill.active {
-        background: #1495a7;
-        color: white;
-        border-color: transparent;
+    .directory-wrapper { display: flex; flex-direction: column; gap: 20px; }
+
+    /* --- PRO CONTROL BAR STYLES --- */
+    .controls-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        background: #f8fafc;
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
     }
 
-    /* Map Layout with Panel */
-    .map-layout { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid #eee; }
-    #map { height: 550px; width: 100%; z-index: 1; }
+    .search-wrapper {
+        position: relative;
+        flex: 1;
+        min-width: 250px;
+        max-width: 400px;
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        color: #94a3b8;
+    }
+
+    #memberSearch { 
+        width: 100%; 
+        padding: 10px 10px 10px 38px; 
+        border-radius: 8px; 
+        border: 1px solid #cbd5e1; 
+        font-family: inherit;
+        font-size: 0.95rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    #memberSearch:focus {
+        outline: none;
+        border-color: #1495a7;
+        box-shadow: 0 0 0 3px rgba(20, 149, 167, 0.1);
+    }
+
+    .filter-dropdowns {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .pro-select {
+        padding: 10px 35px 10px 15px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background-color: white;
+        font-family: inherit;
+        font-size: 0.9rem;
+        color: #334155;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 16px;
+        transition: border-color 0.2s;
+    }
+
+    .pro-select:focus, .pro-select:hover {
+        border-color: #1495a7;
+        outline: none;
+    }
+
+    /* --- SEARCH RESULTS DROPDOWN --- */
+    .search-results-dropdown {
+        position: absolute; width: 100%; background: white;
+        border-radius: 0 0 8px 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        z-index: 1000; max-height: 250px; overflow-y: auto; display: none;
+        top: calc(100% + 4px);
+        border: 1px solid #e2e8f0;
+    }
+    .search-item { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: background 0.2s; }
+    .search-item:last-child { border-bottom: none; }
+    .search-item:hover { background: #f0f9fa; }
+    .search-item strong { display: block; color: #0f172a; margin-bottom: 2px; }
+    .search-item small { color: #64748b; font-size: 0.8rem; }
+
+    /* --- MAP LAYOUT --- */
+    .map-layout { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid #e2e8f0; }
+    #map { height: 600px; width: 100%; z-index: 1; }
     
     .cluster-panel {
         position: absolute;
         top: 10px;
-        right: -320px; /* Hidden by default */
+        right: -320px;
         width: 300px;
         height: calc(100% - 20px);
         background: white;
         z-index: 1001;
-        transition: right 0.3s ease;
-        box-shadow: -4px 0 15px rgba(0,0,0,0.15);
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -4px 0 20px rgba(0,0,0,0.1);
         border-radius: 8px;
         display: flex;
         flex-direction: column;
     }
     .cluster-panel.open { right: 10px; }
-    .panel-header { padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .panel-header { padding: 15px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border-radius: 8px 8px 0 0; }
     .panel-header h4 { margin: 0; font-size: 1rem; color: #003687; }
-    .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; }
+    .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b; padding: 0 5px; }
+    .close-btn:hover { color: #0f172a; }
     
-    .member-list { overflow-y: auto; flex-grow: 1; }
+    .member-list { overflow-y: auto; flex-grow: 1; padding: 5px 0; }
     .member-item { 
-        padding: 12px; 
-        border-bottom: 1px solid #f9f9f9; 
+        padding: 15px; 
+        border-bottom: 1px solid #f1f5f9; 
         cursor: pointer; 
         transition: background 0.2s;
     }
     .member-item:hover { background: #f0f9fa; }
-    .member-item h5 { margin: 0 0 4px 0; color: #1495a7; font-size: 0.9rem; }
-    .member-item p { margin: 0; font-size: 0.75rem; color: #666; }
+    .member-item h5 { margin: 0 0 4px 0; color: #1495a7; font-size: 0.95rem; }
+    .member-item p { margin: 0; font-size: 0.8rem; color: #475569; }
 
-    .search-wrapper { position: relative; width: 100%; max-width: 400px; }
-    #memberSearch { 
-        width: 100%; padding: 10px; border-radius: 8px; 
-        border: 1px solid #d1d9e6; font-family: inherit;
-    }
-    .search-results-dropdown {
-        position: absolute; width: 100%; background: white;
-        border-radius: 0 0 8px 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        z-index: 1000; max-height: 200px; overflow-y: auto; display: none;
-    }
-    .search-item { padding: 10px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
-    .search-item:hover { background: #f8fafc; color: #1495a7; }
-
-    /* Custom Map Reset Button Styling */
+    /* --- HOME BUTTON --- */
     .leaflet-control-reset a {
         font-size: 18px !important;
         line-height: 30px !important;
@@ -135,14 +189,25 @@ title: Member Community
         width: 34px;
         height: 34px;
     }
-    .leaflet-control-reset a:hover {
-        background-color: #f4f4f4;
+    .leaflet-control-reset a:hover { background-color: #f4f4f4; }
+
+    /* --- FOOTER --- */
+    .map-footer { margin-top: 10px; text-align: center; }
+    .support-text { margin-top: 15px; font-size: 0.9rem; color: #64748b; }
+    .support-text a { color: #1495a7; text-decoration: none; }
+    .support-text a:hover { text-decoration: underline; }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .search-wrapper { max-width: 100%; }
+        .filter-dropdowns { width: 100%; }
+        .pro-select { flex: 1; min-width: 140px; }
+        .cluster-panel { width: calc(100% - 20px); }
     }
 </style>
 
 <script>
     const memberData = {{ site.data.members | jsonify }};
-    let currentInterest = null;
     
     // Store initial map configuration
     const initialCenter = [-15, -65];
@@ -155,7 +220,7 @@ title: Member Community
         maxZoom: 20
     }).addTo(map);
 
-    // --- ADD RESET BUTTON CONTROL ---
+    // Add Reset/Home Button
     var resetControl = L.control({position: 'topleft'});
     resetControl.onAdd = function() {
         var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-reset');
@@ -163,20 +228,21 @@ title: Member Community
         div.onclick = function(e) {
             e.preventDefault();
             e.stopPropagation();
-            closePanel(); // Close the side panel if it's open
+            closePanel();
+            document.getElementById('memberSearch').value = '';
             map.flyTo(initialCenter, initialZoom, { animate: true, duration: 1.2 });
         };
         return div;
     };
     resetControl.addTo(map);
 
-    // Initialize Clusters with Custom Logic
+    // Initialize Clusters
     var markersGroup = L.markerClusterGroup({
         showCoverageOnHover: false,
-        zoomToBoundsOnClick: false // We disable auto-zoom to show our list instead
+        zoomToBoundsOnClick: false
     });
 
-    // --- CLUSTER CLICK LOGIC ---
+    // Cluster Click Logic
     markersGroup.on('clusterclick', function (a) {
         const clusterMarkers = a.layer.getAllChildMarkers();
         const memberListDiv = document.getElementById('memberList');
@@ -189,7 +255,7 @@ title: Member Community
             item.innerHTML = `
                 <h5>${m.name}</h5>
                 <p>${m.institution}</p>
-                <p style="font-style:italic;">${m.residence}</p>
+                <p style="font-style:italic; margin-top:2px;">📍 ${m.residence}</p>
             `;
             item.onclick = () => focusOnMember(m);
             memberListDiv.appendChild(item);
@@ -206,8 +272,9 @@ title: Member Community
 
     function populateFilters() {
         const countrySelect = document.getElementById('countryFilter');
-        const pillBox = document.getElementById('interestPills');
+        const interestSelect = document.getElementById('interestFilter');
         
+        // Populate Countries
         const countries = [...new Set(memberData.map(m => m.country))].sort();
         countries.forEach(c => {
             let opt = document.createElement('option');
@@ -215,6 +282,7 @@ title: Member Community
             countrySelect.appendChild(opt);
         });
 
+        // Populate Interests
         let allInterests = [];
         memberData.forEach(m => {
             if(m.interests) {
@@ -224,43 +292,40 @@ title: Member Community
         const uniqueInterests = [...new Set(allInterests)].sort();
         
         uniqueInterests.forEach(interest => {
-            let btn = document.createElement('button');
-            btn.className = 'pill';
-            btn.innerHTML = interest;
-            btn.onclick = function() { setInterest(interest, btn); };
-            pillBox.appendChild(btn);
+            let opt = document.createElement('option');
+            opt.value = interest;
+            opt.innerHTML = interest;
+            interestSelect.appendChild(opt);
         });
     }
 
-    function setInterest(interest, element) {
-        currentInterest = interest;
-        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-        element.classList.add('active');
-        applyFilters();
-    }
-
+    // Consolidated filter logic tied directly to the dropdown values
     function applyFilters() {
         const country = document.getElementById('countryFilter').value;
+        const interest = document.getElementById('interestFilter').value;
+        
         markersGroup.clearLayers();
+        closePanel();
 
         memberData.forEach(m => {
             const matchesCountry = (country === 'all' || m.country === country);
-            const matchesInterest = (!currentInterest || (m.interests && m.interests.includes(currentInterest)));
+            const matchesInterest = (interest === 'all' || (m.interests && m.interests.includes(interest)));
 
             if (matchesCountry && matchesInterest) {
                 const popupContent = `
                     <div style="font-family: sans-serif; min-width: 200px;">
-                        <h4 style="margin:0; color:#003687;">${m.name}</h4>
-                        <p style="margin:0; font-size:0.85rem;">${m.institution}</p>
+                        <h4 style="margin:0 0 5px 0; color:#003687;">${m.name}</h4>
+                        <p style="margin:0; font-size:0.85rem; font-weight: 500;">${m.institution}</p>
+                        <p style="margin:0 0 10px 0; font-size:0.8rem; color:#64748b;">${m.residence}</p>
+                        
                         <div style="margin: 8px 0;">
                             ${m.interests ? m.interests.split(',').map(tag => 
-                                `<span style="background:#eef2ff; color:#1495a7; padding:2px 5px; border-radius:4px; font-size:0.7rem; margin:0 3px 3px 0; display:inline-block;">${tag.trim()}</span>`
+                                `<span style="background:#eef2ff; color:#1495a7; padding:3px 6px; border-radius:4px; font-size:0.7rem; margin:0 4px 4px 0; display:inline-block; border: 1px solid #e0e7ff;">${tag.trim()}</span>`
                             ).join('') : ''}
                         </div>
-                        <p style="font-size:0.8rem; border-top:1px solid #eee; padding-top:5px;">${m.bio || ''}</p>
+                        <p style="font-size:0.8rem; border-top:1px solid #f1f5f9; padding-top:8px; margin-top:8px;">${m.bio || ''}</p>
                     </div>
                 `;
-                // We attach the member data to the marker options for retrieval during cluster clicks
                 const marker = L.marker([m.lat, m.lng], { memberReference: m }).bindPopup(popupContent);
                 markersGroup.addLayer(marker);
             }
@@ -295,7 +360,8 @@ title: Member Community
 
         const matches = memberData.filter(m => 
             m.name.toLowerCase().includes(input) || 
-            m.institution.toLowerCase().includes(input)
+            m.institution.toLowerCase().includes(input) ||
+            m.country.toLowerCase().includes(input)
         );
 
         if (matches.length > 0) {
@@ -303,8 +369,11 @@ title: Member Community
             matches.forEach(m => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
-                div.innerHTML = `<strong>${m.name}</strong><br><small>${m.institution}</small>`;
-                div.onclick = () => focusOnMember(m);
+                div.innerHTML = `<strong>${m.name}</strong><small>${m.institution} • ${m.country}</small>`;
+                div.onclick = () => {
+                    document.getElementById('memberSearch').value = m.name;
+                    focusOnMember(m);
+                };
                 resultsContainer.appendChild(div);
             });
         } else {
@@ -312,6 +381,15 @@ title: Member Community
         }
     }
 
+    // Close search dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        const searchWrapper = document.querySelector('.search-wrapper');
+        if (!searchWrapper.contains(event.target)) {
+            document.getElementById('searchResults').style.display = 'none';
+        }
+    });
+
+    // Run on startup
     populateFilters();
     applyFilters();
 </script>

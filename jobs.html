@@ -25,8 +25,28 @@ title: Opportunities
         </select>
     </div>
 
-    <div id="jobGrid" class="job-grid">
+    <div id="jobGrid" class="job-grid"></div>
+</div>
+
+<div id="jobModalOverlay" class="modal-overlay" onclick="closeJobModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeJobModal()">&times;</button>
+        
+        <div class="badge-container" id="modalBadges"></div>
+        <h2 id="modalTitle" style="margin: 10px 0 5px 0; color: #003687; line-height: 1.2;"></h2>
+        
+        <div class="job-meta" style="margin-bottom: 20px;">
+            <strong id="modalInstitution" style="font-size: 1.1rem; color: #334155;"></strong><br>
+            <span id="modalLocation" style="color: #64748b;"></span>
         </div>
+        
+        <div class="modal-body" id="modalDescription"></div>
+        
+        <div class="job-footer" style="margin-top: 30px;">
+            <span id="modalDeadline" class="posted-date" style="font-weight: bold; color: #bf2600;"></span>
+            <a id="modalApplyBtn" href="#" target="_blank" class="c-button">Apply Now</a>
+        </div>
+    </div>
 </div>
 
 <style>
@@ -62,9 +82,42 @@ title: Opportunities
     .job-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 20px; }
     .posted-date { font-size: 0.75rem; color: #94a3b8; }
 
+    /* Modal Styles */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6); z-index: 2000;
+        display: none; justify-content: center; align-items: center;
+        opacity: 0; transition: opacity 0.3s ease;
+        backdrop-filter: blur(4px);
+    }
+    .modal-overlay.active { display: flex; opacity: 1; }
+    
+    .modal-content {
+        background: white; width: 90%; max-width: 650px;
+        border-radius: 12px; padding: 40px; position: relative;
+        max-height: 90vh; overflow-y: auto;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        transform: translateY(20px); transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    
+    .modal-close {
+        position: absolute; top: 15px; right: 20px;
+        background: none; border: none; font-size: 1.8rem;
+        cursor: pointer; color: #94a3b8; transition: color 0.2s;
+    }
+    .modal-close:hover { color: #0f172a; }
+    
+    .modal-body {
+        margin: 20px 0; font-size: 1rem; color: #334155; line-height: 1.6;
+        white-space: pre-wrap; /* Preserves line breaks from the markdown/textarea */
+        background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;
+    }
+
     @media (max-width: 600px) {
         .jobs-dashboard-header { flex-direction: column; text-align: center; }
         .job-filters { flex-direction: column; }
+        .modal-content { padding: 25px; }
     }
 </style>
 
@@ -83,6 +136,9 @@ title: Opportunities
         const today = new Date();
 
         data.forEach(job => {
+            // Find the original index of the job in the main jobData array for the modal reference
+            const originalIndex = jobData.indexOf(job);
+            
             const postedDate = new Date(job.posted);
             const isNew = (today - postedDate) / (1000 * 60 * 60 * 24) < 7;
             
@@ -94,6 +150,10 @@ title: Opportunities
                 if (daysLeft > 0 && daysLeft < 10) urgent = true;
                 deadlineText = daysLeft > 0 ? `${daysLeft} days left` : "Closed";
             }
+
+            // Truncate description to first 10 words
+            const words = job.description ? job.description.split(/\s+/) : [];
+            const shortDesc = words.slice(0, 10).join(' ') + (words.length > 10 ? '...' : '');
 
             const card = document.createElement('div');
             card.className = 'job-card';
@@ -108,10 +168,10 @@ title: Opportunities
                     <strong>${job.institution}</strong><br>
                     <span>📍 ${job.location}</span>
                 </div>
-                <p class="job-desc">${job.description.substring(0, 140)}...</p>
+                <p class="job-desc">${shortDesc}</p>
                 <div class="job-footer">
                     <span class="posted-date">Posted ${job.posted}</span>
-                    <a href="${job.link}" target="_blank" class="c-button small">Details & Apply</a>
+                    <button onclick="openJobModal(${originalIndex})" class="c-button small" style="border:none; cursor:pointer;">Details</button>
                 </div>
             `;
             grid.appendChild(card);
@@ -133,7 +193,54 @@ title: Opportunities
         renderJobs(filtered);
     }
 
-    // Sort by most recent first and render
-    const sortedJobs = jobData.sort((a, b) => new Date(b.posted) - new Date(a.posted));
+    // Modal Functions
+    function openJobModal(index) {
+        const job = jobData[index];
+        const today = new Date();
+        
+        document.getElementById('modalTitle').innerText = job.title;
+        document.getElementById('modalInstitution').innerText = job.institution;
+        document.getElementById('modalLocation').innerText = "📍 " + job.location;
+        document.getElementById('modalDescription').innerText = job.description || "No description provided.";
+        
+        // Handle Badges in Modal
+        const postedDate = new Date(job.posted);
+        const isNew = (today - postedDate) / (1000 * 60 * 60 * 24) < 7;
+        let badgeHtml = `${isNew ? '<span class="badge badge-new">New</span>' : ''}
+                         <span class="badge badge-modal">${job.modality}</span>`;
+        
+        // Handle Deadline
+        if (job.deadline) {
+            const deadlineDate = new Date(job.deadline);
+            const daysLeft = Math.ceil((deadlineDate - today) / (1000 * 60 * 60 * 24));
+            if (daysLeft > 0 && daysLeft < 10) badgeHtml += `<span class="badge badge-urgent">Closing Soon</span>`;
+            document.getElementById('modalDeadline').innerText = `Deadline: ${job.deadline}`;
+        } else {
+            document.getElementById('modalDeadline').innerText = "";
+        }
+        
+        document.getElementById('modalBadges').innerHTML = badgeHtml;
+
+        // Smart link formatting (if it's an email address, prepend mailto:)
+        const applyBtn = document.getElementById('modalApplyBtn');
+        let link = job.link || job.apply_link; // Account for variations in JSON key
+        if (link && !link.startsWith('http') && link.includes('@')) {
+            link = 'mailto:' + link;
+        }
+        applyBtn.href = link || "#";
+
+        document.getElementById('jobModalOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeJobModal(event) {
+        // Close if clicking the X or the dark overlay background
+        if (event && event.target !== document.getElementById('jobModalOverlay')) return;
+        document.getElementById('jobModalOverlay').classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restore background scrolling
+    }
+
+    // Sort by most recent first and render on page load
+    const sortedJobs = [...jobData].sort((a, b) => new Date(b.posted) - new Date(a.posted));
     renderJobs(sortedJobs);
 </script>

@@ -27,6 +27,7 @@ jobs:
         id: geocode
         run: |
           NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-name".text')
+          EMAIL=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."email-address".text')
           INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."current-institution-university".text')
           RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."country-of-residence".text')
           ORIGIN=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."latam-country-of-origin-affiliation".text')
@@ -43,6 +44,7 @@ jobs:
           # Build the JSON object
           jq -n \
             --arg name "$NAME" \
+            --arg email "$EMAIL" \
             --arg inst "$INST" \
             --arg res "$RESIDENCE" \
             --arg orig "$ORIGIN" \
@@ -50,7 +52,7 @@ jobs:
             --arg lng "$LNG" \
             --arg int "$INTERESTS" \
             --arg bio "$BIO" \
-            '{name: $name, institution: $inst, residence: $res, country: $orig, lat: ($lat|tonumber), lng: ($lng|tonumber), interests: $int, bio: $bio}' > member.json
+            '{name: $name, email: $email, institution: $inst, residence: $res, country: $orig, lat: ($lat|tonumber), lng: ($lng|tonumber), interests: $int, bio: $bio}' > member.json
 
       - name: Update JSON File
         run: |
@@ -72,4 +74,4 @@ jobs:
         with:
           comment: |
             ### 🗺️ Member Added!
-            Welcome to the community, **${{ github.event.issue.title }}**! 
+            Welcome to the community, **${{ github.event.issue.title }}**!

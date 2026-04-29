@@ -316,7 +316,9 @@ title: Member Community
                     <div style="font-family: sans-serif; min-width: 200px;">
                         <h4 style="margin:0 0 5px 0; color:#003687;">${m.name}</h4>
                         <p style="margin:0; font-size:0.85rem; font-weight: 500;">${m.institution}</p>
-                        <p style="margin:0 0 10px 0; font-size:0.8rem; color:#64748b;">${m.residence}</p>
+                        <p style="margin:0 0 5px 0; font-size:0.8rem; color:#64748b;">📍 ${m.residence}</p>
+                        
+                        ${m.email ? `<p style="margin:0 0 10px 0; font-size:0.85rem;"><a href="mailto:${m.email}" style="color:#1495a7; text-decoration:none;">✉️ ${m.email}</a></p>` : ''}
                         
                         <div style="margin: 8px 0;">
                             ${m.interests ? m.interests.split(',').map(tag => 

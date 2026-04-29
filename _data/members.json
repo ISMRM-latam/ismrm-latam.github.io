@@ -1,6 +1,7 @@
 [
   {
     "name": "Jessica Martinez",
+    "email": "jessica.martinezmartinez@nist.gov",
     "institution": "NIST",
     "residence": "USA",
     "country": "Mexico",
@@ -11,6 +12,7 @@
   },
   {
     "name": "Camila Munoz",
+    "email": "c.munoz-escobar@imperial.ac.uk",
     "institution": "Imperial College London",
     "residence": "Reino Unido",
     "country": "Chile",
@@ -21,6 +23,7 @@
   },
   {
     "name": "Carlos Milovic",
+    "email": "cmilovic@uc.cl",
     "institution": "Centro de Imágenes Biomédicas, Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
@@ -31,6 +34,7 @@
   },
   {
     "name": "Paula Trujillo",
+    "email": "paula.trujillo@vumc.org",
     "institution": "Vanderbilt University Medical Center",
     "residence": "USA",
     "country": "Colombia",
@@ -41,6 +45,7 @@
   },
   {
     "name": "Analia Zwick",
+    "email": "analia.zwick@gmail.com",
     "institution": "Centro Atomico Bariloche - CONICET",
     "residence": "Argentina",
     "country": "Argentina",
@@ -51,6 +56,7 @@
   },
   {
     "name": "Carlos Castillo Passi",
+    "email": "cacp@stanford.edu",
     "institution": "Stanford University",
     "residence": "USA",
     "country": "Chile",
@@ -61,6 +67,7 @@
   },
   {
     "name": "Javier Ignacio Silva Orellana",
+    "email": "jisilva8@uc.cl",
     "institution": "Pontificia Universidad Catolica de Chile",
     "residence": "Chile",
     "country": "Chile",
@@ -71,6 +78,7 @@
   },
   {
     "name": "Cristobal Arrieta",
+    "email": "ciarriet@uc.cl",
     "institution": "Faculty of Engineering, Universidad Alberto Hurtado",
     "residence": "Chile",
     "country": "Chile",
@@ -81,26 +89,29 @@
   },
   {
     "name": "Mathias Lambert",
+    "email": "mglambert@uc.cl",
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4417749,
+    "lat": -33.4417748,
     "lng": -70.6403258,
     "interests": "Electromagnetic Tissue Properties",
     "bio": ""
   },
   {
     "name": "Fernando Calamate",
+    "email": "fernando.calamante@sydney.edu.au",
     "institution": "The University of Sydney",
     "residence": "Australia",
     "country": "Argentina",
-    "lat": -33.8889072,
+    "lat": -33.8889073,
     "lng": 151.1894111,
     "interests": "Brain Function, Diffusion, MR in Psychiatry, Perfusion, PET-MRI, Quantitative MR, White Matter",
     "bio": ""
   },
   {
     "name": "Gonzalo Gabriel Rodriguez",
+    "email": "gonzalogabriel.rodriguez@mpinat.mpg.de",
     "institution": "Max Planck Institute for Multidisciplinary Sciences",
     "residence": "Alemania",
     "country": "Argentina",
@@ -111,16 +122,18 @@
   },
   {
     "name": "Javier Bisbal Zenteno",
+    "email": "jebisbal@uc.cl",
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4417749,
+    "lat": -33.4417748,
     "lng": -70.6403258,
     "interests": "Cardiac MR, MR Flow & Motion Quantitation",
     "bio": ""
   },
   {
     "name": "Luis Concha",
+    "email": "lconcha@unam.mx",
     "institution": "Universidad Nacional Autónoma de México",
     "residence": "Mexico",
     "country": "Mexico",
@@ -131,6 +144,7 @@
   },
   {
     "name": "Marisleydis García Saborit",
+    "email": "mgsaborit90@gmail.com",
     "institution": "Facultad de Ingeniería, Universidad de Santiago de Chile ",
     "residence": "Chile",
     "country": "Cuba",
@@ -141,16 +155,18 @@
   },
   {
     "name": "Guillermo Sahonero Alvarez",
+    "email": "gsahonero@uc.cl",
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Bolivia",
-    "lat": -33.4417749,
+    "lat": -33.4417748,
     "lng": -70.6403258,
     "interests": "Image Reconstruction and Analysis, Low Field MRI, MR Engineering, Quantitative MR, Reproducible Research",
     "bio": "Trabajo en la optimización de secuencias de resonancia magnética a bajo campo. Me enfoco principalmente en imágenes T1w y T2w del cerebro. Además, me interesa el hardware detrás de los resonadores open-source. Antes, trabajé en aprendizaje profundo y visión por computador, interfaces cerebro computador con EEG, videojuegos serios, y educación en ingeniería."
   },
   {
     "name": "Pablo Irarrazaval",
+    "email": "pim@uc.cl",
     "institution": "Pontificia Universidad Catolica de Chile",
     "residence": "Chile",
     "country": "Chile",
@@ -161,6 +177,7 @@
   },
   {
     "name": "Abraham Jotssel Cisneros Mejorado",
+    "email": "abraham.cisneros.mejorado@gmail.com",
     "institution": "Instituto de Neurobiología, UNAM",
     "residence": "Mexico",
     "country": "Mexico",
@@ -171,6 +188,7 @@
   },
   {
     "name": "Paulina J Villaseñor",
+    "email": "paulinaj.villasenor@postgrad.manchester.ac.uk",
     "institution": "University of Manchester",
     "residence": "Reino Unido",
     "country": "Mexico",
@@ -181,6 +199,7 @@
   },
   {
     "name": "Jonathan Rafael Patino Lopez",
+    "email": "j.rafael.patino@gmail.com",
     "institution": "EPFL",
     "residence": "Suiza",
     "country": "Mexico",
@@ -191,6 +210,7 @@
   },
   {
     "name": "Sarai Aguilar",
+    "email": "saravonagtrz21@gmail.com",
     "institution": "Universidad Nacional Autónoma de México, Instituto de Neurobiología",
     "residence": "Mexico",
     "country": "Mexico",
@@ -201,6 +221,7 @@
   },
   {
     "name": "Maria Eduarda Medeiros Tempesta",
+    "email": "maria.tempesta@cnpem.br",
     "institution": "Centro Brasileiro de Pesquisa em Energia e Materiais (CNPEM)",
     "residence": "Brasil",
     "country": "Brasil",
@@ -211,6 +232,7 @@
   },
   {
     "name": "Pamela Alejandra Franco Leiva",
+    "email": "pamela.franco@unab.cl",
     "institution": "Energy Transformation Center, Faculty of Engineering, Universidad Andrés Bello, Santiago, Chile",
     "residence": "Chile",
     "country": "Chile",
@@ -221,6 +243,7 @@
   },
   {
     "name": "Hernan Chaves",
+    "email": "hchaves@fleni.org.ar",
     "institution": "Fleni",
     "residence": "Argentina",
     "country": "Argentina",
@@ -231,6 +254,7 @@
   },
   {
     "name": "Fernando Lizcano Cortés",
+    "email": "fernando_lizcanoc@hotmail.com",
     "institution": "Universidad Nacional Autónoma de México",
     "residence": "Mexico",
     "country": "Mexico",
@@ -241,6 +265,7 @@
   },
   {
     "name": "Claudia Prieto",
+    "email": "cdprieto@uc.cl",
     "institution": "Pontificia Universidad Catolica de Chile",
     "residence": "Chile",
     "country": "Chile",
@@ -251,16 +276,18 @@
   },
   {
     "name": "Pamela Guevara",
+    "email": "pamela.guevara@biomedica.udec.cl",
     "institution": "Universidad de Concepción",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -36.8310137,
-    "lng": -73.0346809,
+    "lat": -36.8312096,
+    "lng": -73.0350411,
     "interests": "Diffusion, White Matter",
     "bio": "Desarrollo de métodos para el análisis de datos de tractografía cerebral."
   },
   {
     "name": "Sergio Moguillansky",
+    "email": "sjmoguil@gmail.com",
     "institution": "FAARDIT",
     "residence": "Argentina",
     "country": "Argentina",
@@ -271,6 +298,7 @@
   },
   {
     "name": "Isabela Castro de Moraes",
+    "email": "isabela.moraes@cnpem.br",
     "institution": "CNPEM",
     "residence": "Brasil",
     "country": "Brasil",
@@ -281,6 +309,7 @@
   },
   {
     "name": "Eduarda Nicoletto Ayres de Oliveira",
+    "email": "eduarda.oliveira@cnpem.br",
     "institution": "",
     "residence": "Brasil",
     "country": "Brasil",
@@ -291,6 +320,7 @@
   },
   {
     "name": "Alberto Di Biase",
+    "email": "adibiase@ic.ac.uk",
     "institution": "Imperial College London",
     "residence": "UK",
     "country": "Chile",
@@ -301,6 +331,7 @@
   },
   {
     "name": "Alfredo Rodriguez",
+    "email": "mriuami@gmail.com",
     "institution": "Universidad Autonoma Metropolitana Iztapalapa",
     "residence": "Mexico",
     "country": "Mexico",
@@ -311,6 +342,7 @@
   },
   {
     "name": "Priscila Ruiz Acosta",
+    "email": "priscira28@gmail.com",
     "institution": "Instituto de Neurobiología, UNAM",
     "residence": "Mexico",
     "country": "Mexico",
@@ -321,6 +353,7 @@
   },
   {
     "name": "Ricardo Alonso Rios Carrillo",
+    "email": "ricardo.rios@cimat.mx",
     "institution": "Western University",
     "residence": "Canada",
     "country": "Mexico",
@@ -331,6 +364,7 @@
   },
   {
     "name": "Victor Murray",
+    "email": "murrayv@mskcc.org",
     "institution": "Memorial Sloan Kettering Cancer Center",
     "residence": "USA",
     "country": "Peru",
@@ -341,6 +375,7 @@
   },
   {
     "name": "Ronal Manuel Coronado",
+    "email": "rmcoronado@uc.cl",
     "institution": "Facultad de Ingeniería y Negocios, Universidad de las Américas, Chile",
     "residence": "Chile",
     "country": "Venezuela",
@@ -351,16 +386,18 @@
   },
   {
     "name": "Cristián Tejos",
+    "email": "ctejos@uc.cl",
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4417749,
+    "lat": -33.4417748,
     "lng": -70.6403258,
     "interests": "Electromagnetic Tissue Properties",
     "bio": "QSM"
   },
   {
     "name": "Hernán Arturo Mella Lobos",
+    "email": "hernan.mella@pucv.cl",
     "institution": "Pontificia Universidad Católica de Valparaíso",
     "residence": "Chile",
     "country": "Chile",
@@ -371,6 +408,7 @@
   },
   {
     "name": "Nestor Andrés Muñoz Camelo",
+    "email": "n.munoz933@gmail.com",
     "institution": "Pontificia Universidad Catolica De Chile",
     "residence": "Chile",
     "country": "Colombia",
@@ -381,6 +419,7 @@
   },
   {
     "name": "Martín Belzunce",
+    "email": "mbelzunce@unsam.edu.ar",
     "institution": "UNSAM / CONICET",
     "residence": "Argentina",
     "country": "Argentina",
@@ -391,6 +430,7 @@
   },
   {
     "name": "Eliseo Portilla Islas",
+    "email": "eliseoislas@comunidad.unam.mx",
     "institution": "Universidad Nacional Autónoma de México",
     "residence": "Mexico",
     "country": "Mexico",
@@ -401,6 +441,7 @@
   },
   {
     "name": "Santiago Coelho",
+    "email": "santiago.coelho@nyulangone.org",
     "institution": "Estados Unidos, New York University School of Medicine",
     "residence": "USA",
     "country": "Argentina",
@@ -411,6 +452,7 @@
   },
   {
     "name": "Enedino Hernandez-Torres",
+    "email": "ninoht@drcmr.dk",
     "institution": "DRCMR",
     "residence": "Denmark",
     "country": "Mexico",
@@ -421,6 +463,7 @@
   },
   {
     "name": "Silvia Sandra Hidalgo Tobón",
+    "email": "shid@xanum.uam.mx",
     "institution": "UAM Iztapalapa",
     "residence": "Mexico",
     "country": "Mexico",
@@ -431,6 +474,7 @@
   },
   {
     "name": "Julio García Flores",
+    "email": " julio.garciaflores@ucalgary.ca",
     "institution": "University of Calgary",
     "residence": "Canada",
     "country": "Mexico",
@@ -441,6 +485,7 @@
   },
   {
     "name": "Benito De Celis Alonso",
+    "email": "bdca@fcfm.buap.mx",
     "institution": "Facultad de Ciencias Físico-Matemáticas, Benemérita Universidad Autónoma de Puebla",
     "residence": "Mexico",
     "country": "Mexico",
@@ -451,6 +496,7 @@
   },
   {
     "name": "Joshua Harper",
+    "email": "joshua.harper@smrilab.com",
     "institution": "Universidad Politécnica Taiwán Paraguay",
     "residence": "Paraguay",
     "country": "Paraguay",
@@ -461,16 +507,18 @@
   },
   {
     "name": "Miguel Angel Flores Perez",
+    "email": "maikydovakiin@gmail.com",
     "institution": "BUAP",
     "residence": "Mexico",
     "country": "Mexico",
-    "lat": 19.0060324,
+    "lat": 19.0060325,
     "lng": -98.2051995,
     "interests": "Body MRI, Cardiac MR",
     "bio": "deseoso de entrar a esta organizacion para compartir y ampliar el conocimiento en resonancia "
   },
   {
     "name": "Maria Concepcion Alvarez Garduño",
+    "email": "radiologaconnie@gmail.com",
     "institution": "",
     "residence": "Mexico",
     "country": "Mexico",
@@ -481,6 +529,7 @@
   },
   {
     "name": "Sergio Solis Barquero",
+    "email": "sergio.solis@ucr.ac.cr",
     "institution": "Escuela de Tecnologías en Salud, Facultad de Medicina, Universidad de Costa Rica",
     "residence": "Costa Rica",
     "country": "Costa Rica",
@@ -491,6 +540,7 @@
   },
   {
     "name": "Nilser Laines Medina ",
+    "email": "nilser-jherald.LAINES-MEDINA@univ-amu.fr",
     "institution": "Aix Marseille Université, CRMBM",
     "residence": "Francia",
     "country": "Peru",
@@ -501,6 +551,7 @@
   },
   {
     "name": "Rodrigo Lobos",
+    "email": "rlobos@umich.edu",
     "institution": "University of Michigan",
     "residence": "USA",
     "country": "Chile",
@@ -511,6 +562,7 @@
   },
   {
     "name": " Pablo Jimenez",
+    "email": "pablojimenezcba@gmail.com",
     "institution": "German Cancer Research Center (DKFZ)",
     "residence": "Alemania",
     "country": "Argentina",
@@ -521,6 +573,7 @@
   },
   {
     "name": "Ana Cecilia Saavedra Bazan",
+    "email": "anacsb@umich.edu",
     "institution": "University of Michigan",
     "residence": "USA",
     "country": "Peru",
@@ -531,6 +584,7 @@
   },
   {
     "name": "Jorge Campos",
+    "email": "jorge.campospazmino@mail.mcgill.ca",
     "institution": "McGill University",
     "residence": "Canada",
     "country": "Ecuador",
@@ -541,6 +595,7 @@
   },
   {
     "name": "Luis Carlos Sanmiguel ",
+    "email": "Luiscarlos.sanmiguelserpa@ugent.be",
     "institution": "Ghent University ",
     "residence": "Belgium",
     "country": "Colombia",
@@ -551,6 +606,7 @@
   },
   {
     "name": "Diego Pedraza ",
+    "email": "depedraza@uc.cl",
     "institution": "Pontificia Universidad Católica de Chile ",
     "residence": "Chile",
     "country": "Chile",
@@ -561,6 +617,7 @@
   },
   {
     "name": "Silvina G Horovitz",
+    "email": "silvina.horovitz@gmail.com",
     "institution": "NINDS-NIH",
     "residence": "USA",
     "country": "Argentina",
@@ -571,16 +628,18 @@
   },
   {
     "name": "Nicolás Garrido",
+    "email": "nagarrido@uc.cl",
     "institution": "Pontificia Universidad Católica de Chile",
     "residence": "Chile",
     "country": "Chile",
-    "lat": -33.4417749,
+    "lat": -33.4417748,
     "lng": -70.6403258,
     "interests": "Cardiac MR, Low Field MRI",
     "bio": ""
   },
   {
     "name": "Carlos Valle",
+    "email": "cgvallea@gmail.com",
     "institution": "iHealth",
     "residence": "Chile",
     "country": "Chile",
@@ -591,6 +650,7 @@
   },
   {
     "name": "Ricardo Otazo",
+    "email": "otazotoj@mskcc.org",
     "institution": "Memorial Sloan Kettering Cancer Center",
     "residence": "USA",
     "country": "Paraguay",
@@ -601,6 +661,7 @@
   },
   {
     "name": "Angelo Bustos",
+    "email": "angelo.bustos.b@mail.pucv.cl",
     "institution": "Pontificia Universidad Católica de Valparaíso",
     "residence": "Chile",
     "country": "Chile",
@@ -611,6 +672,7 @@
   },
   {
     "name": "Orlando Aristizabal ",
+    "email": "Orlando. Aristizabal@nyulangone.org",
     "institution": "NYU School of Medicine",
     "residence": "USA",
     "country": "Colombia",
@@ -621,6 +683,7 @@
   },
   {
     "name": "Gonzalo Rodriguez ",
+    "email": "gonzalogabriel.rodriguez@mpinat.mpg.de",
     "institution": "Max Planck Institute for Multidisciplinary Science ",
     "residence": "Alemania",
     "country": "Argentina ",
@@ -631,6 +694,7 @@
   },
   {
     "name": "Juan M. Santos",
+    "email": "jmsantoss@gmail.com",
     "institution": "Vista AI, inc.",
     "residence": "USA",
     "country": "Chile",
@@ -641,6 +705,7 @@
   },
   {
     "name": "Daniel Álvarez Placencia ",
+    "email": "daniel.alvarez.p@mail.pucv.cl",
     "institution": "Pontificia Universidad Católica de Valparaíso",
     "residence": "Chile",
     "country": "Chile",
@@ -651,6 +716,7 @@
   },
   {
     "name": "Catalina Arteaga de Castro",
+    "email": "c.arteaga@tesladc.nl",
     "institution": "Tesla Dynamic Coils",
     "residence": "Netherlands",
     "country": "Chile",
@@ -661,6 +727,7 @@
   },
   {
     "name": "Alfredo L. Lopez Kolkovsky ",
+    "email": "Alfredo.lopezkolkovsky@cea.fr",
     "institution": "CEA/Neurospin",
     "residence": "Francia",
     "country": "Mexico",
@@ -671,6 +738,7 @@
   },
   {
     "name": "Javier Urriola Yaksic",
+    "email": "Javier.urriola@csiro.au",
     "institution": "Australian e-Health Research Centre, CSIRO Australian National Science Agency",
     "residence": "Australia",
     "country": "Chile",
@@ -681,6 +749,7 @@
   },
   {
     "name": "Sebastian Rios",
+    "email": "sebas.riosq99@gmail.com",
     "institution": "Polytechnique Montréal",
     "residence": "Canada",
     "country": "Peru",
@@ -691,6 +760,7 @@
   },
   {
     "name": "Gonzalo A. Alvarez",
+    "email": "gonzalo.a.alvarez@gmail.com",
     "institution": "Centro Atomico Bariloche & Instituto Balseiro, CNEA, CONICET, Argentina",
     "residence": "Argentina",
     "country": "Argentina",
@@ -701,6 +771,7 @@
   },
   {
     "name": "Angel Zavala",
+    "email": "ajzpmedi@gmail.com",
     "institution": "",
     "residence": "Peru",
     "country": "Peru",
@@ -711,6 +782,7 @@
   },
   {
     "name": "Javier Rios",
+    "email": "Jrios@profesores.umaza.edu.ar",
     "institution": "Universidad Juan Agustín Maza",
     "residence": "Argentina",
     "country": "Argentina",
@@ -721,6 +793,7 @@
   },
   {
     "name": "Judith Mier",
+    "email": "judith.mier@cimat.mx",
     "institution": "Centro de Investigación en Matemáticas",
     "residence": "Mexico",
     "country": "Mexico",
@@ -731,6 +804,7 @@
   },
   {
     "name": "Mario Ocampo-Pineda",
+    "email": "mario.ocampopineda@unibas.ch",
     "institution": "University of Basel",
     "residence": "Switzerland",
     "country": "Mexico",

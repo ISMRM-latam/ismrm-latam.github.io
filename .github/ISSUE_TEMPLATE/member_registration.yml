@@ -18,6 +18,15 @@ body:
       required: true
 
   - type: input
+    id: email
+    attributes:
+      label: Email Address
+      description: "This email will be displayed on the public community map so other researchers can contact you."
+      placeholder: e.g., correo@universidad.edu
+    validations:
+      required: true
+
+  - type: input
     id: institution
     attributes:
       label: Current Institution / University

@@ -56,6 +56,6 @@ body:
     id: description
     attributes:
       label: Description
-      placeholder: "Provide a brief overview of the event..."
+      placeholder: "Provide a brief overview of the event. Keep in mind that you need to use Markdown formatting for line breaks, lists, etc. If you wish to include an image, we advice you to upload it to an image hosting service (e.g., Imgur) and include the URL here using Markdown syntax: ![Alt Text](Image URL). If you want to upload the image to GitHub, you can drag and drop the image into the comment box after submitting the issue, and then copy the generated Markdown link back into this description field."
     validations:
       required: true

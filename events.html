@@ -31,7 +31,9 @@ title: Events
           <p><strong>Type:</strong> {{ event.category }} ({{ event.modality }})</p>
           <div style="margin-top: 15px; display: flex; gap: 10px;">
             <a href="{{ event.url | relative_url }}" class="c-button small" style="padding: 8px 16px;">Details</a>
-            {% if event.link and event.link != "" %}
+            
+            {% comment %} Added condition to hide button if link is exactly "#" {% endcomment %}
+            {% if event.link and event.link != "" and event.link != "#" %}
               <a href="{{ event.link }}" target="_blank" class="c-button small secondary">Registration/Info</a>
             {% endif %}
           </div>

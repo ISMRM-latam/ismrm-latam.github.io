@@ -37,7 +37,14 @@ jobs:
           
           MODAL=$(echo "$RAW_DATA" | jq -r '."modality".text')          
           LOC=$(echo "$RAW_DATA" | jq -r '."where-will-it-happen".text // ."location".text')
+          
           LINK=$(echo "$RAW_DATA" | jq -r '."registration-or-info-link".text')
+          
+          # Clean up missing link responses from the issue form parser
+          if [[ "$LINK" == *"No response"* ]] || [ "$LINK" == "null" ] || [ -z "$LINK" ]; then
+            LINK="#"
+          fi
+          
           DESC=$(echo "$RAW_DATA" | jq -r '."description".text')
           
           TITLE=$(echo "${{ github.event.issue.title }}" | sed 's/Event: //g')

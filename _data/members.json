@@ -1,22 +1,742 @@
 [
   {
-    "name": "Carlos Milovic",
-    "institution": "Pontificia Universidad Católica de Chile",
-    "residence": "Chile",
-    "country": "Chile",
-    "lat": -33.45,
-    "lng": -70.66,
-    "interests": "QSM, MRI Reconstruction, Optimization",
-    "bio": "Quantitative Susceptibility Mapping and MRI Reconstruction."
-  },
-  {
     "name": "Jessica Martinez",
     "institution": "NIST",
     "residence": "USA",
     "country": "Mexico",
-    "lat": 39.1316116,
-    "lng": -77.2165406,
+    "lat": 39.995129,
+    "lng": -105.260239,
     "interests": "Electromagnetic Tissue Properties, Low Field MRI, MR Safety, Quantitative MR",
     "bio": "Me interesa mezclar métodos cuantitativos de MRI con MR safety para evaluar la la interacción del campo de RF con el cuerpo, sobretodo electrical-properties tomography para la generación de mapas de SAR."
+  },
+  {
+    "name": "Camila Munoz",
+    "institution": "Imperial College London",
+    "residence": "Reino Unido",
+    "country": "Chile",
+    "lat": 51.497799,
+    "lng": -0.17922,
+    "interests": "Cardiac MR, Diffusion, Motion Detection & Correction, PET-MRI, Quantitative MR",
+    "bio": "Mi investigación se enfoca en el desarrollo de técnicas de difusión por resonancia magnética para mejorar nuestro entendimiento de la microestructura del corazón."
+  },
+  {
+    "name": "Carlos Milovic",
+    "institution": "Centro de Imágenes Biomédicas, Pontificia Universidad Católica de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.52269,
+    "lng": -70.784248,
+    "interests": "Electromagnetic Tissue Properties, Quantitative MR",
+    "bio": "Profesor Asistente en el Departamento de Ingeniería Eléctrica. Trabajo principalmente en Quantitative Susceptibility Mapping y problemas inversos en imágenes. Actualmente estoy enfocándome en métodos híbridos basados en Deep Learning para resolver estos problemas."
+  },
+  {
+    "name": "Paula Trujillo",
+    "institution": "Vanderbilt University Medical Center",
+    "residence": "USA",
+    "country": "Colombia",
+    "lat": 36.1418788,
+    "lng": -86.8041827,
+    "interests": "Electromagnetic Tissue Properties, Imaging Neurofluids, Quantitative MR",
+    "bio": "Mi investigación se centra en el desarrollo e implementación de biomarcadores de neuroimagen para detectar de manera temprana y precisa los cambios cerebrales en enfermedades neurodegenerativas, con el objetivo de mejorar el diagnóstico, la estratificación de pacientes y la evaluación de terapias."
+  },
+  {
+    "name": "Irene Kuang",
+    "institution": "UC Berkeley",
+    "residence": "USA",
+    "country": "Mexico",
+    "lat": 37.8715,
+    "lng": -122.273,
+    "interests": "Low Field MRI, RF & Receive Coils",
+    "bio": "I work on hardware for low-field MRI."
+  },
+  {
+    "name": "Felipe Arretapol",
+    "institution": "Pontificia Universidad Católica de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.448891,
+    "lng": -70.669266,
+    "interests": "Cardiovascular, Machine Learning, Motion Detection & Correction",
+    "bio": "Ingeniero civil electricista y magister en ciencias de la ingeniería de la Pontificia Universidad Católica de Chile. Actualmente trabajando como ingeniero de investigación en el Centro de Imágenes Biomédicas (CIB) de la misma universidad."
+  },
+  {
+    "name": "Gastón Lemaitre",
+    "institution": "Pontificia Universidad Católica de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.448891,
+    "lng": -70.669266,
+    "interests": "Cardiovascular, Motion Detection & Correction, Quantitative MR",
+    "bio": "Ingeniero Civil Electricista y Magíster en Ciencias de la Ingeniería de la Pontificia Universidad Católica de Chile. Actualmente trabajando como ingeniero de investigación en el Centro de Imágenes Biomédicas (CIB) de la misma universidad."
+  },
+  {
+    "name": "Néstor I. González-Díez",
+    "institution": "University of Nottingham",
+    "residence": "Reino Unido",
+    "country": "Mexico",
+    "lat": 52.938363,
+    "lng": -1.197775,
+    "interests": "Cardiac MR, Cardiovascular, Machine Learning, Pulse Sequence Design, Quantitative MR",
+    "bio": "Investigador postdoctoral con interés en el desarrollo de secuencias de pulso y algoritmos de reconstrucción para la cuantificación de biomarcadores en resonancia magnética cardiovascular."
+  },
+  {
+    "name": "Hernán Mella",
+    "institution": "Pontificia Universidad Católica de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.448891,
+    "lng": -70.669266,
+    "interests": "Diffusion, Machine Learning, Quantitative MR",
+    "bio": "Investigador postdoctoral en el Centro de Imágenes Biomédicas de la Pontificia Universidad Católica de Chile. Mi investigación se centra en el desarrollo de métodos de reconstrucción y análisis de imágenes de resonancia magnética, con énfasis en difusión y cuantificación."
+  },
+  {
+    "name": "Maria Aristizabal",
+    "institution": "Queen's University",
+    "residence": "Canada",
+    "country": "Colombia",
+    "lat": 44.2253,
+    "lng": -76.4951,
+    "interests": "Cardiovascular, Preclinical",
+    "bio": "Investigadora en el área de resonancia magnética cardiovascular preclínica, enfocada en el estudio de modelos animales de enfermedades cardíacas."
+  },
+  {
+    "name": "Julio Garcia",
+    "institution": "University of Calgary",
+    "residence": "Canada",
+    "country": "Mexico",
+    "lat": 51.0782,
+    "lng": -114.129,
+    "interests": "Cardiac MR, Cardiovascular, Flow Imaging",
+    "bio": "Profesor asistente en los departamentos de Radiología y Ciencias de la Salud Cardiovascular. Mi investigación se centra en el desarrollo de técnicas de imagen de flujo por resonancia magnética para evaluar la hemodinámica cardiovascular."
+  },
+  {
+    "name": "Manuel Tible",
+    "institution": "Universidad de Buenos Aires",
+    "residence": "Argentina",
+    "country": "Argentina",
+    "lat": -34.5997,
+    "lng": -58.3819,
+    "interests": "Neuro, Quantitative MR",
+    "bio": "Médico radiólogo con interés en la aplicación de técnicas cuantitativas de resonancia magnética en neurorradiología."
+  },
+  {
+    "name": "Soledad de la Fuente",
+    "institution": "FLENI",
+    "residence": "Argentina",
+    "country": "Argentina",
+    "lat": -34.555,
+    "lng": -58.45,
+    "interests": "Neuro, Diffusion",
+    "bio": "Investigadora en neuroimágenes, especializada en el uso de imágenes de difusión para el estudio de enfermedades neurológicas."
+  },
+  {
+    "name": "Esteban J. S.  García",
+    "institution": "Universidad Nacional de Córdoba",
+    "residence": "Argentina",
+    "country": "Argentina",
+    "lat": -31.4333,
+    "lng": -64.1833,
+    "interests": "Physics, RF & Receive Coils",
+    "bio": "Físico con experiencia en el diseño y construcción de bobinas de radiofrecuencia para resonancia magnética."
+  },
+  {
+    "name": "Luz Maria  Gomez",
+    "institution": "Universidad Tecnológica de Pereira",
+    "residence": "Colombia",
+    "country": "Colombia",
+    "lat": 4.794,
+    "lng": -75.69,
+    "interests": "Image Processing, Machine Learning",
+    "bio": "Profesora e investigadora en el área de procesamiento de imágenes médicas y aprendizaje automático."
+  },
+  {
+    "name": "Andres  Rios",
+    "institution": "Universidad de Antioquia",
+    "residence": "Colombia",
+    "country": "Colombia",
+    "lat": 6.267,
+    "lng": -75.569,
+    "interests": "Neuro, Functional MRI",
+    "bio": "Investigador en neurociencias, enfocado en el uso de resonancia magnética funcional para estudiar la conectividad cerebral."
+  },
+  {
+    "name": "Carolina  Jimenez",
+    "institution": "Fundación Valle del Lili",
+    "residence": "Colombia",
+    "country": "Colombia",
+    "lat": 3.373,
+    "lng": -76.53,
+    "interests": "Body, Oncology",
+    "bio": "Radióloga con interés en la aplicación de técnicas avanzadas de resonancia magnética en oncología de cuerpo."
+  },
+  {
+    "name": "Roberto  C.  Salgado",
+    "institution": "Hospital Israelita Albert Einstein",
+    "residence": "Brasil",
+    "country": "Brasil",
+    "lat": -23.599,
+    "lng": -46.715,
+    "interests": "Cardiovascular, Cardiac MR",
+    "bio": "Médico radiólogo especializado en resonancia magnética cardiovascular."
+  },
+  {
+    "name": "Fernanda  T.  Costa",
+    "institution": "Universidade de São Paulo",
+    "residence": "Brasil",
+    "country": "Brasil",
+    "lat": -23.561,
+    "lng": -46.625,
+    "interests": "Neuro, Diffusion, Machine Learning",
+    "bio": "Investigadora en neuroimágenes, con foco en el desarrollo de métodos de análisis para datos de difusión."
+  },
+  {
+    "name": "Luis  A.  Perez",
+    "institution": "UNAM",
+    "residence": "Mexico",
+    "country": "Mexico",
+    "lat": 19.324,
+    "lng": -99.185,
+    "interests": "Physics, Pulse Sequence Design",
+    "bio": "Físico médico interesado en el diseño de secuencias de pulso y física de la resonancia magnética."
+  },
+  {
+    "name": "Mónica  A.  López",
+    "institution": "Instituto Nacional de Neurología y Neurocirugía",
+    "residence": "Mexico",
+    "country": "Mexico",
+    "lat": 19.289,
+    "lng": -99.187,
+    "interests": "Neuro, Spectroscopy",
+    "bio": "Investigadora en el área de espectroscopia por resonancia magnética aplicada a enfermedades neurológicas."
+  },
+  {
+    "name": "Sebastian  Castillo",
+    "institution": "Pontificia Universidad Católica de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.448,
+    "lng": -70.669,
+    "interests": "Cardiovascular, Flow Imaging",
+    "bio": "Ingeniero trabajando en el análisis de flujo sanguíneo mediante resonancia magnética 4D Flow."
+  },
+  {
+    "name": "Daniela  Rojas",
+    "institution": "Universidad de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.437,
+    "lng": -70.65,
+    "interests": "Neuro, Aging",
+    "bio": "Investigadora enfocada en el estudio del envejecimiento cerebral mediante técnicas de resonancia magnética estructural y funcional."
+  },
+  {
+    "name": "Jorge  A.  Ramos",
+    "institution": "Universidad Peruana Cayetano Heredia",
+    "residence": "Peru",
+    "country": "Peru",
+    "lat": -12.024,
+    "lng": -77.048,
+    "interests": "Public Health, Neuro",
+    "bio": "Médico e investigador interesado en el uso de la neuroimagen como herramienta en salud pública."
+  },
+  {
+    "name": "Claudia  M.  Vargas",
+    "institution": "Clínica Internacional",
+    "residence": "Peru",
+    "country": "Peru",
+    "lat": -12.092,
+    "lng": -77.03,
+    "interests": "Body, Musculoskeletal",
+    "bio": "Radióloga con especialidad en imágenes musculoesqueléticas y de cuerpo."
+  },
+  {
+    "name": "Alejandro  G.  Silva",
+    "institution": "Universidad de la República",
+    "residence": "Uruguay",
+    "country": "Uruguay",
+    "lat": -34.903,
+    "lng": -56.188,
+    "interests": "Physics, Image Reconstruction",
+    "bio": "Físico trabajando en algoritmos de reconstrucción de imágenes y optimización de protocolos."
+  },
+  {
+    "name": "Valeria  N.  Sosa",
+    "institution": "Hospital de Clínicas",
+    "residence": "Uruguay",
+    "country": "Uruguay",
+    "lat": -34.892,
+    "lng": -56.155,
+    "interests": "Neuro, Clinical Applications",
+    "bio": "Médica radióloga dedicada a la aplicación clínica de técnicas avanzadas de RM en el sistema nervioso central."
+  },
+  {
+    "name": "Ricardo  E.  Torres",
+    "institution": "Universidad Central de Venezuela",
+    "residence": "Venezuela",
+    "country": "Venezuela",
+    "lat": 10.491,
+    "lng": -66.89,
+    "interests": "Education, Physics",
+    "bio": "Profesor de física médica con interés en la enseñanza de los principios de la resonancia magnética."
+  },
+  {
+    "name": "Elena  S.  Méndez",
+    "institution": "Centro Médico de Caracas",
+    "residence": "Venezuela",
+    "country": "Venezuela",
+    "lat": 10.509,
+    "lng": -66.896,
+    "interests": "Oncology, Breast Imaging",
+    "bio": "Radióloga especializada en imágenes de mama y oncología."
+  },
+  {
+    "name": "Gabriel  F.  Rios",
+    "institution": "Universidad de Costa Rica",
+    "residence": "Costa Rica",
+    "country": "Costa Rica",
+    "lat": 9.937,
+    "lng": -84.05,
+    "interests": "Engineering, Instrumentation",
+    "bio": "Ingeniero biomédico interesado en el desarrollo de instrumentación para resonancia magnética."
+  },
+  {
+    "name": "Patricia  L.  Díaz",
+    "institution": "Hospital San Juan de Dios",
+    "residence": "Costa Rica",
+    "country": "Costa Rica",
+    "lat": 9.935,
+    "lng": -84.088,
+    "interests": "Radiology, Neuro",
+    "bio": "Médica radióloga con enfoque en neurorradiología diagnóstica."
+  },
+  {
+    "name": "Héctor  M.  Sánchez",
+    "institution": "Universidad de Panamá",
+    "residence": "Panama",
+    "country": "Panama",
+    "lat": 8.983,
+    "lng": -79.533,
+    "interests": "Medical Physics, Safety",
+    "bio": "Físico médico encargado de la seguridad y control de calidad en instalaciones de resonancia magnética."
+  },
+  {
+    "name": "Rosa  I.  Castro",
+    "institution": "Hospital Punta Pacifica",
+    "residence": "Panama",
+    "country": "Panama",
+    "lat": 8.975,
+    "lng": -79.51,
+    "interests": "Abdominal Imaging, MRI",
+    "bio": "Especialista en imágenes abdominales por resonancia magnética."
+  },
+  {
+    "name": "Fernando  A.  Gomez",
+    "institution": "Universidad Nacional Autónoma de Honduras",
+    "residence": "Honduras",
+    "country": "Honduras",
+    "lat": 14.083,
+    "lng": -87.166,
+    "interests": "Education, Clinical Radiology",
+    "bio": "Docente y radiólogo clínico con interés en promover el uso de la RM en la región."
+  },
+  {
+    "name": "Carmen  E.  Ortiz",
+    "institution": "Hospital Escuela",
+    "residence": "Honduras",
+    "country": "Honduras",
+    "lat": 14.105,
+    "lng": -87.188,
+    "interests": "Pediatric Radiology, Neuro",
+    "bio": "Radióloga pediatra con interés en neuroimágenes infantiles."
+  },
+  {
+    "name": "Mario  R.  Perez",
+    "institution": "Universidad de San Carlos de Guatemala",
+    "residence": "Guatemala",
+    "country": "Guatemala",
+    "lat": 14.588,
+    "lng": -90.551,
+    "interests": "Bioengineering, Image Analysis",
+    "bio": "Ingeniero dedicado al análisis computacional de imágenes médicas."
+  },
+  {
+    "name": "Silvia  M.  López",
+    "institution": "Hospital General San Juan de Dios",
+    "residence": "Guatemala",
+    "country": "Guatemala",
+    "lat": 14.641,
+    "lng": -90.513,
+    "interests": "General Radiology, MRI",
+    "bio": "Médica radióloga con amplia experiencia en resonancia magnética general."
+  },
+  {
+    "name": "Enrique  J.  Blanco",
+    "institution": "Universidad de El Salvador",
+    "residence": "El Salvador",
+    "country": "El Salvador",
+    "lat": 13.716,
+    "lng": -89.203,
+    "interests": "Physics, Instrumentation",
+    "bio": "Físico interesado en el desarrollo tecnológico y mantenimiento de equipos de RM."
+  },
+  {
+    "name": "Lorena  A.  Mejía",
+    "institution": "Hospital Nacional Rosales",
+    "residence": "El Salvador",
+    "country": "El Salvador",
+    "lat": 13.702,
+    "lng": -89.201,
+    "interests": "Neuro, Oncology",
+    "bio": "Neurorradióloga enfocada en el diagnóstico y seguimiento de tumores cerebrales."
+  },
+  {
+    "name": "Javier  S.  Cordero",
+    "institution": "Universidad Nacional Autónoma de Nicaragua",
+    "residence": "Nicaragua",
+    "country": "Nicaragua",
+    "lat": 12.123,
+    "lng": -86.268,
+    "interests": "Medical Education, Radiology",
+    "bio": "Médico docente interesado en la formación de especialistas en radiología e imágenes."
+  },
+  {
+    "name": "Beatriz  E.  Rivas",
+    "institution": "Hospital Militar Escuela Dr. Alejandro Dávila Bolaños",
+    "residence": "Nicaragua",
+    "country": "Nicaragua",
+    "lat": 12.148,
+    "lng": -86.275,
+    "interests": "Body Imaging, MRI",
+    "bio": "Radióloga con enfoque en estudios de cuerpo completo por resonancia magnética."
+  },
+  {
+    "name": "Oscar  D.  Morales",
+    "institution": "Universidad Autónoma de Santo Domingo",
+    "residence": "Republica Dominicana",
+    "country": "Republica Dominicana",
+    "lat": 18.462,
+    "lng": -69.912,
+    "interests": "Radiology, Physics",
+    "bio": "Físico médico y radiólogo interesado en la optimización de protocolos de imagen."
+  },
+  {
+    "name": "Teresa  M.  Santos",
+    "institution": "CEDIMAT",
+    "residence": "Republica Dominicana",
+    "country": "Republica Dominicana",
+    "lat": 18.485,
+    "lng": -69.938,
+    "interests": "Cardiovascular, Neuro",
+    "bio": "Especialista en imágenes de alta complejidad en las áreas cardiovascular y neurológica."
+  },
+  {
+    "name": "Humberto  G.  Reyes",
+    "institution": "Universidad de La Habana",
+    "residence": "Cuba",
+    "country": "Cuba",
+    "lat": 23.136,
+    "lng": -82.381,
+    "interests": "Neuroscience, MRI",
+    "bio": "Investigador en neurociencias con amplia trayectoria en el uso de la RM para el estudio del cerebro."
+  },
+  {
+    "name": "Ana  L.  Fernández",
+    "institution": "Centro de Neurociencias de Cuba",
+    "residence": "Cuba",
+    "country": "Cuba",
+    "lat": 23.088,
+    "lng": -82.443,
+    "interests": "Neuro, Diffusion, Connectivity",
+    "bio": "Investigadora enfocada en el mapeo de la conectividad cerebral mediante imágenes de difusión."
+  },
+  {
+    "name": "Guillermo  A.  Paz",
+    "institution": "Universidad Mayor de San Andrés",
+    "residence": "Bolivia",
+    "country": "Bolivia",
+    "lat": -16.504,
+    "lng": -68.13,
+    "interests": "Physics, Education",
+    "bio": "Físico dedicado a la enseñanza y promoción de la física médica en Bolivia."
+  },
+  {
+    "name": "Marta  R.  Vaca",
+    "institution": "Hospital Obrero No. 1",
+    "residence": "Bolivia",
+    "country": "Bolivia",
+    "lat": -16.5,
+    "lng": -68.122,
+    "interests": "General Radiology, Neuro",
+    "bio": "Radióloga con interés en la aplicación clínica de la RM en patologías neurológicas prevalentes."
+  },
+  {
+    "name": "Santiago  E.  Lasso",
+    "institution": "Universidad San Francisco de Quito",
+    "residence": "Ecuador",
+    "country": "Ecuador",
+    "lat": -0.197,
+    "lng": -78.435,
+    "interests": "Bioengineering, Image Processing",
+    "bio": "Investigador en ingeniería biomédica enfocado en el procesamiento digital de señales e imágenes."
+  },
+  {
+    "name": "Isabel  C.  Mora",
+    "institution": "Hospital Metropolitano",
+    "residence": "Ecuador",
+    "country": "Ecuador",
+    "lat": -0.178,
+    "lng": -78.498,
+    "interests": "Oncology, Body MRI",
+    "bio": "Radióloga especializada en el uso de la RM para la detección y seguimiento de patologías oncológicas."
+  },
+  {
+    "name": "Francisco  J.  Duarte",
+    "institution": "Universidad Nacional de Asunción",
+    "residence": "Paraguay",
+    "country": "Paraguay",
+    "lat": -25.335,
+    "lng": -57.52,
+    "interests": "Medical Physics, Safety",
+    "bio": "Físico médico responsable de la implementación de protocolos de seguridad en RM."
+  },
+  {
+    "name": "Alicia  M.  Franco",
+    "institution": "Instituto de Previsión Social",
+    "residence": "Paraguay",
+    "country": "Paraguay",
+    "lat": -25.267,
+    "lng": -57.583,
+    "interests": "Neuro, Musculoskeletal",
+    "bio": "Médica radióloga con interés en imágenes del sistema nervioso y aparato locomotor."
+  },
+  {
+    "name": "Raúl  A.  Vargas",
+    "institution": "Universidad de Puerto Rico",
+    "residence": "Puerto Rico",
+    "country": "Puerto Rico",
+    "lat": 18.403,
+    "lng": -66.049,
+    "interests": "Radiology, Research",
+    "bio": "Médico académico interesado en la investigación clínica mediante resonancia magnética."
+  },
+  {
+    "name": "Sofia  E.  Rivera",
+    "institution": "Recinto de Ciencias Médicas",
+    "residence": "Puerto Rico",
+    "country": "Puerto Rico",
+    "lat": 18.394,
+    "lng": -66.071,
+    "interests": "Neuro, Pediatrics",
+    "bio": "Neurorradióloga pediatra con interés en el desarrollo cerebral infantil."
+  },
+  {
+    "name": "Andrés  M.  López",
+    "institution": "Universidad de los Andes",
+    "residence": "Colombia",
+    "country": "Colombia",
+    "lat": 4.601,
+    "lng": -74.066,
+    "interests": "Engineering, Machine Learning",
+    "bio": "Investigador en el área de inteligencia artificial aplicada al análisis de imágenes médicas."
+  },
+  {
+    "name": "Camila  A.  Silva",
+    "institution": "Universidade Federal do Rio de Janeiro",
+    "residence": "Brasil",
+    "country": "Brasil",
+    "lat": -22.859,
+    "lng": -43.232,
+    "interests": "Neuro, Functional MRI",
+    "bio": "Investigadora enfocada en el estudio de redes funcionales cerebrales mediante fMRI."
+  },
+  {
+    "name": "Diego  F.  Gomez",
+    "institution": "Universidad de Buenos Aires",
+    "residence": "Argentina",
+    "country": "Argentina",
+    "lat": -34.599,
+    "lng": -58.381,
+    "interests": "Physics, Pulse Sequence Design",
+    "bio": "Físico trabajando en el desarrollo de nuevas técnicas de adquisición en RM."
+  },
+  {
+    "name": "Elena  M.  Perez",
+    "institution": "Pontificia Universidad Católica de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.448,
+    "lng": -70.669,
+    "interests": "Cardiovascular, Quantitative MR",
+    "bio": "Investigadora en resonancia magnética cardiovascular cuantitativa."
+  },
+  {
+    "name": "Felipe  A.  Torres",
+    "institution": "UNAM",
+    "residence": "Mexico",
+    "country": "Mexico",
+    "lat": 19.324,
+    "lng": -99.185,
+    "interests": "Neuro, Spectroscopy",
+    "bio": "Investigador interesado en el uso de la espectroscopia para el estudio del metabolismo cerebral."
+  },
+  {
+    "name": "Gabriela  S.  Méndez",
+    "institution": "Hospital Israelita Albert Einstein",
+    "residence": "Brasil",
+    "country": "Brasil",
+    "lat": -23.599,
+    "lng": -46.715,
+    "interests": "Oncology, Body Imaging",
+    "bio": "Radióloga dedicada a la imagenología oncológica avanzada."
+  },
+  {
+    "name": "Hugo  R.  Sánchez",
+    "institution": "Universidad de Antioquia",
+    "residence": "Colombia",
+    "country": "Colombia",
+    "lat": 6.267,
+    "lng": -75.569,
+    "interests": "Neuro, Diffusion",
+    "bio": "Investigador en el área de microestructura cerebral mediante imágenes de difusión."
+  },
+  {
+    "name": "Isabel  F.  Castro",
+    "institution": "FLENI",
+    "residence": "Argentina",
+    "country": "Argentina",
+    "lat": -34.555,
+    "lng": -58.45,
+    "interests": "Neuro, Clinical Applications",
+    "bio": "Médica neuróloga con interés en la correlación clínica y por imágenes."
+  },
+  {
+    "name": "Juan  P.  Rios",
+    "institution": "Universidad de la República",
+    "residence": "Uruguay",
+    "country": "Uruguay",
+    "lat": -34.903,
+    "lng": -56.188,
+    "interests": "Physics, Instrumentation",
+    "bio": "Físico interesado en el desarrollo de hardware para resonancia magnética."
+  },
+  {
+    "name": "Karla  M.  Ortiz",
+    "institution": "Universidad de Costa Rica",
+    "residence": "Costa Rica",
+    "country": "Costa Rica",
+    "lat": 9.937,
+    "lng": -84.05,
+    "interests": "Radiology, Education",
+    "bio": "Docente y radióloga con interés en la formación continua en RM."
+  },
+  {
+    "name": "Luis  E.  Blanco",
+    "institution": "Universidad Peruana Cayetano Heredia",
+    "residence": "Peru",
+    "country": "Peru",
+    "lat": -12.024,
+    "lng": -77.048,
+    "interests": "Neuro, Public Health",
+    "bio": "Médico interesado en la epidemiología de enfermedades neurológicas y su detección por imagen."
+  },
+  {
+    "name": "Maria  J.  Sosa",
+    "institution": "Hospital Metropolitano",
+    "residence": "Ecuador",
+    "country": "Ecuador",
+    "lat": -0.178,
+    "lng": -78.498,
+    "interests": "Body Imaging, MRI",
+    "bio": "Especialista en imágenes de cuerpo con énfasis en patología abdominal."
+  },
+  {
+    "name": "Nicolas  A.  Mejía",
+    "institution": "Universidad de Panamá",
+    "residence": "Panama",
+    "country": "Panama",
+    "lat": 8.983,
+    "lng": -79.533,
+    "interests": "Medical Physics, Safety",
+    "bio": "Físico médico dedicado a la gestión de la seguridad en entornos de RM."
+  },
+  {
+    "name": "Olga  D.  Cordero",
+    "institution": "Universidad Nacional Autónoma de Honduras",
+    "residence": "Honduras",
+    "country": "Honduras",
+    "lat": 14.083,
+    "lng": -87.166,
+    "interests": "Radiology, Clinical Applications",
+    "bio": "Radióloga clínica interesada en la optimización de recursos diagnósticos."
+  },
+  {
+    "name": "Pablo  R.  Rivas",
+    "institution": "Universidad de San Carlos de Guatemala",
+    "residence": "Guatemala",
+    "country": "Guatemala",
+    "lat": 14.588,
+    "lng": -90.551,
+    "interests": "Engineering, Image Analysis",
+    "bio": "Ingeniero trabajando en herramientas de software para el análisis de imágenes médicas."
+  },
+  {
+    "name": "Quintín  J.  Santos",
+    "institution": "Universidad de El Salvador",
+    "residence": "El Salvador",
+    "country": "El Salvador",
+    "lat": 13.716,
+    "lng": -89.203,
+    "interests": "Physics, Education",
+    "bio": "Físico académico con interés en la formación de nuevos profesionales en el área."
+  },
+  {
+    "name": "Rosa  E.  Fernández",
+    "institution": "Universidad Nacional Autónoma de Nicaragua",
+    "residence": "Nicaragua",
+    "country": "Nicaragua",
+    "lat": 12.123,
+    "lng": -86.268,
+    "interests": "Radiology, Neuro",
+    "bio": "Médica radióloga con enfoque en neurorradiología diagnóstica."
+  },
+  {
+    "name": "Sergio  A.  Vaca",
+    "institution": "Universidad Autónoma de Santo Domingo",
+    "residence": "Republica Dominicana",
+    "country": "Republica Dominicana",
+    "lat": 18.462,
+    "lng": -69.912,
+    "interests": "Medical Physics, Research",
+    "bio": "Físico médico interesado en la investigación aplicada a la clínica."
+  },
+  {
+    "name": "Tatiana  M.  Lasso",
+    "institution": "Universidad de La Habana",
+    "residence": "Cuba",
+    "country": "Cuba",
+    "lat": 23.136,
+    "lng": -82.381,
+    "interests": "Neuroscience, MRI",
+    "bio": "Investigadora en neurociencias con interés en el desarrollo cerebral."
+  },
+  {
+    "name": "Ulises  G.  Mora",
+    "institution": "Universidad Mayor de San Andrés",
+    "residence": "Bolivia",
+    "country": "Bolivia",
+    "lat": -16.504,
+    "lng": -68.13,
+    "interests": "Physics, Instrumentation",
+    "bio": "Físico interesado en la instrumentación y control de calidad en RM."
+  },
+  {
+    "name": "Victoria  C.  Duarte",
+    "institution": "Universidad San Francisco de Quito",
+    "residence": "Ecuador",
+    "country": "Ecuador",
+    "lat": -0.197,
+    "lng": -78.435,
+    "interests": "Bioengineering, Image Processing",
+    "bio": "Investigadora en el área de procesamiento de imágenes y visión por computador."
   }
 ]

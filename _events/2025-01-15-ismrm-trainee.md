@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: event
 title: "ISMRM Trainee & Student Session"
 event_date: 2025-01-15
 location: "Virtual"

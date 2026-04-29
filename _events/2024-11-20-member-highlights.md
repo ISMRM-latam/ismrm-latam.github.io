@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: event
 title: "Scientific Meeting: ISMRM-LATAM Member Highlights"
 event_date: 2024-11-20
 location: "Virtual"

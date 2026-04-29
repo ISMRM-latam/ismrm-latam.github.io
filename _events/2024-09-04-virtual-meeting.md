@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: event
 title: "Virtual Meeting: Growth of MR in the region"
 event_date: 2024-09-04
 location: "Virtual (Zoom)"

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: event
 title: "Hola Hawai: Latin American Chapter Business Meeting"
 event_date: 2024-05-06
 location: "Honolulu, Hawai"

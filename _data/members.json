@@ -281,7 +281,7 @@
   },
   {
     "name": "Eduarda Nicoletto Ayres de Oliveira",
-    "institution": NaN,
+    "institution": "",
     "residence": "Brasil",
     "country": "Brasil",
     "lat": -22.802261,
@@ -471,7 +471,7 @@
   },
   {
     "name": "Maria Concepcion Alvarez Garduño",
-    "institution": NaN,
+    "institution": "",
     "residence": "Mexico",
     "country": "Mexico",
     "lat": 19.4434696,
@@ -701,7 +701,7 @@
   },
   {
     "name": "Angel Zavala",
-    "institution": NaN,
+    "institution": "",
     "residence": "Peru",
     "country": "Peru",
     "lat": -12.1085815,

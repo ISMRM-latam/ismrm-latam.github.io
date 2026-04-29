@@ -1,32 +1,42 @@
 [
   {
-    "title": "This",
-    "organizer": "null",
-    "category": "null",
-    "event_date": "2026-05-20",
+    "title": "ISMRM Trainee & Student Session",
+    "organizer": "ISMRM Latin American Chapter",
+    "category": "Trainee Session",
+    "event_date": "2025-01-15",
     "modality": "Virtual",
-    "location": "Here",
-    "link": "We",
-    "url": "events/2026-05-20-this/"
+    "location": "Virtual",
+    "link": "#",
+    "url": "events/2025-01-15-ismrm-trainee/"
   },
   {
-    "title": "HEre is the event",
-    "organizer": "We are inviting",
-    "category": "Conference",
-    "event_date": "2026-06-06",
-    "modality": "In-person",
-    "location": "HEre",
-    "link": "Tehereee",
-    "url": "events/2026-06-06-here-is-the-event/"
-  },
+  "title": "Scientific Meeting: ISMRM-LATAM Member Highlights",
+  "organizer": "ISMRM Latin American Chapter",
+  "category": "Scientific Meeting",
+  "event_date": "2024-11-20",
+  "modality": "Virtual",
+  "location": "Virtual",
+  "link": "#",
+  "url": "events/2024-11-20-member-highlights/"
+},
   {
-    "title": "This is the event",
-    "organizer": "That",
-    "category": "Webinar",
-    "event_date": "2026-07-07",
-    "modality": "Virtual",
-    "location": "Will happen",
-    "link": "Here",
-    "url": "events/2026-07-07-this-is-the-event/"
-  }
+  "title": "Virtual Meeting: Growth of MR in the region",
+  "organizer": "ISMRM Latin American Chapter",
+  "category": "Virtual Meeting",
+  "event_date": "2024-09-04",
+  "modality": "Virtual",
+  "location": "Virtual",
+  "link": "#",
+  "url": "events/2024-09-04-virtual-meeting/"
+},
+{
+  "title": "Hola Hawai: Latin American Chapter Business Meeting",
+  "organizer": "ISMRM Latin American Chapter",
+  "category": "Business Meeting",
+  "event_date": "2024-05-06",
+  "modality": "In-Person",
+  "location": "Honolulu, Hawai",
+  "link": "https://www.ismrm.org/24m/",
+  "url": "events/2024-05-06-hola-hawai/"
+}
 ]

@@ -3,6 +3,8 @@ layout: default
 title: Opportunities
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <div class="content-card">
     <div class="jobs-dashboard-header">
         <div>
@@ -110,9 +112,15 @@ title: Opportunities
     
     .modal-body {
         margin: 20px 0; font-size: 1rem; color: #334155; line-height: 1.6;
-        white-space: pre-wrap; /* Preserves line breaks from the markdown/textarea */
         background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;
     }
+    
+    /* Style rendered markdown inside the modal */
+    .modal-body p { margin-top: 0; margin-bottom: 1em; }
+    .modal-body p:last-child { margin-bottom: 0; }
+    .modal-body a { color: #1495a7; text-decoration: none; font-weight: bold; }
+    .modal-body a:hover { text-decoration: underline; color: #003687; }
+    .modal-body strong { color: #0f172a; }
 
     @media (max-width: 600px) {
         .jobs-dashboard-header { flex-direction: column; text-align: center; }
@@ -136,7 +144,6 @@ title: Opportunities
         const today = new Date();
 
         data.forEach(job => {
-            // Find the original index of the job in the main jobData array for the modal reference
             const originalIndex = jobData.indexOf(job);
             
             const postedDate = new Date(job.posted);
@@ -151,8 +158,14 @@ title: Opportunities
                 deadlineText = daysLeft > 0 ? `${daysLeft} days left` : "Closed";
             }
 
-            // Truncate description to first 10 words
-            const words = job.description ? job.description.split(/\s+/) : [];
+            // Strip Markdown symbols for a clean text preview
+            let cleanDesc = job.description || "";
+            // Remove links but keep text, remove bold/italic asterisks and underscores, remove raw HTML brackets
+            cleanDesc = cleanDesc.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+                                 .replace(/[*_#]/g, '')
+                                 .replace(/<[^>]*>?/gm, '');
+            
+            const words = cleanDesc.split(/\s+/);
             const shortDesc = words.slice(0, 10).join(' ') + (words.length > 10 ? '...' : '');
 
             const card = document.createElement('div');
@@ -201,7 +214,10 @@ title: Opportunities
         document.getElementById('modalTitle').innerText = job.title;
         document.getElementById('modalInstitution').innerText = job.institution;
         document.getElementById('modalLocation').innerText = "📍 " + job.location;
-        document.getElementById('modalDescription').innerText = job.description || "No description provided.";
+        
+        // Parse the markdown securely into HTML
+        const rawDesc = job.description || "No description provided.";
+        document.getElementById('modalDescription').innerHTML = marked.parse(rawDesc);
         
         // Handle Badges in Modal
         const postedDate = new Date(job.posted);
@@ -234,7 +250,6 @@ title: Opportunities
     }
 
     function closeJobModal(event) {
-        // Close if clicking the X or the dark overlay background
         if (event && event.target !== document.getElementById('jobModalOverlay')) return;
         document.getElementById('jobModalOverlay').classList.remove('active');
         document.body.style.overflow = 'auto'; // Restore background scrolling

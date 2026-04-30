@@ -22,16 +22,17 @@ jobs:
 
       - name: Process News and Generate Post
         id: process
+        env:
+          # SECURE FIX: Pass the raw data through an environment variable
+          RAW_JSON: ${{ steps.parse.outputs.data }}
         run: |
           # 1. Extract Metadata
-          RAW_DATA='${{ steps.parse.outputs.data }}'
-          
-          AUTHOR=$(echo "$RAW_DATA" | jq -r '."author-name".text // "Executive Committee"')
-          CAT=$(echo "$RAW_DATA" | jq -r '."category".text // "News"')
-          SUMM=$(echo "$RAW_DATA" | jq -r '."short-summary".text // "No summary provided"')
+          AUTHOR=$(echo "$RAW_JSON" | jq -r '."author-name".text // "Executive Committee"')
+          CAT=$(echo "$RAW_JSON" | jq -r '."category".text // "News"')
+          SUMM=$(echo "$RAW_JSON" | jq -r '."short-summary".text // "No summary provided"')
           
           # URL Sanitization
-          IMG_RAW=$(echo "$RAW_DATA" | jq -r '."featured-image-url".text')
+          IMG_RAW=$(echo "$RAW_JSON" | jq -r '."featured-image-url".text')
           IMG=$(echo "$IMG_RAW" | tr -d '<>' | xargs)
           
           TITLE=$(echo "${{ github.event.issue.title }}" | sed 's/News: //g')
@@ -56,9 +57,7 @@ jobs:
           echo "" >> "_posts/$FILENAME"
           
           # 4. APPEND CONTENT SAFELY (Dynamic headers + Content)
-          # We grab every value in the JSON, keep only the .text if it exists,
-          # and exclude the metadata fields we already used in the header.
-          echo "$RAW_DATA" | jq -r '
+          echo "$RAW_JSON" | jq -r '
             to_entries 
             | map(select(.key | IN("author-name", "category", "featured-image-url", "short-summary") | not)) 
             | map(.value.text) 

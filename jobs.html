@@ -215,9 +215,10 @@ title: Opportunities
         document.getElementById('modalInstitution').innerText = job.institution;
         document.getElementById('modalLocation').innerText = "📍 " + job.location;
         
-        // Parse the markdown securely into HTML
+        // --- THE FIX IS HERE ---
+        // Tell marked.js to preserve single line breaks by passing { breaks: true }
         const rawDesc = job.description || "No description provided.";
-        document.getElementById('modalDescription').innerHTML = marked.parse(rawDesc);
+        document.getElementById('modalDescription').innerHTML = marked.parse(rawDesc, { breaks: true });
         
         // Handle Badges in Modal
         const postedDate = new Date(job.posted);

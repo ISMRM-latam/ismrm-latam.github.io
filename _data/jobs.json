@@ -18,5 +18,15 @@
     "link": "mailto:pi@university.cl",
     "description": "Research focusing on Halbach array optimization for portable MRI scanners.",
     "posted": "2026-04-10"
+  },
+  {
+    "title": "PhD: Electrical property mapping of the human body using magnetic resonance imaging (MRI)",
+    "institution": "Université de Lorraine – IADI Laboratory",
+    "modality": "Full-time (In-person)",
+    "location": "Nancy, France",
+    "deadline": "2026-10-31",
+    "link": "<freddy.odille@inserm.fr>",
+    "description": "Funding: **Fully funded doctoral contract**\nStart: Ideally October 2026, open for negotiation\nTopic: Developing new MRI methods to map electrical properties of human tissues (tumor detection & treatment planning) (see attachment for details: [OffreThèse_IADI_IRM_propriétés_électriques_2026.docx](https://github.com/user-attachments/files/27217940/OffreThese_IADI_IRM_proprietes_electriques_2026.docx))\nMRI lab with access to clinical 1.5T & research 3T MRI scanners\nSupervisor: Freddy Odille (Inserm Research Director)\nProfile: Master's or engineering degree (biomedical eng., physics, maths, or data science) · Matlab/Python · English proficiency\nFrench: **Not required**\n\nApply: CV + cover letter → <freddy.odille@inserm.fr>",
+    "posted": "2026-04-30"
   }
 ]

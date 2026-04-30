@@ -26,20 +26,26 @@ jobs:
           # SECURE FIX: Pass the raw data through an environment variable
           RAW_JSON: ${{ steps.parse.outputs.data }}
         run: |
-          # 1. Extract Metadata
-          AUTHOR=$(echo "$RAW_JSON" | jq -r '."author-name".text // "Executive Committee"')
-          CAT=$(echo "$RAW_JSON" | jq -r '."category".text // "News"')
-          SUMM=$(echo "$RAW_JSON" | jq -r '."short-summary".text // "No summary provided"')
+          # 1. Extract Metadata using <<< to safely pass the env variable
+          AUTHOR=$(jq -r '."author-name".text // "Executive Committee"' <<< "$RAW_JSON")
+          CAT=$(jq -r '."category".text // "News"' <<< "$RAW_JSON")
+          SUMM=$(jq -r '."short-summary".text // "No summary provided"' <<< "$RAW_JSON")
           
           # URL Sanitization
-          IMG_RAW=$(echo "$RAW_JSON" | jq -r '."featured-image-url".text')
+          IMG_RAW=$(jq -r '."featured-image-url".text // ""' <<< "$RAW_JSON")
           IMG=$(echo "$IMG_RAW" | tr -d '<>' | xargs)
           
           TITLE=$(echo "${{ github.event.issue.title }}" | sed 's/News: //g')
           DATE=$(date +%Y-%m-%d)
           
-          # 2. Slug and Filename
-          SLUG=$(echo "$SUMM" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed -E 's/-+/-/g' | sed -E 's/^-|-$//g')
+          # Escaping quotes to prevent YAML Front Matter crashes if an iframe/quotes are used
+          TITLE_ESC=$(echo "$TITLE" | sed 's/"/\\"/g')
+          AUTHOR_ESC=$(echo "$AUTHOR" | sed 's/"/\\"/g')
+          CAT_ESC=$(echo "$CAT" | sed 's/"/\\"/g')
+          SUMM_ESC=$(echo "$SUMM" | sed 's/"/\\"/g')
+          
+          # 2. Slug and Filename (Fixed to use TITLE instead of SUMM)
+          SLUG=$(echo "$TITLE" | iconv -t ascii//TRANSLIT | sed -E 's/[^a-zA-Z0-9 ]/-/g' | tr '[:upper:]' '[:lower:]' | awk '{print $1"-"$2"-"$3"-"$4"-"$5}' | sed -E 's/-+/-/g' | sed -E 's/^-|-$//g')
           FILENAME="${DATE}-${SLUG}.md"
           
           mkdir -p _posts
@@ -47,23 +53,23 @@ jobs:
           # 3. Create the Front Matter
           echo "---" > "_posts/$FILENAME"
           echo "layout: post" >> "_posts/$FILENAME"
-          echo "title: \"$TITLE\"" >> "_posts/$FILENAME"
+          echo "title: \"$TITLE_ESC\"" >> "_posts/$FILENAME"
           echo "date: $DATE" >> "_posts/$FILENAME"
-          echo "author: \"$AUTHOR\"" >> "_posts/$FILENAME"
-          echo "category: \"$CAT\"" >> "_posts/$FILENAME"
+          echo "author: \"$AUTHOR_ESC\"" >> "_posts/$FILENAME"
+          echo "category: \"$CAT_ESC\"" >> "_posts/$FILENAME"
           echo "image: \"$IMG\"" >> "_posts/$FILENAME"
-          echo "excerpt: \"$SUMM\"" >> "_posts/$FILENAME"
+          echo "excerpt: \"$SUMM_ESC\"" >> "_posts/$FILENAME"
           echo "---" >> "_posts/$FILENAME"
           echo "" >> "_posts/$FILENAME"
           
-          # 4. APPEND CONTENT SAFELY (Dynamic headers + Content)
-          echo "$RAW_JSON" | jq -r '
+          # 4. APPEND CONTENT SAFELY
+          # CRITICAL FIX: We filter out nulls and empty responses BEFORE joining to prevent jq from crashing.
+          jq -r '
             to_entries 
             | map(select(.key | IN("author-name", "category", "featured-image-url", "short-summary") | not)) 
-            | map(.value.text) 
-            | select(. != null and . != "") 
+            | map(.value.text | select(. != null and . != "" and . != "_No response_" and . != "*No response*")) 
             | join("\n\n")
-          ' > content_tmp.txt
+          ' <<< "$RAW_JSON" > content_tmp.txt
           
           cat content_tmp.txt >> "_posts/$FILENAME"
 

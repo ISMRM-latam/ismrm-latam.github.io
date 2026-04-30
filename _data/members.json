@@ -812,5 +812,16 @@
     "lng": 7.5752961,
     "interests": "Diffusion, Quantitative MR, White Matter",
     "bio": "PhD en Ciencias de la Computación. Actualmente, trabajo con MRI del cerebro de personas con esclerosis múltiple "
+  },
+  {
+    "name": "Ignacio López Martínez",
+    "email": "<inlopez1@uc.cl>",
+    "institution": "German Cancer Research Center (DKFZ)",
+    "residence": "Germany",
+    "country": "Chile",
+    "lat": -33.45,
+    "lng": -70.66,
+    "interests": "MRI, UHF, RF antennas, Radiotherapy",
+    "bio": "PhD researcher specializing in metamaterial applications for radiofrequency antennas. Other interests include new technologies for MRI, MRI safety, and MR-LINAC technology. Feel free to contact me :)"
   }
 ]

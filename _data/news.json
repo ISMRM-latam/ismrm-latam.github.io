@@ -1,38 +1,47 @@
 [
   {
-  "title": "Capítulo Aprobado",
-  "author": "ISMRM Latam",
-  "category": "Chapter News",
-  "image": null,
-  "summary": "¡Es oficial! La junta directiva de la ISMRM ha aprobado formalmente la creación del Capítulo Latinoamericano.",
-  "date": "2024-02-15",
-  "url": "2024/02/15/capitulo-aprobado.html"
-},
-{
-  "title": "Bylaws of the ISMRM Latin American Chapter",
-  "author": "ISMRM Latam",
-  "category": "Chapter News",
-  "image": null,
-  "summary": "The governing documents establishing the mission, structure, and rules of the Latin American Chapter.",
-  "date": "2024-03-01",
-  "url": "2024/03/01/bylaws-of-the-ismrm-latin-american-chapter.html"
-},
-{
-  "title": "Hola Hawai: Latin American Chapter Business Meeting",
-  "author": "ISMRM Latam",
-  "category": "Chapter News",
-  "image": null,
-  "summary": "Notes and highlights from our first official business meeting held during the ISMRM 2024 Annual Meeting in Honolulu.",
-  "date": "2024-05-06",
-  "url": "2024/05/06/hola-hawai-latin-american-chapter-business-meeting"
-},
-{
-  "title": "New platform!",
-  "author": "G. Sahonero",
-  "category": "Chapter News",
-  "image": null,
-  "summary": "We developed a new platform on GitHub Pages.",
-  "date": "2026-04-20",
-  "url": "2026/04/20/new-platform.html"
-}
+    "title": "Capítulo Aprobado",
+    "author": "ISMRM Latam",
+    "category": "Chapter News",
+    "image": null,
+    "summary": "¡Es oficial! La junta directiva de la ISMRM ha aprobado formalmente la creación del Capítulo Latinoamericano.",
+    "date": "2024-02-15",
+    "url": "2024/02/15/capitulo-aprobado.html"
+  },
+  {
+    "title": "Bylaws of the ISMRM Latin American Chapter",
+    "author": "ISMRM Latam",
+    "category": "Chapter News",
+    "image": null,
+    "summary": "The governing documents establishing the mission, structure, and rules of the Latin American Chapter.",
+    "date": "2024-03-01",
+    "url": "2024/03/01/bylaws-of-the-ismrm-latin-american-chapter.html"
+  },
+  {
+    "title": "Hola Hawai: Latin American Chapter Business Meeting",
+    "author": "ISMRM Latam",
+    "category": "Chapter News",
+    "image": null,
+    "summary": "Notes and highlights from our first official business meeting held during the ISMRM 2024 Annual Meeting in Honolulu.",
+    "date": "2024-05-06",
+    "url": "2024/05/06/hola-hawai-latin-american-chapter-business-meeting"
+  },
+  {
+    "title": "New platform!",
+    "author": "G. Sahonero",
+    "category": "Chapter News",
+    "image": null,
+    "summary": "We developed a new platform on GitHub Pages.",
+    "date": "2026-04-20",
+    "url": "2026/04/20/new-platform.html"
+  },
+  {
+    "title": "Latin American Chapter – Member Presentations ISMRM 2026",
+    "author": "Latin American Chapter",
+    "category": "Research",
+    "image": "*No response*",
+    "summary": "Latin American Chapter Member Presentations ISMRM 2026",
+    "date": "2026-04-30",
+    "url": "2026/04/30/latin-american-chapter-member-presentations.html"
+  }
 ]

@@ -1,25 +1,5 @@
 [
   {
-    "title": "Postdoctoral Fellow in Diffusion MRI",
-    "institution": "Universidad Nacional Autónoma de México",
-    "modality": "Full-time",
-    "location": "Mexico City, Mexico",
-    "deadline": "2026-05-15",
-    "link": "https://example.com/apply",
-    "description": "Seeking a postdoc to work on advanced diffusion modeling and microstructure imaging.",
-    "posted": "2026-04-18"
-  },
-  {
-    "title": "PhD Position: Low-Field MRI Hardware",
-    "institution": "Pontificia Universidad Católica de Chile",
-    "modality": "PhD Position",
-    "location": "Santiago, Chile",
-    "deadline": "2026-04-25",
-    "link": "mailto:pi@university.cl",
-    "description": "Research focusing on Halbach array optimization for portable MRI scanners.",
-    "posted": "2026-04-10"
-  },
-  {
     "title": "PhD: Electrical property mapping of the human body using magnetic resonance imaging (MRI)",
     "institution": "Université de Lorraine – IADI Laboratory",
     "modality": "Full-time (In-person)",

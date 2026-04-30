@@ -25,15 +25,18 @@ jobs:
 
       - name: Process Job Data
         id: process
+        env:
+          # Safely inject the JSON string into an environment variable
+          RAW_JSON: ${{ steps.parse.outputs.data }}
         run: |
-          # Extract variables from the parsed issue form
-          TITLE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."position-title".text')
-          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."posting-institution".text')
-          MODAL=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."modality".text')
-          LOC=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."location".text')
-          DEADLINE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."application-deadline".text')
-          LINK=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."how-to-apply-link-or-email".text')
-          DESC=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."description".text')
+          # Extract variables from the environment variable instead of echoing the raw context
+          TITLE=$(echo "$RAW_JSON" | jq -r '."position-title".text')
+          INST=$(echo "$RAW_JSON" | jq -r '."posting-institution".text')
+          MODAL=$(echo "$RAW_JSON" | jq -r '."modality".text')
+          LOC=$(echo "$RAW_JSON" | jq -r '."location".text')
+          DEADLINE=$(echo "$RAW_JSON" | jq -r '."application-deadline".text')
+          LINK=$(echo "$RAW_JSON" | jq -r '."how-to-apply-link-or-email".text')
+          DESC=$(echo "$RAW_JSON" | jq -r '."description".text')
           
           # Auto-generate current date
           POSTED_DATE=$(date +%Y-%m-%d)

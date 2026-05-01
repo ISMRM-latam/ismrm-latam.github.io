@@ -5,6 +5,7 @@
     { "name": "Home", "link": "/"},
     { "name": "Events", "link": "/events" },
     { "name": "Labs", "link": "/labs" },
+    { "name": "ISMRM", "link": "/ismrm"},
     { "name": "Members", "link": "/members" },
     { "name": "News", "link": "/news" },
     { "name": "Opportunities", "link": "/jobs" },

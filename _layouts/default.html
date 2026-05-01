@@ -23,7 +23,7 @@
     </nav>
 
     <main>
-        {% if page.layout == "post" %}
+        {% if page.layout == "post" or page.layout == "event"%}
             {{ content }}
         {% else %}
             <div class="content-card">

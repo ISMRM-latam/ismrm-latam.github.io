@@ -24,9 +24,10 @@ layout: default
     </div>
   </header>
 
-  {% if page.image and page.image != "" and page.image != "null" %}
+  {% comment %} FIXED: Ignore GitHub Issue form default 'No response' strings {% endcomment %}
+  {% if page.image and page.image != "" and page.image != "null" and page.image != "*No response*" and page.image != "_No response_" %}
     <div class="featured-image-container">
-        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="featured-image">
+        <img src="{{ page.image | strip | relative_url }}" alt="{{ page.title }}" class="featured-image">
     </div>
   {% endif %}
 

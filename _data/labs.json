@@ -9,5 +9,16 @@
     "contact": "contact@cib.cl",
     "lat": -33.4836,
     "lng": -70.6351
+  },
+  {
+    "name": "Laboratory of Nuclear Magnetic Resonance Spectroscopy and Imaging",
+    "institution": "Centro Atomico Bariloche & Instituto Balseiro",
+    "pi": "Dr. Analia Zwick & Dr. Gonzalo A. Alvarez",
+    "residence": "Argentina",
+    "website": "<https://www.ib.edu.ar/investigacion/fisica-y-biologia-aplicada-a-la-salud/laboratorio-de-espectroscopia-e-imagenes-por-resonancia-magnetica-nuclear/>",
+    "focus": "null",
+    "contact": "<gonzalo.alvarez@conicet.gov.ar>",
+    "lat": -41.1200731,
+    "lng": -71.4147157
   }
 ]

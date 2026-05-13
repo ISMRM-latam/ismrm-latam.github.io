@@ -79,7 +79,16 @@ title: Opportunities
     .job-meta { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
     .job-meta i { margin-right: 5px; }
 
-    .job-desc { font-size: 0.88rem; color: #555; line-height: 1.5; flex-grow: 1; margin-bottom: 20px; }
+    .job-desc { 
+        font-size: 0.88rem; 
+        color: #555; 
+        line-height: 1.5; 
+        flex-grow: 1; 
+        margin-bottom: 20px; 
+        /* Prevents long text from overflowing the card */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
 
     .job-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 20px; }
     .posted-date { font-size: 0.75rem; color: #94a3b8; }
@@ -111,14 +120,30 @@ title: Opportunities
     .modal-close:hover { color: #0f172a; }
     
     .modal-body {
-        margin: 20px 0; font-size: 1rem; color: #334155; line-height: 1.6;
-        background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;
+        margin: 20px 0; 
+        font-size: 1rem; 
+        color: #334155; 
+        line-height: 1.6;
+        background: #f8fafc; 
+        padding: 20px; 
+        border-radius: 8px; 
+        border: 1px solid #e2e8f0;
+        /* THE MOBILE FIX: Enforce word breaks on long unbroken strings */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
     }
     
     /* Style rendered markdown inside the modal */
     .modal-body p { margin-top: 0; margin-bottom: 1em; }
     .modal-body p:last-child { margin-bottom: 0; }
-    .modal-body a { color: #1495a7; text-decoration: none; font-weight: bold; }
+    .modal-body a { 
+        color: #1495a7; 
+        text-decoration: none; 
+        font-weight: bold; 
+        /* Specifically target links to break if they are too long */
+        word-break: break-all;
+    }
     .modal-body a:hover { text-decoration: underline; color: #003687; }
     .modal-body strong { color: #0f172a; }
 

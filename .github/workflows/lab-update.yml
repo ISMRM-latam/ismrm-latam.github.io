@@ -25,15 +25,23 @@ jobs:
 
       - name: Geocode and Parse Lab Data
         id: geocode
+        env:
+          # SECURE FIX: Pass the raw data through an environment variable
+          RAW_JSON: ${{ steps.parse.outputs.data }}
         run: |
-          # Map to slugified keys from the lab_registration.yml
-          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."lab-or-group-name".text')
-          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."host-institution-university".text')
-          PI=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."principal-investigator-pi".text')
-          RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."country".text')
-          URL=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."official-website".text')
-          FOCUS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."research-focus-keywords".text')
-          CONTACT=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."contact-information".text')
+          # Map to slugified keys from the lab_registration.yml using the secure env variable
+          NAME=$(echo "$RAW_JSON" | jq -r '."lab-or-group-name".text')
+          INST=$(echo "$RAW_JSON" | jq -r '."host-institution-university".text')
+          PI=$(echo "$RAW_JSON" | jq -r '."principal-investigator-pi".text')
+          RESIDENCE=$(echo "$RAW_JSON" | jq -r '."country".text')
+          FOCUS=$(echo "$RAW_JSON" | jq -r '."research-focus-and-keywords".text')
+
+          # Extract URL and Contact, then cleanly strip out any < > brackets injected by Markdown auto-linking
+          URL_RAW=$(echo "$RAW_JSON" | jq -r '."official-website".text')
+          URL=$(echo "$URL_RAW" | tr -d '<>' | xargs)
+
+          CONTACT_RAW=$(echo "$RAW_JSON" | jq -r '."contact-information".text')
+          CONTACT=$(echo "$CONTACT_RAW" | tr -d '<>' | xargs)
 
           # Geocoding via Nominatim
           QUERY=$(echo "$INST, $RESIDENCE" | jq -sRr @uri)

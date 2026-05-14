@@ -35,8 +35,11 @@ jobs:
           MODAL=$(echo "$RAW_JSON" | jq -r '."modality".text')
           LOC=$(echo "$RAW_JSON" | jq -r '."location".text')
           DEADLINE=$(echo "$RAW_JSON" | jq -r '."application-deadline".text')
-          LINK=$(echo "$RAW_JSON" | jq -r '."how-to-apply-link-or-email".text')
           DESC=$(echo "$RAW_JSON" | jq -r '."description".text')
+          
+          # Extract link/email and cleanly strip out any < > brackets injected by Markdown auto-linking
+          LINK_RAW=$(echo "$RAW_JSON" | jq -r '."how-to-apply-link-or-email".text')
+          LINK=$(echo "$LINK_RAW" | tr -d '<>' | xargs)
           
           # Auto-generate current date
           POSTED_DATE=$(date +%Y-%m-%d)

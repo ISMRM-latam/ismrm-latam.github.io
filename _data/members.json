@@ -823,5 +823,16 @@
     "lng": -70.66,
     "interests": "MRI, UHF, RF antennas, Radiotherapy",
     "bio": "PhD researcher specializing in metamaterial applications for radiofrequency antennas. Other interests include new technologies for MRI, MRI safety, and MR-LINAC technology. Feel free to contact me :)"
+  },
+  {
+    "name": "Felipe Ercoli Oliva",
+    "email": "<fiercoli@alumni.uc.cl>",
+    "institution": "Pontificia Universidad Católica de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.4417748,
+    "lng": -70.6403258,
+    "interests": "Mid Field (0.55T), Quantitative MRI, Liver, Diffusion, Heart",
+    "bio": "I got my bachelors degree in Science of Engineering at Pontificia Universidad Católica and currently Im doing a PhD on biological and medical engineering. I work in multiparametric quantification of Liver and Heart at 0.55 T."
   }
 ]

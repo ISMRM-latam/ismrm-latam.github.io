@@ -25,14 +25,21 @@ jobs:
 
       - name: Geocode and Parse Data
         id: geocode
+        env:
+          # SECURE FIX: Pass the raw data through an environment variable
+          RAW_JSON: ${{ steps.parse.outputs.data }}
         run: |
-          NAME=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."full-name".text')
-          EMAIL=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."email-address".text')
-          INST=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."current-institution-university".text')
-          RESIDENCE=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."country-of-residence".text')
-          ORIGIN=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."latam-country-of-origin-affiliation".text')
-          INTERESTS=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."research-interests".text')
-          BIO=$(echo '${{ steps.parse.outputs.data }}' | jq -r '."short-bio".text')
+          NAME=$(echo "$RAW_JSON" | jq -r '."full-name".text')
+          
+          # Extract email and cleanly strip out any < > brackets injected by Markdown
+          EMAIL_RAW=$(echo "$RAW_JSON" | jq -r '."email-address".text')
+          EMAIL=$(echo "$EMAIL_RAW" | tr -d '<>' | xargs)
+          
+          INST=$(echo "$RAW_JSON" | jq -r '."current-institution-university".text')
+          RESIDENCE=$(echo "$RAW_JSON" | jq -r '."country-of-residence".text')
+          ORIGIN=$(echo "$RAW_JSON" | jq -r '."latam-country-of-origin-affiliation".text')
+          INTERESTS=$(echo "$RAW_JSON" | jq -r '."research-interests".text')
+          BIO=$(echo "$RAW_JSON" | jq -r '."short-bio".text')
 
           # Geocoding logic
           QUERY=$(echo "$INST, $RESIDENCE" | jq -sRr @uri)

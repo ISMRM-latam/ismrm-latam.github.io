@@ -834,5 +834,16 @@
     "lng": -70.6403258,
     "interests": "Mid Field (0.55T), Quantitative MRI, Liver, Diffusion, Heart",
     "bio": "I got my bachelors degree in Science of Engineering at Pontificia Universidad Católica and currently Im doing a PhD on biological and medical engineering. I work in multiparametric quantification of Liver and Heart at 0.55 T."
+  },
+  {
+    "name": "Matías Ávila Ramírez",
+    "email": "matias.avila@postgrado.uv.cl",
+    "institution": "Universidad de Valparaíso",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.0439191,
+    "lng": -71.6171173,
+    "interests": "fMIR, Neuroimaging, Low Field MRI",
+    "bio": "I am a Biomedical Engineer and Master's researcher in Neuroimagery at the iHEALTH institute in Santiago, Chile, specializing in fMRI optimization on low-field (0.55T) MRI systems. My work spans pulse sequence development (Pulseq/MATLAB), raw k-space image reconstruction (Python/MATLAB), and fMRI preprocessing/analysis pipelines (SPM, FSL), with a focus on artifact correction and signal harmonization across magnetic field strengths."
   }
 ]

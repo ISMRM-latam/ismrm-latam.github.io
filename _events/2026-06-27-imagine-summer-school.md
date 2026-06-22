@@ -6,7 +6,7 @@ organizer: "CAMERA MRI Africa, The Neuro (Montreal Neurological Institute-Hospit
 category: "Workshop"
 modality: "Hybrid"
 location: "Formato híbrido | Actividades presenciales en el Montreal Neurological Institute (McGill University, Canadá), Mbarara (Uganda), Santiago de Chile (Chile), Ciudad del Cabo (Sudáfrica), Kathmandu (Nepal), y Lagos (Nigeria)."
-link: "<https://event.fourwaves.com/imagine/registration>"
+link: "https://event.fourwaves.com/imagine/registration"
 ---
 
 ¿Eres estudiante, investigador/a, profesional en formación o docente en etapas iniciales de tu carrera con interés en resonancia magnética (MRI), imagen médica, ingeniería, física, neurociencia o radiología?

@@ -1,7 +1,7 @@
 ---
 layout: event
 title: "IMAGINE Summer School"
-event_date: 27 de junio
+event_date: 2026-06-27
 organizer: "CAMERA MRI Africa, The Neuro (Montreal Neurological Institute-Hospital), MRI UGANDA,  NYUAD Center for Brain and Health, National Innovation Center Nepal,  Instituto de Ingeniería Biológica y Médica (IIBM),  Pontificia Universidad Católica de Chile, Department of Biomedical Engineering de Stellenbosch University, McGill University Doctoral Internship Program, McGill Global Mobility Awards"
 category: "Workshop"
 modality: "Hybrid"

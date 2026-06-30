@@ -58,5 +58,15 @@
     "location": "Formato híbrido | Actividades presenciales en el Montreal Neurological Institute (McGill University, Canadá), Mbarara (Uganda), Santiago de Chile (Chile), Ciudad del Cabo (Sudáfrica), Kathmandu (Nepal), y Lagos (Nigeria).",
     "link": "https://event.fourwaves.com/imagine/registration",
     "url": "events/2026-06-27-imagine-summer-school/"
+  },
+  {
+    "title": "2026 ISMRM Workshop on White Matter: MR Imaging and Beyond",
+    "organizer": "White Matter Study Group",
+    "category": "Workshop",
+    "event_date": "2026-10-14",
+    "modality": "Hybrid",
+    "location": "Marseille, France",
+    "link": "<https://echo.ismrm.org/program/WhiteMatter2026>",
+    "url": "events/2026-10-14-2026-ismrm-workshop-on-white/"
   }
 ]

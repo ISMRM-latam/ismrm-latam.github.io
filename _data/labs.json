@@ -20,5 +20,16 @@
     "contact": "gonzalo.alvarez@conicet.gov.ar",
     "lat": -41.1200731,
     "lng": -71.4147157
+  },
+  {
+    "name": "Brain Magnetic Resonance Group (BrainMAG)",
+    "institution": "University of Trento",
+    "pi": "Jorge Jovicich",
+    "residence": "Italy",
+    "website": "https://researchcenter.unitn.it/en/mri",
+    "focus": "Human brain network representations, methods developments (structure, microstructure, function, metabolism), applications (plasticity, dementia, Parkinson's disease, oncology)",
+    "contact": "jorge.jovicich@unitn.it",
+    "lat": 46.0661807,
+    "lng": 11.1166177
   }
 ]

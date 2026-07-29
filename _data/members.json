@@ -845,5 +845,16 @@
     "lng": -71.6171173,
     "interests": "fMIR, Neuroimaging, Low Field MRI",
     "bio": "I am a Biomedical Engineer and Master's researcher in Neuroimagery at the iHEALTH institute in Santiago, Chile, specializing in fMRI optimization on low-field (0.55T) MRI systems. My work spans pulse sequence development (Pulseq/MATLAB), raw k-space image reconstruction (Python/MATLAB), and fMRI preprocessing/analysis pipelines (SPM, FSL), with a focus on artifact correction and signal harmonization across magnetic field strengths."
+  },
+  {
+    "name": "Jorge Jovicich",
+    "email": "jorge.jovicich@unitn.it",
+    "institution": "University of Trento",
+    "residence": "Italy",
+    "country": "Argentina",
+    "lat": 46.0661807,
+    "lng": 11.1166177,
+    "interests": "Human brain networks, structural, microstructural, functional, spectroscopy",
+    "bio": "<https://webapps.unitn.it/du/en/Persona/PER0000933/Curriculum>"
   }
 ]

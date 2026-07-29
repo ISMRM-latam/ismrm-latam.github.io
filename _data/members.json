@@ -856,5 +856,16 @@
     "lng": 11.1166177,
     "interests": "Human brain networks, structural, microstructural, functional, spectroscopy",
     "bio": "<https://webapps.unitn.it/du/en/Persona/PER0000933/Curriculum>"
+  },
+  {
+    "name": "Ignacio Contreras Zúñiga",
+    "email": "iscontreras@uc.cl",
+    "institution": "Pontificia Universidad Católica de Chile",
+    "residence": "Chile",
+    "country": "Chile",
+    "lat": -33.4417748,
+    "lng": -70.6403258,
+    "interests": "Inverse Problems, MRI, QSM",
+    "bio": "Ingeniero Matemático y Computacional y M.Sc. Actualmente investigador en el Centro de Imágenes Biomédicas UC. Interesado en problemas inversos, análisis y optimización, con aplicaciones a imágenes biomédicas."
   }
 ]

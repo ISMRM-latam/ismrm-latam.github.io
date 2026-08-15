@@ -68,5 +68,15 @@
     "location": "Marseille, France",
     "link": "<https://echo.ismrm.org/program/WhiteMatter2026>",
     "url": "events/2026-10-14-2026-ismrm-workshop-on-white/"
+  },
+  {
+    "title": "Workshop Teórico-Práctico: IA Interpretable en Neurooncología: Decodificando la Severidad Tumoral mediante Resonancia Multimodal",
+    "organizer": "UNAB - UC - FALP",
+    "category": "Workshop",
+    "event_date": "2026-12-10",
+    "modality": "Hybrid",
+    "location": "Auditorio Zócalo, Edificio A2, UNAB (Antonio Varas 880, Providencia) / Transmisión Online (Modalidad Híbrida)",
+    "link": "<https://pamelafranco.github.io/workshop_glioma_web/>",
+    "url": "events/2026-12-10-workshop-teorico-practico--ia-interpretable-en/"
   }
 ]

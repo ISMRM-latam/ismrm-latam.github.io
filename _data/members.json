@@ -867,5 +867,16 @@
     "lng": -70.6403258,
     "interests": "Inverse Problems, MRI, QSM",
     "bio": "Ingeniero Matemático y Computacional y M.Sc. Actualmente investigador en el Centro de Imágenes Biomédicas UC. Interesado en problemas inversos, análisis y optimización, con aplicaciones a imágenes biomédicas."
+  },
+  {
+    "name": "Irene Guadalupe Quiterio Pérez",
+    "email": "quiteriopere@wisc.edu",
+    "institution": "University of Wisconsin-Madison",
+    "residence": "USA",
+    "country": "Mexico",
+    "lat": 43.0802745,
+    "lng": -89.4309587,
+    "interests": "Diffusion",
+    "bio": "I am a Medical Physics PhD student at the University of Wisconsin-Madison and Research Assistant in the Developing Brain Imaging Lab at the Waisman Center. My research focuses on advancing neuroimaging through the implementation of advanced diffusion MRI models and the preprocessing of neuroimaging datasets. In addition to my computational and modeling work, I have hands-on experience acting as an MRI technician for the Healthy Brain and Child Development (HBCD) study, a longitudinal, multi-site project across the USA."
   }
 ]

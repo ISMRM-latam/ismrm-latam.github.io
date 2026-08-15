@@ -66,7 +66,7 @@
     "event_date": "2026-10-14",
     "modality": "Hybrid",
     "location": "Marseille, France",
-    "link": "<https://echo.ismrm.org/program/WhiteMatter2026>",
+    "link": "https://echo.ismrm.org/program/WhiteMatter2026",
     "url": "events/2026-10-14-2026-ismrm-workshop-on-white/"
   },
   {
@@ -76,7 +76,7 @@
     "event_date": "2026-12-10",
     "modality": "Hybrid",
     "location": "Auditorio Zócalo, Edificio A2, UNAB (Antonio Varas 880, Providencia) / Transmisión Online (Modalidad Híbrida)",
-    "link": "<https://pamelafranco.github.io/workshop_glioma_web/>",
+    "link": "https://pamelafranco.github.io/workshop_glioma_web/",
     "url": "events/2026-12-10-workshop-teorico-practico--ia-interpretable-en/"
   }
 ]

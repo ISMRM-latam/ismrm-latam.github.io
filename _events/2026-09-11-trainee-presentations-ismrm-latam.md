@@ -5,7 +5,7 @@ event_date: 2026-09-11
 organizer: "ISMRM LATAM"
 category: "Chapter Meeting"
 modality: "Virtual"
-location: "<https://univ-amu-fr.zoom.us/j/3165560965>"
+location: "https://univ-amu-fr.zoom.us/j/3165560965"
 link: "#"
 ---
 

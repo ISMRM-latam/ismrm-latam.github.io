@@ -78,5 +78,15 @@
     "location": "Auditorio Zócalo, Edificio A2, UNAB (Antonio Varas 880, Providencia) / Transmisión Online (Modalidad Híbrida)",
     "link": "https://pamelafranco.github.io/workshop_glioma_web/",
     "url": "events/2026-12-10-workshop-teorico-practico--ia-interpretable-en/"
+  },
+  {
+    "title": "Trainee Presentations ISMRM Latam",
+    "organizer": "ISMRM LATAM",
+    "category": "Chapter Meeting",
+    "event_date": "2026-09-11",
+    "modality": "Virtual",
+    "location": "<https://univ-amu-fr.zoom.us/j/3165560965>",
+    "link": "#",
+    "url": "events/2026-09-11-trainee-presentations-ismrm-latam/"
   }
 ]

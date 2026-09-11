@@ -1780,5 +1780,16 @@
     "lng": -60.0,
     "interests": "Diagnostic Imaging, MRI",
     "bio": "Profesional de salud interesada en resonancia magnética."
+  },
+  {
+    "name": "Alejandra Castilla Bolaños",
+    "email": "Alejandra.castilla@mail.utoronto.ca",
+    "institution": "University of Toronto",
+    "residence": "Toronto",
+    "country": "Colombia",
+    "lat": 43.6634681,
+    "lng": -79.3968165,
+    "interests": "NMR spectroscopy",
+    "bio": "**Alejandra Castilla Bolaños** is a Colombian biomedical engineer, Master of Science in Neurophysiology, and a doctoral candidate in Medical Biophysics at the University of Toronto. Her research focuses on human pluripotent stem cell–derived cerebral organoids and the use of \\*\\*high-resolution magic-angle-spinning (HR-MAS) nuclear magnetic resonance spectroscopy \\*\\* to investigate brain metabolism, development, and neurological disease. Her work aims to develop more physiologically relevant human models for studying neurodegeneration, including Alzheimer's disease, ALS, and other brain disorders."
   }
 ]
